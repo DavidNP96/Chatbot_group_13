@@ -24,7 +24,7 @@ keywords = {"inform":["know", "food", "restaurant", "town", "part"],
                 "ack":["okay", "alright", "ok", "kay", "um"], 
                 "restart":["start", "reset", "restart"], 
                 "reqmore":["more","other"]}
-                
+
 # import data                
 data = data_class.Data("../data/dialog_acts.dat")
 train_sents = data.train_sents
@@ -43,6 +43,7 @@ def keyword_matching(labels, keywords, train_sents, train_labels):
             for label, keyword in keywords.items():
                 if word in keyword:
                     labels_counter[label] += 1
+                    
         # select the most probable one            
         mx = labels_counter.most_common(1)
 

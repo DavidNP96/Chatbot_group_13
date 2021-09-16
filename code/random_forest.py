@@ -54,7 +54,8 @@ def shallow_tree(data,X_train, train_labels, X_test ):
     random_forest_model = RandomForestClassifier(max_depth=3, random_state=data.SEED).fit(X_train, train_labels)
     rf_predicted = random_forest_model.predict(X_test)
     print('accuracy score : ', round(accuracy_score(test_labels, rf_predicted),4))
-    test.create_confusion_matrix(label_id_df, data.test_labels,rf_predicted)
+
+    test.create_confusion_matrix(label_id_df, data.test_labels,rf_predicted, file_name="shallow_hm.png")
 
 def deep_tree(data,X_train, train_labels, X_test, test_labels):
     print('random forest model')
@@ -64,7 +65,8 @@ def deep_tree(data,X_train, train_labels, X_test, test_labels):
     print('f1 score : ', round(f1_score(test_labels, rf_predicted, average = 'macro'),4))
     print('recall score : ', round(recall_score(test_labels, rf_predicted, average = 'macro'),4))
     print('precision score : ', round(precision_score(test_labels, rf_predicted, average = 'macro'),4))
-    test.create_confusion_matrix(label_id_df, data.test_labels,rf_predicted)
+
+    test.create_confusion_matrix(label_id_df, data.test_labels,rf_predicted, file_name="deep_hm.png")
 
 if __name__=="__main__":
     shallow_tree(data,X_train, train_labels, X_test)

@@ -63,7 +63,7 @@ print('precision score : ', round(precision_score(data.test_labels, lm_predicted
 # save model
 # logistic_model.save("../models/logistic_model.model")
 
-test.create_confusion_matrix(label_id_df, data.test_labels,lm_predicted)
+# test.create_confusion_matrix(label_id_df, data.test_labels,lm_predicted)
 
 if __name__=="__main__":
-    test.create_confusion_matrix(label_id_df,data.test_labels, lm_predicted )
+    test.create_confusion_matrix(label_id_df,data.test_labels, lm_predicted, file_name="hm_log_reg.png" )

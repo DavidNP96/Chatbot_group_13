@@ -13,6 +13,7 @@ sns.set_palette('Set2')
 sns.set_style("darkgrid")
 
 test_data = ["hey", "how", "are", "you"]
+plot_file = "../plots/"
 
 def main():
     model_names = ["inform_baseline"]
@@ -58,14 +59,15 @@ def get_metrics(model_name, x_values, y_values):
 
     return metrics
 
-def create_confusion_matrix(label_id_df, y_labels,predicted):
+def create_confusion_matrix(label_id_df, y_labels,predicted, file_name):
     conf_mat = confusion_matrix(y_labels, predicted)
+
     fig, ax = plt.subplots(figsize=(10,10))
     sns.heatmap(conf_mat, annot=True, fmt='d',
                 xticklabels=label_id_df.label.values, yticklabels=label_id_df.label.values)
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
-    plt.show()
+    plt.savefig(plot_file + file_name)
 
 def recall_m(y_true, y_pred, positives): # TPR
     # true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1))) # TP
