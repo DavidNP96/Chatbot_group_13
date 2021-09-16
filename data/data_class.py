@@ -3,8 +3,8 @@
 import random
 import numpy as np
 import nltk
-nltk.download('stopwords')
-from nltk.corpus import stopwords
+# nltk.download('stopwords')
+# from nltk.corpus import stopwords
 from collections import Counter
 from keras.preprocessing.text import Tokenizer
 import random
@@ -19,7 +19,6 @@ class Data:
   def __init__(self, filepath):
     print("get filepath ", filepath)
     self.FILE_PATH = filepath
-    self.STOPWORDS = set(stopwords.words('english'))
     self.TRAIN_SPLIT = 0.85
     self.SEED = 42
     self.dataset = self.get_data()
@@ -37,10 +36,6 @@ class Data:
   def split_data(self):
     self.sents = [sent for label, sent in self.dataset]
     labels = [label for label, sent in self.dataset]
-    # tokenizer = Tokenizer()
-
-    # # fit the tokenizer on the documents
-    # tokenizer.fit_on_texts(doc)
 
     train_size = int(len(self.dataset) * (self.TRAIN_SPLIT))
     train_sents = self.sents[:train_size]
@@ -58,7 +53,7 @@ class Data:
     tokenizer = tokenizer = Tokenizer()
     encoded_docs = tokenizer.texts_to_matrix(self.sents, mode=mode)
 
-  def create_bof(self):
+  def create_bow(self):
     count_vect = CountVectorizer()
     X_train_counts = count_vect.fit_transform(self.train_sents)
     tfidf_transformer = TfidfTransformer()
