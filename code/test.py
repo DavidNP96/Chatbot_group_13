@@ -1,6 +1,9 @@
 
 import tensorflow as tf
 from tensorflow.keras import backend as K
+import sys
+sys.path.append("../data")
+import data_class
 import inform_baseline
 
 test_data = ["hey", "how", "are", "you"]
@@ -12,64 +15,83 @@ def main():
     while model_name not in model_names:
         model_name = input("wrong model name! choose one of the following models: 'inform_baseline', 'key_word_baseline': ")
 
-    get_metrics(model_name, test_data)
+    data = data_class.Data("../data/dialog_acts.dat")
+    get_metrics(model_name, data.test_sents, data.test_labels)
     
     return True
 
-def get_model_predictions(model_name, x_values):
+def get_model_predictions(model_name, x_values, y_values):
     predictions = []
 
-    options = {"inform_baseline" : inform_baseline.classify_request(x_values),
+    options = {"inform_baseline" : inform_baseline.classify_request(x_values, y_values),
                 "key_word_baseline": "not in use yet",
                 "bert" : "not in use yet" }
 
-    return predictions
+    y_true, y_pred, positives = options[model_name]
+    return y_true, y_pred, positives
     
 
 def get_metrics(model_name, x_values, y_values):
-    y_pred = get_model_predictions(model_name=model_name, x_values=x_values)
-    recall_m(y_values, y_pred)
-    precision_m(y_values, y_pred)
-    f1_m(y_values, y_pred)
-    TP(y_values, y_pred)
-    TN(y_values, y_pred)
-    FP(y_values, y_pred)
+    y_true, y_pred, positives = get_model_predictions(model_name=model_name, x_values=x_values, y_values=y_values)
+    print("Y_true and y_pred",y_true, y_pred, positives)
+    recall = recall_m(y_true=y_true, y_pred=y_pred, positives=positives)
+    precision = precision_m(y_true, y_pred)
+    f1 = f1_m(y_true, y_pred, positives)
+    tp =TP(y_true, y_pred)
+    tn = TN(y_true, y_pred)
+    fp = FP(y_true, y_pred)
+    
+    metrics = {
+    "recall": recall,
+    "precision": precision,
+    "f1": f1,
+    "TP": tp,
+    "TN":tn,
+    "FP": fp }
+    print("model metrics are:",metrics)
 
-def recall_m(y_true, y_pred): # TPR
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1))) # TP
-    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1))) # P
-    recall = true_positives / (possible_positives + K.epsilon())
+    return metrics
+
+
+def recall_m(y_true, y_pred, positives): # TPR
+    # true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1))) # TP
+    # possible_positives = K.sum(K.round(K.clip(y_true, 0, 1))) # P
+    # print("bottom statment", possible_positives + K.epsilon())
+    # recall =  tf.cast(true_positives,tf.int32 ) / tf.cast((possible_positives + K.epsilon()), tf.int32 )
+    recall = y_true/positives
     return recall
  
 def precision_m(y_true, y_pred):
-    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1))) # TP
-    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1))) # TP + FP
-    precision = true_positives / (predicted_positives + K.epsilon())
+    # true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1))) # TP
+    # predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1))) # TP + FP
+    # precision = true_positives / (predicted_positives + K.epsilon())
+    precision = y_true/y_pred
     return precision
  
-def f1_m(y_true, y_pred):
+def f1_m(y_true, y_pred, positives):
     precision = precision_m(y_true, y_pred)
-    recall = recall_m(y_true, y_pred)
-    return 2*((precision*recall)/(precision+recall+K.epsilon()))
+    recall = recall_m(y_true, y_pred, positives=positives)
+    return 2*((precision*recall)/(precision+recall))
  
 def TP(y_true, y_pred):
-    tp = K.sum(K.round(K.clip(y_true * y_pred, 0, 1))) # TP
-    y_pos = K.round(K.clip(y_true, 0, 1))
-    n_pos = K.sum(y_pos)
-    y_neg = 1 - y_pos
-    n_neg = K.sum(y_neg)
-    n = n_pos + n_neg
-    return tp/n
+    # tp = K.sum(K.round(K.clip(y_true * y_pred, 0, 1))) # TP
+    # y_pos = K.round(K.clip(y_true, 0, 1))
+    # n_pos = K.sum(y_pos)
+    # y_neg = 1 - y_pos
+    # n_neg = K.sum(y_neg)
+    # n = n_pos + n_neg
+    return y_true/y_pred
  
 def TN(y_true, y_pred):
-    y_pos = K.round(K.clip(y_true, 0, 1))
-    n_pos = K.sum(y_pos)
+    y_pos = y_true
+    n_pos = y_pos
     y_neg = 1 - y_pos
-    n_neg = K.sum(y_neg)
+    n_neg = y_neg
     n = n_pos + n_neg
-    y_pred_pos = K.round(K.clip(y_pred, 0, 1))
+    y_pred_pos = y_pred
     y_pred_neg = 1 - y_pred_pos
-    tn = K.sum(K.round(K.clip(y_neg * y_pred_neg, 0, 1))) # TN
+    tn = y_neg * y_pred_neg
+
     return tn/n
  
 def FP(y_true, y_pred):

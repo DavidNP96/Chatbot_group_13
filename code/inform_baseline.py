@@ -1,10 +1,17 @@
 
 
-def classify_request(request, test_data):
+def classify_request(sents, labels):
     predictions = []
-    for line in test_data:
-        predictions.append("inform")
-    return predictions
+    y_true = 0
+    y_pred = 0
+    positives = 0
+    for line, label in zip(sents, labels):
+        if label == "inform":
+            y_true += 1
+            positives += 1
+        
+        y_pred += 1
+    return y_true, y_pred, positives 
 
 
 def process_incoming_string():
