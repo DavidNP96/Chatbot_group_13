@@ -2,7 +2,7 @@
 import sys
 sys.path.append("../../data")
 import data_class
-import test
+import evaluation
 
 data = data_class.Data("../../data/dialog_acts.dat")
 test_sents = data.test_sents
@@ -27,8 +27,9 @@ def main():
         predictions.append("inform")
         
         y_pred += 1
-        
-    test.get_metrics(predictions, test_labels)
+    
+    print("Evaluation score inform baseline:")
+    evaluation.get_metrics(predictions, test_labels)
     return predictions, y_true, y_pred, positives 
 
     

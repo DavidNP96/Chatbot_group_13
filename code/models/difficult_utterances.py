@@ -24,17 +24,13 @@ print(len(pred[0]),len(pred[1]),len(pred[2]),len(pred[3]),len(pred[4]))
 
 for i in range(0,len(test_labels)):
     for j in range(0,5):
-        if test_labels[i] == pred[j][i]:
-            pred[j][i] = 1
-        else:
+        if test_labels[i] != pred[j][i]:
             pred[j][i] = 0
+
 j = 0
 for i in range(0,len(test_sents)):
-    if pred[0][i] == 0 and pred[1][i] == 0 and pred[2][i] == 0 and pred[3][i] == 0 and pred[4][i] == 0: 
+    if pred[0][i] == 0 and pred[1][i] == 0 and pred[2][i] == 0 and pred[3][i] == 0 and pred[4][i] == 0:
         print(test_labels[i], ": ", test_sents[i])
         j += 1
         
-print(j)        
-#for i in range(0,len(all_false)):
-#    if all_false[i] == True:
-#        print(test_sents[i])
+print("There are", j, "utterances wrongly classified by all the models.")        

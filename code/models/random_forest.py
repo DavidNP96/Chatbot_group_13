@@ -7,7 +7,7 @@ import seaborn as sns
 import sys
 sys.path.append("../../data")
 import data_class
-import test
+import evaluation
 
 from sklearn.ensemble import RandomForestClassifier
 
@@ -37,7 +37,8 @@ def shallow_tree(data,X_train, y_train, X_test ):
     
 
     # get metrics and matrix
-    #test.get_metrics(rf_predicted ,y_test)
+    print("Evaluation score random forest shallow tree:")
+    evaluation.get_metrics(rf_predicted ,y_test)
     return rf_predicted
     
 def deep_tree(data,X_train, y_train, X_test, y_test):
@@ -46,7 +47,8 @@ def deep_tree(data,X_train, y_train, X_test, y_test):
     rf_predicted = random_forest_model.predict(X_test)
 
     # get metrics and matrix
-    #test.get_metrics(rf_predicted ,y_test)
+    print("Evaluation score random forest deep tree:")
+    evaluation.get_metrics(rf_predicted ,y_test)
     return rf_predicted
     
 
