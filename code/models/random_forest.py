@@ -26,8 +26,9 @@ y_test = data.test_labels
 X_train, X_test = data.create_bow()
 
 def main():
-    shallow_tree(data,X_train, y_train, X_test)
-    deep_tree(data,X_train, y_train, X_test, y_test)
+    st = shallow_tree(data,X_train, y_train, X_test)
+    dt = deep_tree(data,X_train, y_train, X_test, y_test)
+    return st, dt
 
 def shallow_tree(data,X_train, y_train, X_test ):
     print("shallow random forest model metrics:")
@@ -36,7 +37,8 @@ def shallow_tree(data,X_train, y_train, X_test ):
     
 
     # get metrics and matrix
-    test.get_metrics(rf_predicted ,y_test)
+    #test.get_metrics(rf_predicted ,y_test)
+    return rf_predicted
     
 def deep_tree(data,X_train, y_train, X_test, y_test):
     print('deep random forest model metrics:')
@@ -44,14 +46,11 @@ def deep_tree(data,X_train, y_train, X_test, y_test):
     rf_predicted = random_forest_model.predict(X_test)
 
     # get metrics and matrix
-    test.get_metrics(rf_predicted ,y_test)
+    #test.get_metrics(rf_predicted ,y_test)
+    return rf_predicted
     
 
-if __name__=="__main__":
-    shallow_tree(data,X_train, y_train, X_test)
-    deep_tree(data,X_train, y_train, X_test, y_test)
-    # test.create_confusion_matrix(label_id_df, y_test,rf_predicted, file_name="deep_hm.png")
-    # test.create_confusion_matrix(label_id_df, y_test,rf_predicted, file_name="shallow_hm.png")
+
 
 
     
