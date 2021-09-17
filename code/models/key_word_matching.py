@@ -4,14 +4,11 @@ import sklearn.metrics as skm
 from operator import itemgetter
 from collections import Counter
 import sys
-sys.path.append("../data")
+sys.path.append("../../data")
 import data_class
 import test
 
-
-
-
-def main():
+def main(sents, labels):
     ### classify sentence based on keywords found in sentence
     print("keyword matching metrics:")
     labels = ['inform', 'request', 'thankyou', 'reqalts', 'null', 'affirm', 'bye', 
@@ -34,8 +31,8 @@ def main():
 
     # import data                
     data = data_class.Data("../../data/dialog_acts.dat")
-    train_sents = data.train_sents
-    train_labels = data.train_labels
+    train_sents = sents
+    train_labels = labels
 
     train_pred = []
     for sentence in train_sents:
@@ -66,17 +63,6 @@ def main():
                         train_pred.append(label)
                         filled = True
     
-    
-   
 
-    test.get_metrics(train_pred, train_labels)
-    
-    return
-
-
-
-if __name__=="__main__":
-    x_test = data.test_sents
-    y_test = data.test_labels
-    # keyword_matching(labels, keywords, train_sents, train_labels)
-    keyword_matching(labels, keywords, x_test, y_test)
+    #test.get_metrics(train_pred, train_labels)
+    return train_pred

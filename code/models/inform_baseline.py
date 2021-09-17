@@ -29,7 +29,7 @@ def main():
         y_pred += 1
         
     test.get_metrics(predictions, test_labels)
-    return predictions ,y_true, y_pred, positives 
+    return predictions, y_true, y_pred, positives 
 
     
 
@@ -37,5 +37,6 @@ def process_incoming_string():
     request = input("Enter your value: ")
     return("inform")
 
-if __name__ == "__main__":
-    classify_request()
+
+    
+    
