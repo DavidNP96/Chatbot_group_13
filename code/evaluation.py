@@ -1,9 +1,8 @@
-import random_forest
-import logistic_regression
-import key_word_matching
-import inform_baseline
+import models.random_forest as random_forest
+import models.logistic_regression as logistic_regression
+import models.key_word_matching as key_word_matching
+import models.inform_baseline as inform_baseline
 from sklearn.metrics import confusion_matrix
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import precision_score
@@ -11,10 +10,8 @@ from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 import seaborn as sns
 import data_class
-import tensorflow as tf
-from tensorflow.keras import backend as K
 import sys
-sys.path.append("../../data")
+sys.path.append("../data")
 
 sns.set_palette('Set2')
 sns.set_style("darkgrid")
@@ -47,13 +44,13 @@ def create_confusion_matrix(label_id_df, y_labels, predicted, file_name):
 
 def model_metrics(requested_model_name, model_names):
 
-    data = data_class.Data("../../data/dialog_acts.dat")
+    data = data_class.Data("./data/dialog_acts.dat")
     get_metrics(data.test_sents, data.test_labels)
 
-    models = {"inform_baseline": inform_baseline.main(),
+    models = {"inform_baseline": inform_baseline.main(data),
               "key_word_matching": key_word_matching.main(data.test_sents, data.test_labels),
-              "logistic_regression": logistic_regression.main(),
-              "random_forest": random_forest.main()}
+              "logistic_regression": logistic_regression.main(data),
+              "random_forest": random_forest.main(data)}
 
     if requested_model_name == "all":
         for name in model_names:

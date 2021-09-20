@@ -15,7 +15,7 @@ def main(test_sents, test_labels):
     print("keyword matching metrics:")
     labels = ['inform', 'request', 'thankyou', 'reqalts', 'null', 'affirm', 'bye',
               'confirm', 'hello', 'negate', 'deny', 'repeat', 'ack', 'restart', 'reqmore']
-
+    #dictionary with the labels as keys, and their matching keywords as values in a list
     keywords = {"inform": ["know", "food", "restaurant", "town", "part"],
                 "request": ["number", "phone", "address", "whats", "code", "post"],
                 "thankyou": ["thanks", "appreciate", "thank"], "reqalts": ["else", "anything"],
@@ -31,10 +31,7 @@ def main(test_sents, test_labels):
                 "restart": ["start", "reset", "restart"],
                 "reqmore": ["more", "other"]}
 
-    # import data
-    data = data_class.Data("../../data/dialog_acts.dat")
-
-    test_pred = []
+    y_pred = []
     for sentence in test_sents:
         labels_counter = Counter()
 
@@ -45,25 +42,25 @@ def main(test_sents, test_labels):
                     labels_counter[label] += 1
 
         # select the most probable one
-        mx = labels_counter.most_common(1)
+        max_label = labels_counter.most_common(1)
 
         # check if there is a tie between most likely labels
-        maxes = [ele[0]
-                 for ele in labels_counter.items() if ele[1] >= mx[0][1]]
+        maxes = [label[0]
+                 for label in labels_counter.items() if label[1] >= max_label[0][1]]
 
         if len(maxes) == 1:
-            test_pred.append(maxes[0])
+            y_pred.append(maxes[0])
         elif len(maxes) == 0: # if no keywords are found select the most probable class based on distribution
-            test_pred.append("inform")
+            y_pred.append("inform")
         else:
             # check which of the multiple classes is most likely based on prior
             filled = False
             for label in labels:
                 for max in maxes:
                     if max == label and filled == False:
-                        test_pred.append(label)
+                        y_pred.append(label)
                         filled = True
     
     print("Evaluation score keyword matching:")
-    evaluation.get_metrics(test_pred, test_labels)
-    return test_pred
+    evaluation.get_metrics(y_pred, test_labels)
+    return y_pred

@@ -1,38 +1,24 @@
-
 import evaluation
 import data_class
 import sys
 sys.path.append("../../data")
 
-data = data_class.Data("../../data/dialog_acts.dat")
-test_sents = data.test_sents
-test_labels = data.test_labels
-
-
-def main():
+def main(data):
     print(" 'inform' baseline metrics:")
-    data = data_class.Data("../../data/dialog_acts.dat")
+    #load test sentences and test labels
+    #we don't need to load train data as this model is not trained
     test_sents = data.test_sents
     test_labels = data.test_labels
 
-    predictions = []
-    y_true = 0
-    y_pred = 0
-    predictions = []
-    positives = 0
-    for line, label in zip(test_sents, test_labels):
-        if label == "inform":
-            y_true += 1
-            positives += 1
-        predictions.append("inform")
+    #the inform baseline model classifies each label as 'inform'
+    y_pred = ['inform' for label in test_labels]
 
-        y_pred += 1
-
+    #compare classifications with true labels, print evaluation metrics
     print("Evaluation score inform baseline:")
-    evaluation.get_metrics(predictions, test_labels)
-    return predictions, y_true, y_pred, positives
-
-
+    evaluation.get_metrics(y_pred, test_labels)
+    return y_pred
+    
+#this function allows the user to type a sentence, and always classifies it as 'inform'
 def process_incoming_string():
     request = input("Enter your value: ")
     return("inform")
