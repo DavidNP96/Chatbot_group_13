@@ -23,7 +23,7 @@ def random_forest(max_depth):
     random_forest_model = RandomForestClassifier(
         max_depth=max_depth).fit(X_train, y_train)
     #get predictions for the test set
-    rf_predicted = random_forest_model.predict(X_test)
+    y_predicted = random_forest_model.predict(X_test)
     #get evaluation results
     print("Evaluation score random forest with depth" + str(max_depth) +":")
     evaluation.get_metrics(y_predicted, y_test)
