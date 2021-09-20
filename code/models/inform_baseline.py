@@ -16,6 +16,7 @@ def main(data):
     #compare classifications with true labels, print evaluation metrics
     print("Evaluation score inform baseline:")
     evaluation.get_metrics(y_pred, test_labels)
+    return y_pred
     
 #this function allows the user to type a sentence, and always classifies it as 'inform'
 def process_incoming_string():
