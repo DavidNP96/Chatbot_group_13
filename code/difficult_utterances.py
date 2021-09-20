@@ -1,36 +1,40 @@
-import numpy as np
-import inform_baseline as ib
-import key_word_matching as km
-import logistic_regression as lr
-import random_forest as rf
+#In this file, we find sentences that are classified incorrectly for sentences from all models
+import models.inform_baseline as inform_baseline
+import models.key_word_matching as key_word_matching
+import models.logistic_regression as logistic_regression
+import models.random_forest as random_forest
 import data_class
 
-data = data_class.Data("../../data/dialog_acts.dat")
+#load data
+data = data_class.Data("./data/dialog_acts.dat")
 train_sents = data.train_sents
 train_labels = data.train_labels
 test_sents = data.test_sents
 test_labels = data.test_labels
 
-pred = [[], [], [], [], []]
-pred[0] = ["inform"] * len(test_labels)
-pred[1] = km.main(test_sents, test_labels)
-pred[2] = lr.main().tolist()
-st, dt = rf.main()
-pred[3] = st.tolist()
-pred[4] = dt.tolist()
+#load predictions from all models
+predictions = [[], [], [], [], []]
+predictions[0] = inform_baseline.main(data)
+predictions[1] = key_word_matching.main(test_sents, test_labels)
+predictions[2] = logistic_regression.main(data).tolist()
+shallow_tree, deep_tree = random_forest.main(data)
+predictions[3] = shallow_tree.tolist()
+predictions[4] = deep_tree.tolist()
 listofzeros = [0] * len(test_labels)
 
-print(len(pred[0]), len(pred[1]), len(pred[2]), len(pred[3]), len(pred[4]))
+#get incorrect predictions for each model
+for label_index in range(len(test_labels)):
+    for model_index in range(5):
+        if test_labels[label_index] != predictions[model_index][label_index]:
+            predictions[model_index][label_index] = 0
 
-for i in range(0, len(test_labels)):
-    for j in range(0, 5):
-        if test_labels[i] != pred[j][i]:
-            pred[j][i] = 0
+#check whether sentences are misclassified by each model
+incorrect_sents = 0
+for label_index in range(len(test_sents)):
+    if predictions[0][label_index] == 0 and predictions[1][label_index] == 0 and predictions[2][label_index] == 0 \
+            and predictions[3][label_index] == 0 and predictions[4][label_index] == 0:
+        #if the model is consistently missclassified: print sentence and add one to the counter
+        print(test_labels[label_index], ": ", test_sents[label_index])
+        incorrect_sents += 1
 
-j = 0
-for i in range(0, len(test_sents)):
-    if pred[0][i] == 0 and pred[1][i] == 0 and pred[2][i] == 0 and pred[3][i] == 0 and pred[4][i] == 0:
-        print(test_labels[i], ": ", test_sents[i])
-        j += 1
-
-print("There are", j, "utterances wrongly classified by all the models.")
+print("There are", incorrect_sents, "utterances wrongly classified by all the models.")
