@@ -12,10 +12,10 @@ def main(data):
 
     #train both a shallow tree (max depth=3) and a deep tree (max depth=20)
     print("shallow random forest model metrics:")
-    st = random_forest(max_depth=3)
+    shallow_tree_y_pred = random_forest(max_depth=3)
     print("deep random forest model metrics:")
-    dt = random_forest(max_depth=20)
-    return st, dt
+    deep_tree_y_pred = random_forest(max_depth=20)
+    return shallow_tree_y_pred, deep_tree_y_pred
 
 #train random forest with a given max depth
 def random_forest(max_depth):
@@ -26,5 +26,5 @@ def random_forest(max_depth):
     rf_predicted = random_forest_model.predict(X_test)
     #get evaluation results
     print("Evaluation score random forest with depth" + str(max_depth) +":")
-    evaluation.get_metrics(rf_predicted, y_test)
-    return rf_predicted
+    evaluation.get_metrics(y_predicted, y_test)
+    return y_predicted

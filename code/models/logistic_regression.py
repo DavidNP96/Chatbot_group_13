@@ -22,9 +22,9 @@ def main(data):
 
     #train logistic model on train data, make predictions on test data
     logistic_model = LogisticRegression(multi_class='multinomial').fit(X_train, y_train)
-    lm_predicted = logistic_model.predict(X_test)
+    y_pred = logistic_model.predict(X_test)
 
     #calculate and print evaluation metrics for this model
     print("Evaluation score logistic regression:")
-    evaluation.get_metrics(lm_predicted, y_test)
-    return lm_predicted
+    evaluation.get_metrics(y_pred, y_test)
+    return y_pred
