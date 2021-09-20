@@ -1,3 +1,6 @@
+from sklearn.ensemble import RandomForestClassifier
+import evaluation
+import data_class
 import numpy as np
 from collections import Counter
 
@@ -6,10 +9,7 @@ import random
 import seaborn as sns
 import sys
 sys.path.append("../../data")
-import data_class
-import test
 
-from sklearn.ensemble import RandomForestClassifier
 
 sns.set_palette('Set2')
 sns.set_style("darkgrid")
@@ -25,33 +25,32 @@ y_train = data.train_labels
 y_test = data.test_labels
 X_train, X_test = data.create_bow()
 
+
 def main():
-    st = shallow_tree(data,X_train, y_train, X_test)
-    dt = deep_tree(data,X_train, y_train, X_test, y_test)
+    st = shallow_tree(data, X_train, y_train, X_test)
+    dt = deep_tree(data, X_train, y_train, X_test, y_test)
     return st, dt
 
-def shallow_tree(data,X_train, y_train, X_test ):
+
+def shallow_tree(data, X_train, y_train, X_test):
     print("shallow random forest model metrics:")
-    random_forest_model = RandomForestClassifier(max_depth=3, random_state=data.SEED).fit(X_train, y_train)
+    random_forest_model = RandomForestClassifier(
+        max_depth=3, random_state=data.SEED).fit(X_train, y_train)
     rf_predicted = random_forest_model.predict(X_test)
-    
 
     # get metrics and matrix
-    #test.get_metrics(rf_predicted ,y_test)
+    print("Evaluation score random forest shallow tree:")
+    evaluation.get_metrics(rf_predicted, y_test)
     return rf_predicted
-    
-def deep_tree(data,X_train, y_train, X_test, y_test):
+
+
+def deep_tree(data, X_train, y_train, X_test, y_test):
     print('deep random forest model metrics:')
-    random_forest_model = RandomForestClassifier(max_depth=20, random_state=data.SEED).fit(X_train, y_train)
+    random_forest_model = RandomForestClassifier(
+        max_depth=20, random_state=data.SEED).fit(X_train, y_train)
     rf_predicted = random_forest_model.predict(X_test)
 
     # get metrics and matrix
-    #test.get_metrics(rf_predicted ,y_test)
+    print("Evaluation score random forest deep tree:")
+    evaluation.get_metrics(rf_predicted, y_test)
     return rf_predicted
-    
-
-
-
-
-    
-
