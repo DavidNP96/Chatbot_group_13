@@ -1,10 +1,8 @@
-
 import tensorflow as tf
 from tensorflow.keras import backend as K
 import sys
 sys.path.append("../../data")
 import data_class
-import inform_baseline
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
@@ -19,8 +17,6 @@ import inform_baseline
 import key_word_matching
 import logistic_regression
 import random_forest
-
-
 
 sns.set_palette('Set2')
 sns.set_style("darkgrid")
@@ -53,7 +49,7 @@ def model_metrics(requested_model_name, model_names):
     get_metrics(data.test_sents, data.test_labels)
 
     models = {"inform_baseline": inform_baseline.main(),
-            "key_word_matching": key_word_matching.main(),
+            "key_word_matching": key_word_matching.main(data.test_sents, data.test_labels),
             "logistic_regression" : logistic_regression.main(),
             "random_forest" : random_forest.main()}
 
@@ -67,6 +63,5 @@ def model_metrics(requested_model_name, model_names):
         return True
 
 
-if __name__=="__main__":
-    model_metrics()
+
     

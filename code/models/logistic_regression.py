@@ -4,7 +4,7 @@ import seaborn as sns
 import sys
 sys.path.append("../../data")
 import data_class
-import test
+import evaluation
 
 from sklearn.linear_model import LogisticRegression
 
@@ -33,8 +33,9 @@ def main():
 # save model
 # logistic_model.save("../models/logistic_model.model")
 
+    print("Evaluation score logistic regression:")
+    evaluation.get_metrics(lm_predicted, y_test)
+    #evaluation.create_confusion_matrix(label_id_df,y_test, lm_predicted, file_name="hm_log_reg.png" )
 
-
-if __name__=="__main__":
-    test.get_metrics(lm_predicted, y_test)
-    test.create_confusion_matrix(label_id_df,y_test, lm_predicted, file_name="hm_log_reg.png" )
+    return lm_predicted
+    
