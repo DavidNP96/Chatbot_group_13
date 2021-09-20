@@ -42,11 +42,11 @@ def main(test_sents, test_labels):
                     labels_counter[label] += 1
 
         # select the most probable one
-        mx = labels_counter.most_common(1)
+        max_label = labels_counter.most_common(1)
 
         # check if there is a tie between most likely labels
-        maxes = [ele[0]
-                 for ele in labels_counter.items() if ele[1] >= mx[0][1]]
+        maxes = [label[0]
+                 for label in labels_counter.items() if label[1] >= mx[0][1]]
 
         if len(maxes) == 1:
             y_pred.append(maxes[0])
