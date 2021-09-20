@@ -1,56 +1,30 @@
 from sklearn.ensemble import RandomForestClassifier
 import evaluation
-import data_class
-import numpy as np
-from collections import Counter
 
-import pandas as pd
-import random
-import seaborn as sns
-import sys
-sys.path.append("../../data")
+def main(data):
+    global y_train, y_test 
+    global X_train, X_test
 
+    #load train and test text and labels
+    y_train = data.train_labels
+    y_test = data.test_labels
+    X_train, X_test = data.create_bow()
 
-sns.set_palette('Set2')
-sns.set_style("darkgrid")
-
-# load data
-data = data_class.Data("../../data/dialog_acts.dat")
-
-# create dataframe
-data_frame, label_id_df = data.create_data_frame()
-
-# create bow
-y_train = data.train_labels
-y_test = data.test_labels
-X_train, X_test = data.create_bow()
-
-
-def main():
-    st = shallow_tree(data, X_train, y_train, X_test)
-    dt = deep_tree(data, X_train, y_train, X_test, y_test)
+    #train both a shallow tree (max depth=3) and a deep tree (max depth=20)
+    print("shallow random forest model metrics:")
+    st = random_forest(max_depth=3)
+    print("deep random forest model metrics:")
+    dt = random_forest(max_depth=20)
     return st, dt
 
-
-def shallow_tree(data, X_train, y_train, X_test):
-    print("shallow random forest model metrics:")
+#train random forest with a given max depth
+def random_forest(max_depth):
+    #train random forest
     random_forest_model = RandomForestClassifier(
-        max_depth=3, random_state=data.SEED).fit(X_train, y_train)
+        max_depth=max_depth).fit(X_train, y_train)
+    #get predictions for the test set
     rf_predicted = random_forest_model.predict(X_test)
-
-    # get metrics and matrix
-    print("Evaluation score random forest shallow tree:")
-    evaluation.get_metrics(rf_predicted, y_test)
-    return rf_predicted
-
-
-def deep_tree(data, X_train, y_train, X_test, y_test):
-    print('deep random forest model metrics:')
-    random_forest_model = RandomForestClassifier(
-        max_depth=20, random_state=data.SEED).fit(X_train, y_train)
-    rf_predicted = random_forest_model.predict(X_test)
-
-    # get metrics and matrix
-    print("Evaluation score random forest deep tree:")
+    #get evaluation results
+    print("Evaluation score random forest with depth" + str(max_depth) +":")
     evaluation.get_metrics(rf_predicted, y_test)
     return rf_predicted

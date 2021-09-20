@@ -18,6 +18,10 @@ from sklearn.naive_bayes import MultinomialNB
 
 class Data:
     def __init__(self, filepath):
+        import os
+        path = os.getcwd()
+        print(path)
+        print('xxxxxxxxxxxxxxxx')
         print("get filepath ", filepath)
         self.FILE_PATH = filepath
         self.TRAIN_SPLIT = 0.85
@@ -82,6 +86,6 @@ class Data:
 
 
 if __name__ == "__main__":
-    data = Data("./dialog_acts.dat")
+    data = Data("../data/dialog_acts.dat")
     splitted_data = data.split_data()
     print(splitted_data[0])

@@ -31,9 +31,6 @@ def main(test_sents, test_labels):
                 "restart": ["start", "reset", "restart"],
                 "reqmore": ["more", "other"]}
 
-    # import data
-    data = data_class.Data("../../data/dialog_acts.dat")
-
     test_pred = []
     for sentence in test_sents:
         labels_counter = Counter()
