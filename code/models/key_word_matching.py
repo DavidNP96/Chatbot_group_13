@@ -46,7 +46,7 @@ def main(test_sents, test_labels):
 
         # check if there is a tie between most likely labels
         maxes = [label[0]
-                 for label in labels_counter.items() if label[1] >= mx[0][1]]
+                 for label in labels_counter.items() if label[1] >= max_label[0][1]]
 
         if len(maxes) == 1:
             y_pred.append(maxes[0])
