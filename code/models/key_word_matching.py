@@ -15,7 +15,7 @@ def main(test_sents, test_labels):
     print("keyword matching metrics:")
     labels = ['inform', 'request', 'thankyou', 'reqalts', 'null', 'affirm', 'bye',
               'confirm', 'hello', 'negate', 'deny', 'repeat', 'ack', 'restart', 'reqmore']
-
+    #dictionary with the labels as keys, and their matching keywords as values in a list
     keywords = {"inform": ["know", "food", "restaurant", "town", "part"],
                 "request": ["number", "phone", "address", "whats", "code", "post"],
                 "thankyou": ["thanks", "appreciate", "thank"], "reqalts": ["else", "anything"],
