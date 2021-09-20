@@ -2,6 +2,8 @@
 
 # import models
 
+
+
 def main():
     # initial interface for the dialog system
     match = False
@@ -53,8 +55,8 @@ class Dialog_system:
     def  calculate_levenstein_distance(self):
         return 
 
-    def inform():
-        preferences  = extract_preferences()
+    def inform(self):
+        preferences  = self.extract_preferences()
         self.preferances.append(preferences)
         
         #  if preferences are sufficient
