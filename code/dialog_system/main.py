@@ -37,11 +37,10 @@ class Dialog_system:
         
         # create response based on dialog_state and cutomer_input
         options = {"inform": self.inform(),
-                    # fill in rest of options and create fittin functions 
+                    # fill in rest of options and create fitting functions 
                  }
         
         options[self.dialog_state]
-
 
         # return response
         response = ""
