@@ -1,16 +1,20 @@
 from sklearn.linear_model import LogisticRegression
+import sys
+sys.path.append("../")
 import evaluation
 import data_class
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import sys
-sys.path.append("../../data")
+import pickle
+
+
 
 
 sns.set_palette('Set2')
 sns.set_style("darkgrid")
 
+TRAINED_MODEL_FILEPATH = "./trained_models"
 
 def main(data):
     print("Logistic regression model metrics:")
@@ -27,4 +31,14 @@ def main(data):
     #calculate and print evaluation metrics for this model
     print("Evaluation score logistic regression:")
     evaluation.get_metrics(y_pred, y_test)
+
+    # save model
+    f = open(f"{TRAINED_MODEL_FILEPATH}/logistic_regression.pickle", "wb")
+    pickle.dump(logistic_model, f)
+    f.close()
     return y_pred
+
+if __name__== "__main__":
+    import data_class
+    data = data_class.Data("../../data/dialog_acts.dat")
+    main(data)
