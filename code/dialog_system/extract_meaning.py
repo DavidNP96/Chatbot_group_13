@@ -123,8 +123,8 @@ def find_similar_word(potential_keyword, attribute):
     #if no similar words are found, return None
     else:
         return None
-
-#test performance for test sentences
-for sent in test_sents:
-    print(sent)
-    extract_preferences(sent)
+if __name__ == "__main__":
+    #test performance for test sentences
+    for sent in test_sents:
+        print(sent)
+        extract_preferences(sent)

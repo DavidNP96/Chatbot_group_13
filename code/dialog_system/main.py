@@ -7,6 +7,8 @@ import sys
 sys.path.append("../models")
 import extract_meaning
 
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
 
 # relevant filepaths
 TRAINED_MODELS_FP = "../models/trained_models/"
@@ -39,6 +41,7 @@ class Dialog_system:
         self.preferences = {"area": "",
                             "food": "",
                             "pricerange": ""}
+        self.missing_preferences = ["area", "food", "pricerange"]
 
     def updated_customer_input(self, customer_input):
         # triggered if new customer input received
@@ -46,6 +49,7 @@ class Dialog_system:
         # update state and customer input
         self.customer_input = customer_input
         self.dialog_act.update_act(customer_input)
+        self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
 
         # create reponse based on updated dialog_state
         response, match = self.create_response(customer_input)
@@ -63,11 +67,11 @@ class Dialog_system:
                    "goodbye": self.goodbye()
                    }
 
-        options[self.dialog_act]
+        response, match = options[self.dialog_act]
 
         # return response
         response = ""
-        return response
+        return response, match
 
     def update_preferences(self, customer_input):
 
@@ -128,16 +132,18 @@ class Dialog_system:
 
 
 class Dialog_act:
-    def __init__(self, customer_input):
+    def __init__(self):
         self.dialog_act = ""
         self.models = self.load_models()
+        self.count_vect = CountVectorizer()
+        self.tfidf_transformer = TfidfTransformer()
 
     def update_act(self, customer_input, classifier="logistic_regression"):
-        # use imported model to predict class
+        # use imported model to predict dialog_act
         model = self.models[classifier]  # import model
-        self.dialog_act = model.predict(customer_input)
+        self.dialog_act = model.predict(self.create_bow(customer_input))
 
-    def load_models():
+    def load_models(self):
         trained_models = {}
         # all available models
         trained_model_names = [
@@ -146,7 +152,7 @@ class Dialog_act:
         # load all classifier models
         for trained_model_name in trained_model_names:
             trained_model = open(
-                f"{TRAINED_MODELS_FP}{trained_model_name}", 'rb')
+                f"{TRAINED_MODELS_FP}{trained_model_name}.pickle", 'rb')
             classifier = pickle.load(trained_model)
             trained_models['{}'.format(trained_model_name)] = classifier
             trained_model.close()
@@ -155,18 +161,25 @@ class Dialog_act:
     def select_model(self, model_name):
         # reselects classifier
         self.model = self.models[model_name]
+        
+    def create_bow(self, customer_input):
+        
+        #create vectors of custome input
+        input_counts = self.count_vect.fit_transform(customer_input)
 
+        #transform vectors using TF-IDF
+        tdfidf_vector = self.tfidf_transformer.fit_transform(input_counts)
+        return tdfidf_vector
 
 class Dialog_state:
 
-    def __init__(self, Dialog_act):
+    def __init__(self):
         self.state = "hello"
 
     def update_info(self, request):
         self.info[request[0]] = request[1]
 
-    def update_state(self, customer_input, missing_preferences=[]):
-        act = Dialog_act.dialog_act
+    def update_state(self, act, missing_preferences=[]):
 
         if self.state == "hello":
             if act == "inform":
