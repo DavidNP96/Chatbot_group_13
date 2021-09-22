@@ -1,96 +1,137 @@
 # the main file to run the dialog system
 
 # import models
-<<<<<<< HEAD
+import pandas as pd
 import pickle
 import sys
 sys.path.append("../models")
 
+
 # relevant filepaths
 TRAINED_MODELS_FP = "../models/trained_models/"
-=======
-import pandas as pd
->>>>>>> simon
 
 
 def main():
     # initial interface for the dialog system
     match = False
 
-    #ds = Dialog_system()
+    ds = Dialog_system()
 
-    #while match == False:
-    #    customer_input = input("").lower()
-    #    response, match = ds.updated_customer_input(customer_input)
-    #    print(response)
+    while match == False:
+       customer_input = input("").lower()
+       response, match = ds.updated_customer_input(customer_input)
+       print(response)
 
-    rs = RestaurantInfo()
-    print(rs.data)
-    print("\n\n\n\n ===================== \n\n\n")
-    preference = ["centre","european","moderate"]
-    filtered_data = rs.filter_info(preference)
-    print(filtered_data)
+    # rs = RestaurantInfo()
+    # print(rs.data)
+    # print("\n\n\n\n ===================== \n\n\n")
+    # preference = ["centre", "european", "moderate"]
+    # filtered_data = rs.filter_info(preference)
+    # print(filtered_data)
 
 
 class Dialog_system:
 
     def __init__(self):
         self.dialog_state = Dialog_state()
-        self.preferences = {}
+        self.dialog_act = Dialog_act()
+        self.preferences = {"area": "",
+                            "food_type": "",
+                            "price_range": ""}
 
     def updated_customer_input(self, customer_input):
         # triggered if new customer input received
 
         # update state and customer input
         self.customer_input = customer_input
-        self.dialog_state.update_state(customer_input)
+        self.dialog_act.update_state(customer_input)
 
         # create reponse based on updated dialog_state
-        response, match = self.create_response()
+        response, match = self.create_response(customer_input)
 
         return response, match
 
-    def create_response(self):
+    def create_response(self, customer_input):
 
         # create response based on dialog_state and cutomer_input
-        options = {"inform": self.inform(),
-                   # fill in rest of options and create fitting functions
+        options = {"hello": self.hello(),
+                   "express_preferences": self.update_preferences(customer_input),
+                   "suggest_restaurant": self.suggest_restaurant(),
+                   "request_restaurant_information": self.request_restaurant_information(),
+                   "request_add_info": self.request_restaurant_information(),
+                   "goodbye": self.goodbye()
                    }
 
-        options[self.dialog_state]
+        options[self.dialog_act]
 
         # return response
         response = ""
         return response
 
-    def extract_preferences():
-        # extract preferences from levenstein distance
-        preferences = ""
-        return preferences
+    def update_preferences(self, customer_input):
+
+        # TODO assumes that this function updates the preferences
+        self.extract_preferences(customer_input)
+
+        self.missing_preferences = []
+
+        # check for missing preferences
+        for key, value in self.preferences.items():
+            if value == "":
+                self.missing_preferences.append(key)
+        # still missing preferences
+        if len(self.missing_preferences) > 0:
+            for preference in self.missing_preferences:
+                # TODO create response in form of question
+                pass
+        else:
+            Dialog_state.update_state(self.missing_preferences)
+            # TODO create response for first missing preference
+            pass
+        return
+
+    def extract_preferences(self, customer_input):
+        return
+
+    def refresh_preferences(self):
+        self.info = {"area": "",
+                     "food_type": "",
+                     "price_range": ""}
 
     def calculate_levenstein_distance(self):
         return
 
-    def inform(self):
-        preferences = self.extract_preferences()
-        self.preferances.append(preferences)
+    def hello(self):
+        # TODO return hello response
+        pass
 
-        #  if preferences are sufficient
-        # make request
-        # else:
-        # ask for missing preferences
+    def suggest_restaurant():
+        # TODO suggest restaurant response
+        pass
+
+    def request_restaurant_information(self, information_req="phone_number"):
+        # TODO retreive extra information
+        if information_req == "phone_number":
+            # return phone number resposne
+            pass
+        else:
+            # return postal code response
+            pass
+        return
+
+    def goodbye():
+        return
 
 
-class Dialog_state:
+class Dialog_act:
     def __init__(self, customer_input):
-        self.dialog_state = ""
+        self.dialog_act = ""
         self.models = self.load_models()
 
-    def update_state(self, customer_input, classifier="logistic_regression"):
+    def update_act(self, customer_input, classifier="logistic_regression"):
         # use imported model to predict class
         model = self.models[classifier]  # import model
-        self.dialog_state = model.predict(customer_input)
-        print("new state: ", self.dialog_state)
+        self.dialog_act = model.predict(customer_input)
 
     def load_models():
         trained_models = {}
@@ -112,51 +153,93 @@ class Dialog_state:
         self.model = self.models[model_name]
 
 
+class Dialog_state:
+
+    def __init__(self, Dialog_act):
+        self.state = "hello"
+
+    def update_info(self, request):
+        self.info[request[0]] = request[1]
+
+    def update_state(self, customer_input, missing_preferences=[]):
+        act = Dialog_act.dialog_act
+
+        if self.state == "hello":
+            if act == "inform":
+
+                self.state = "express_preferences"
+            elif act == "hello":
+                self.state == "hello"
+        elif self.state == "express_preferences":
+            if len(missing_preferences) == 0:
+                self.sate = "suggest_restaurant"
+            else:
+                self.state = "express_preferences"
+
+        elif self.state == "suggest_restaurant":
+            if act == "accept":
+                self.state = "request_restaurant_information"
+            elif act == "deny" or act == "negate" or act == "reqalts" or act == "reqmore":
+                self.state == "suggest_restaurant"
+
+        elif self.state == "request_restaurant_information":
+            if act == "reqmore":
+                self.state = "request_add_info"
+            elif act == "thankyou":
+                self.state == "goodbye"
+
+    def extract_preferences(self, customer_input):
+        return
 
 
 class RestaurantInfo:
 
-    def __init__(self):   
+    def __init__(self):
         self.data = self.load_data()
 
-    #Load function
-    ###Load in dataset and change it in a pandas setup
+    # Load function
+    # Load in dataset and change it in a pandas setup
     def load_data(self):
-        restaurants_info = pd.read_csv("C:\\Users\\Simon\\Documents\\Master_Code\\Chatbot_group_13\\data\\restaurant_info.csv")
+        restaurants_info = pd.read_csv(
+            "C:\\Users\\Simon\\Documents\\Master_Code\\Chatbot_group_13\\data\\restaurant_info.csv")
         return restaurants_info
 
-    ##Filter function(pd dataframe, array/list of preferences)
+    # Filter function(pd dataframe, array/list of preferences)
     def filter_info(self, filter_preferences: list):
-        
-        #unpack array and place array elements into variables
+
+        # unpack array and place array elements into variables
         area = filter_preferences[0]
         food_type = filter_preferences[1]
         price = filter_preferences[2]
-       
-        ##check if variables exist, and if so, filter the dataframe on it
+
+        # check if variables exist, and if so, filter the dataframe on it
         if (area != "") & (food_type != "") & (price != ""):
-            filtered_restaurant_info = self.data[((self.data["area"]== area) & (self.data["food"]==food_type)) & (self.data["pricerange"]==price)]
+            filtered_restaurant_info = self.data[((self.data["area"] == area) & (
+                self.data["food"] == food_type)) & (self.data["pricerange"] == price)]
 
         elif (area != "") & (food_type != ""):
-            filtered_restaurant_info = self.data[((self.data["area"]== area) & (self.data["food"]==food_type))]
+            filtered_restaurant_info = self.data[(
+                (self.data["area"] == area) & (self.data["food"] == food_type))]
 
-        elif (area != "") &  (price != ""):
-            filtered_restaurant_info = self.data[((self.data["area"]== area) & (self.data["pricerange"]==price))]
+        elif (area != "") & (price != ""):
+            filtered_restaurant_info = self.data[(
+                (self.data["area"] == area) & (self.data["pricerange"] == price))]
 
         elif (food_type != "") & (price != ""):
-            filtered_restaurant_info = self.data[(((self.data["food"]==food_type)) & (self.data["pricerange"]==price))]
+            filtered_restaurant_info = self.data[(
+                ((self.data["food"] == food_type)) & (self.data["pricerange"] == price))]
 
         elif (area != ""):
-            filtered_restaurant_info = self.data["area"]== area
-        
+            filtered_restaurant_info = self.data["area"] == area
+
         elif (price != ""):
-            filtered_restaurant_info = self.data["pricerange"]== price
-        
+            filtered_restaurant_info = self.data["pricerange"] == price
+
         elif (food_type != ""):
-            filtered_restaurant_info = self.data["food"]== food_type
+            filtered_restaurant_info = self.data["food"] == food_type
 
         return filtered_restaurant_info
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
