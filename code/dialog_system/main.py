@@ -12,8 +12,8 @@ sys.path.append("../../data")
 
 
 # relevant filepaths
-TRAINED_MODELS_FP = "../trained_models/"
-DATAPATH = "../../data/"
+TRAINED_MODELS_FP = "./trained_models/"
+DATAPATH = "./data/"
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
 
     ds = Dialog_system()
 
-    print("Welcome in you can find a variety of restaurants here. Just give me some information about the location, food type and price range that you'd like: \n ")
+    print("Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and where you would like to eat and how much you are willing to spend, I can recommend you some nice restaurants: \n ")
 
     while match == False:
         customer_input = input("").lower()
@@ -54,9 +54,9 @@ class Dialog_system:
         # update state and customer input
         self.customer_input = customer_input
         self.dialog_act.update_act(customer_input)
+        print(self.dialog_act.dialog_act)
         self.dialog_state.update_state(
             self.dialog_act.dialog_act, self.missing_preferences)
-
         # create reponse based on updated dialog_state
         response = self.create_response()
 
@@ -86,7 +86,7 @@ class Dialog_system:
 
     def update_preferences(self):
 
-        # TODO assumes that this function updates the preferences
+        # this function updates the preferences according to the user's input
         self.extract_preferences()
 
         self.missing_preferences = []
@@ -98,17 +98,26 @@ class Dialog_system:
 
         # still missing preferences
         if len(self.missing_preferences) > 0:
-            # TODO create response in form of question
-            pass
+            if self.missing_preferences[0] == 'area':
+                response = 'In what area would you like to eat?'
+            elif self.missing_preferences[0] == 'food':
+                response = 'What type of cuisine would you prefer?'
+            else:
+                response = 'Excuse me for asking, but what is your pricerange today?'
         else:
-            Dialog_state.update_state(self.missing_preferences)
-            # TODO create response for first missing preference
+            #TODO this function does not work
+            print(self.dialog_act.dialog_act)
+            self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
+            response = 'Great! Let me find you the best option.'
             pass
-        return
+        return response
 
     def extract_preferences(self):
         preferences = extract_meaning.extract_preferences(self.customer_input)
-
+        if preferences == {}:
+            print('I am sorry I did not quite get that. ')
+        else: 
+            print('Great choice.')
         # update preferences
         for preference, value in preferences.items():
             self.preferences[preference] = value
@@ -120,16 +129,16 @@ class Dialog_system:
                      "pricerange": ""}
 
     def hello(self):
-        # TODO return hello response
-        response = "oh hello again"
+        response = "Hi! so nice to meet you. What would you like to eat today?"
         return response
 
     def suggest_restaurant(self):
-        # TODO suggest restaurant response
+        response = 'my favourite for you is...'
 
         #  filter restaurants
         restaurant_options = RestaurantInfo.filter_info(self.preferences)
-        pass
+        print(restaurant_options)
+        return response
 
     def request_restaurant_information(self, information_req="phone_number"):
         # TODO retreive extra information
@@ -150,9 +159,9 @@ class Dialog_act:
         self.dialog_act = ""
         self.models = self.load_models()
         self.count_vect = pickle.load(
-            open("./../trained_models/vectorizer.pickle", 'rb'))
+            open("./trained_models/vectorizer.pickle", 'rb'))
         self.tfidf_transformer = pickle.load(
-            open("./../trained_models/tfidf.pickle", 'rb'))
+            open("./trained_models/tfidf.pickle", 'rb'))
 
     def update_act(self, customer_input, classifier="logistic_regression"):
         # use imported model to predict dialog_act
@@ -193,7 +202,7 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
-
+        print(self.state)
         if self.state == "hello":
             if act == "inform":
 
@@ -202,7 +211,7 @@ class Dialog_state:
                 self.state == "hello"
         elif self.state == "express_preferences":
             if len(missing_preferences) == 0:
-                self.sate = "suggest_restaurant"
+                self.state = "suggest_restaurant"
             else:
                 self.state = "express_preferences"
 
@@ -217,7 +226,8 @@ class Dialog_state:
                 self.state = "request_add_info"
             elif act == "thankyou":
                 self.state == "goodbye"
-
+        print('state is now :', self.state)
+        
     def extract_preferences(self, customer_input):
         return
 
@@ -267,6 +277,7 @@ class RestaurantInfo:
 
         elif (food != ""):
             filtered_restaurant_info = self.data["food"] == food
+
 
         return filtered_restaurant_info
 
