@@ -57,7 +57,7 @@ class Data:
         #fit test sentences to the bag of words vectors
         X_test = tfidf_transformer.transform(
             count_vect.transform(self.test_sents))
-        return X_train, X_test
+        return X_train, X_test, count_vect, tfidf_transformer
 
     #this function creates a dataframe from the input data
     #another dataframe is created in which the unique labels are listed with their corresponding ids
