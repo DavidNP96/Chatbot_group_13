@@ -87,7 +87,12 @@ def match_patterns(utterance, preferences_dict):
                 else:
                     closest_word = find_similar_word(potential_keyword, attribute)
                     if closest_word != None:
-                        preferences_dict[attribute] = closest_word
+                        check_correction = input('I did not recognize '+ potential_keyword + '. Did you mean '+ closest_word + '?' +
+                                            'Please reply yes (y) or no (n). ')
+                        while check_correction not in ['yes', 'y', 'no', 'n']:
+                            check_correction = input("Sorry I did not understand. Please reply with yes or no. ")
+                        if check_correction == 'yes' or check_correction == 'y':
+                            preferences_dict[attribute] = closest_word
     return preferences_dict
 
 #this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
