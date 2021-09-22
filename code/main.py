@@ -1,5 +1,4 @@
-import models
-import data_class
+from models import Models
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
@@ -15,10 +14,10 @@ sns.set_style("darkgrid")
 test_data = ["hey", "how", "are", "you"]
 plot_file = "../plots/"
 
-#load data
-data = data_class.Data("./data/dialog_acts.dat")
-y_test = data.test_labels
+#all models
 model_names = ["inform_baseline", "key_word_matching", "logistic_regression", "shallow_random_forest", "deep_random_forest", "all"]
+
+models = Models()
 
 #given predicted labels and true labels, print accuracy, macro- F1, recall and precision
 def get_metrics(y_pred, y_true):
@@ -50,11 +49,14 @@ while requested_model_name not in model_names:
             'logistic_regression', 'shallow_random_forest', 'deep_random_forest' or 'all': ")
 
 #create dictionary with model names as keys and their predictions as values
-models = {"inform_baseline": models.inform_baseline(data),
-            "key_word_matching": models.keyword_matcher(data.test_sents, data.test_labels),
-            "logistic_regression": models.logistic_regression(data),
-            "shallow_random_forest": models.random_forest(data, max_depth=3),
-            "deep_random_forest": models.random_forest(data, max_depth=20)}
+all_models = {"inform_baseline": models.inform_baseline(),
+            "key_word_matching": models.keyword_matcher(),
+            "logistic_regression": models.logistic_regression(),
+            "shallow_random_forest": models.random_forest(max_depth=3),
+            "deep_random_forest": models.random_forest(max_depth=20)}
+
+#get y_test labels
+y_test = models.data.test_labels
 
 # if all models are requested: print performance scores for all models;
 # otherwise print performance scores for selected model
@@ -62,7 +64,7 @@ if requested_model_name == "all":
     for model_name in model_names:
         if model_name != "all":
             print('Performance metrics for ', model_name, ':')
-            y_pred = models[model_name]
+            y_pred = all_models[model_name]
             get_metrics(y_pred, y_test)
 else:
-    models[requested_model_name]
+    all_models[requested_model_name]
