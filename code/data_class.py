@@ -10,7 +10,6 @@ class Data:
     def __init__(self, filepath):
         self.FILE_PATH = filepath
         self.TRAIN_SPLIT = 0.85
-        self.SEED = 42
         self.dataset = self.get_data()
         self.split_data()
 
@@ -43,7 +42,7 @@ class Data:
 
         #randomly shuffle the train data; then save train sentences and labels
         train_data = list(zip(train_sents, train_labels))
-        random.Random(self.SEED).shuffle(train_data)
+        random.shuffle(train_data)
         self.train_sents, self.train_labels = zip(*train_data)
 
     #create Bag-of-Words vectors for the train and test sentences
