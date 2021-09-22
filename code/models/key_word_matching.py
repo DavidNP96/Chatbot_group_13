@@ -18,7 +18,8 @@ def main(test_sents, test_labels):
     #dictionary with the labels as keys, and their matching keywords as values in a list
     keywords = {"inform": ["know", "food", "restaurant", "town", "part"],
                 "request": ["number", "phone", "address", "whats", "code", "post"],
-                "thankyou": ["thanks", "appreciate", "thank"], "reqalts": ["else", "anything"],
+                "thankyou": ["thanks", "appreciate", "thank"], 
+                "reqalts": ["else", "anything"],
                 "null": ["ah", "uh", "ugh", "oh", "noise", "sil", "unintelligible"],
                 "affirm": ["yes", "true", "correct", "affirmative", "uh-huh", "agree", "acknowledge", "concede", "right", "yea", "yeah"],
                 "bye": ["goodbye", "bye", "cya", "farewell", "laters"],
