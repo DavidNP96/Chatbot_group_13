@@ -11,7 +11,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
 # relevant filepaths
-TRAINED_MODELS_FP = "../models/trained_models/"
+TRAINED_MODELS_FP = "../models/"
 
 
 def main():
@@ -164,12 +164,9 @@ class Dialog_act:
         
     def create_bow(self, customer_input):
         
-        #create vectors of custome input
-        input_counts = self.count_vect.fit_transform(customer_input)
-
-        #transform vectors using TF-IDF
-        tdfidf_vector = self.tfidf_transformer.fit_transform(input_counts)
-        return tdfidf_vector
+        return self.tfidf_transformer.transform(
+            self.count_vect.transform([customer_input]))
+        
 
 class Dialog_state:
 

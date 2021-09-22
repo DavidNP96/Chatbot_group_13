@@ -6,7 +6,7 @@ import pickle
 import sys
 sys.path.append("../../data")
 
-TRAINED_MODEL_FILEPATH = "./trained_models"
+TRAINED_MODEL_FILEPATH = "./models"
 
 def inform_baseline(data):
     #load t test labels
@@ -79,9 +79,9 @@ def logistic_regression(data):
     logistic_model = LogisticRegression(multi_class='multinomial').fit(X_train, y_train)
     y_pred = logistic_model.predict(X_test)
     # save model
-    #f = open(f"{TRAINED_MODEL_FILEPATH}/logistic_regression.pickle", "wb")
-    #pickle.dump(logistic_model, f)
-    #f.close()
+    f = open(f"{TRAINED_MODEL_FILEPATH}/logistic_regression.pickle", "wb")
+    pickle.dump(logistic_model, f)
+    f.close()
     return y_pred
 
 #train random forest with a given max depth
