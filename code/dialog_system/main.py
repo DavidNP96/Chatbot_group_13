@@ -124,8 +124,11 @@ class Dialog_system:
         response = "oh hello again"
         return response
 
-    def suggest_restaurant():
+    def suggest_restaurant(self):
         # TODO suggest restaurant response
+
+        #  filter restaurants
+        restaurant_options = RestaurantInfo.filter_info(self.preferences)
         pass
 
     def request_restaurant_information(self, information_req="phone_number"):
@@ -232,38 +235,38 @@ class RestaurantInfo:
         return restaurants_info
 
     # Filter function(pd dataframe, array/list of preferences)
-    def filter_info(self, filter_preferences: list):
+    def filter_info(self, filter_preferences):
 
         # unpack array and place array elements into variables
-        area = filter_preferences[0]
-        food_type = filter_preferences[1]
-        price = filter_preferences[2]
+        area = filter_preferences["area"]
+        food = filter_preferences["food"]
+        pricerange = filter_preferences["pricerange"]
 
         # check if variables exist, and if so, filter the dataframe on it
-        if (area != "") & (food_type != "") & (price != ""):
+        if (area != "") & (food != "") & (pricerange != ""):
             filtered_restaurant_info = self.data[((self.data["area"] == area) & (
-                self.data["food"] == food_type)) & (self.data["pricerange"] == price)]
+                self.data["food"] == food)) & (self.data["pricerangerange"] == pricerange)]
 
-        elif (area != "") & (food_type != ""):
+        elif (area != "") & (food != ""):
             filtered_restaurant_info = self.data[(
-                (self.data["area"] == area) & (self.data["food"] == food_type))]
+                (self.data["area"] == area) & (self.data["food"] == food))]
 
-        elif (area != "") & (price != ""):
+        elif (area != "") & (pricerange != ""):
             filtered_restaurant_info = self.data[(
-                (self.data["area"] == area) & (self.data["pricerange"] == price))]
+                (self.data["area"] == area) & (self.data["pricerangerange"] == pricerange))]
 
-        elif (food_type != "") & (price != ""):
+        elif (food != "") & (pricerange != ""):
             filtered_restaurant_info = self.data[(
-                ((self.data["food"] == food_type)) & (self.data["pricerange"] == price))]
+                ((self.data["food"] == food)) & (self.data["pricerangerange"] == pricerange))]
 
         elif (area != ""):
             filtered_restaurant_info = self.data["area"] == area
 
-        elif (price != ""):
-            filtered_restaurant_info = self.data["pricerange"] == price
+        elif (pricerange != ""):
+            filtered_restaurant_info = self.data["pricerangerange"] == pricerange
 
-        elif (food_type != ""):
-            filtered_restaurant_info = self.data["food"] == food_type
+        elif (food != ""):
+            filtered_restaurant_info = self.data["food"] == food
 
         return filtered_restaurant_info
 
