@@ -44,6 +44,7 @@ def extract_preferences(utterance):
     preferences_dict = match_keywords(utterance, preferences_dict)
     preferences_dict = match_patterns(utterance, preferences_dict)
     print(preferences_dict)
+    return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
 # if so, add the the preference to the preferences dictionary

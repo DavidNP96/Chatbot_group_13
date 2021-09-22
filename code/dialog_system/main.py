@@ -5,6 +5,7 @@ import pandas as pd
 import pickle
 import sys
 sys.path.append("../models")
+import extract_meaning
 
 
 # relevant filepaths
@@ -36,15 +37,15 @@ class Dialog_system:
         self.dialog_state = Dialog_state()
         self.dialog_act = Dialog_act()
         self.preferences = {"area": "",
-                            "food_type": "",
-                            "price_range": ""}
+                            "food": "",
+                            "pricerange": ""}
 
     def updated_customer_input(self, customer_input):
         # triggered if new customer input received
 
         # update state and customer input
         self.customer_input = customer_input
-        self.dialog_act.update_state(customer_input)
+        self.dialog_act.update_act(customer_input)
 
         # create reponse based on updated dialog_state
         response, match = self.create_response(customer_input)
@@ -79,11 +80,11 @@ class Dialog_system:
         for key, value in self.preferences.items():
             if value == "":
                 self.missing_preferences.append(key)
+
         # still missing preferences
         if len(self.missing_preferences) > 0:
-            for preference in self.missing_preferences:
-                # TODO create response in form of question
-                pass
+            # TODO create response in form of question
+            pass
         else:
             Dialog_state.update_state(self.missing_preferences)
             # TODO create response for first missing preference
@@ -91,12 +92,15 @@ class Dialog_system:
         return
 
     def extract_preferences(self, customer_input):
+        preferences = extract_meaning.extract_preferences(customer_input)
+        for preference, value in preferences.items:
+            self.preferences[preference] = value
         return
 
     def refresh_preferences(self):
         self.info = {"area": "",
-                     "food_type": "",
-                     "price_range": ""}
+                     "food": "",
+                     "pricerange": ""}
 
     def calculate_levenstein_distance(self):
         return
