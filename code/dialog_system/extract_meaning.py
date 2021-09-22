@@ -55,7 +55,7 @@ def match_keywords(utterance, preferences_dict):
         #if so add the keyword to the preferences dictionary
         for pref in preference:
             if type(pref) == dict:
-                for preference_variation in pref.values():
+                for preference_variation in list(pref.values())[0]:
                     if preference_variation in sent:
                         preferences_dict[attribute] = list(pref.keys())[0]
             #check if keyword is expressed in the sentence, if so add preference to preferences dictionary
