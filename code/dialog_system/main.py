@@ -40,6 +40,7 @@ class Dialog_system:
                             "pricerange": ""}
         self.missing_preferences = ["area", "food", "pricerange"]
         self.restaurant_suggestion = None
+        self.provided_info = []
 
     def updated_customer_input(self, customer_input):
         # triggered if new customer input received
@@ -47,9 +48,7 @@ class Dialog_system:
         # update state and customer input
         self.customer_input = customer_input
         self.dialog_act.update_act(customer_input)
-        print(self.dialog_act.dialog_act)
-        self.dialog_state.update_state(
-            self.dialog_act.dialog_act, self.missing_preferences)
+        self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
         # create reponse based on updated dialog_state
         response = self.create_response()
 
@@ -69,7 +68,6 @@ class Dialog_system:
                    "request_add_info": self.request_restaurant_information,
                    "goodbye": self.goodbye
                    }
-
         action = options[self.dialog_state.state]
 
         response = action()
@@ -78,8 +76,6 @@ class Dialog_system:
         return response
 
     def update_preferences(self):
-        print('updating preferences')
-        print(self.preferences)
         # this function updates the preferences according to the user's input
         confirmation = self.extract_preferences()
 
@@ -136,19 +132,47 @@ class Dialog_system:
             response = 'I recommend you to go to ' + self.restaurant_suggestion['restaurantname'] + '. Would you like to go there?'
         return response
 
-    def request_restaurant_information(self, information_req="address"):
+    def extract_asked_information(self, costumer_input):
+        information_dict = {'address' : ['address', 'adress', 'adres', 'street', 'location'],
+                            'phone_number' : ['phone', 'number', 'telephone'],
+                            'postcode': ['postcode', 'zipcode', 'post', 'zip', 'postalcode', 'code', 'postal'],
+                            'both' : ['both', 'all']
+                            }
+        required_info = []
+        sentence = costumer_input.split()
+        for information, keywords in information_dict.items():
+            for keyword in keywords:
+                if keyword in sentence:
+                    if information == 'both':
+                        required_info.append('phone_number')
+                        required_info.append('postcode')
+                    else:
+                        required_info.append(information)
+        return required_info
 
-        if information_req == "address":
-            response = "The address is " + self.restaurant_suggestion['addr']
-        elif information_req == "phone_number":
-            response = "The phone number is " + self.restaurant_suggestion['phone']
-            
-        elif information_req == "postal_code":
-            response = "The postal code is " + self.restaurant_suggestion['postcode']
+    def request_restaurant_information(self):
+        information_req = self.extract_asked_information(self.customer_input)
+        if self.provided_info == [] and information_req == []:
+            information_req.append('address') 
+            response = "Great! "
+        else:
+            response = ""
+        if "address" in information_req:
+            response += "The address is " + self.restaurant_suggestion['addr'] +  ". "
+        if "phone_number" in information_req:
+            response += "The phone number is " + self.restaurant_suggestion['phone'] + ". "
+        if "postcode" in information_req :
+            response += "The postal code is " + self.restaurant_suggestion['postcode'] + ". "
+        if information_req == [] or self.provided_info == []:
+            response += 'Would you like to know the phone number or the postcode? Or maybe both?'
+        for information in information_req:
+            self.provided_info.append(information)
+
         return response
 
-    def goodbye():
-        return
+    def goodbye(self):
+        response = "Enjoy your dinner"
+        return response
 
 
 class Dialog_act:
@@ -199,8 +223,6 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
-        print(self.state, act, missing_preferences)
-
         if self.state == "hello":
             if act == "inform":
                 self.state = "express_preferences"
@@ -219,15 +241,13 @@ class Dialog_state:
             if act == "affirm":
                 self.state = "request_restaurant_information"
             elif act == "deny" or act == "negate" or act == "reqalts" or act == "reqmore":
-                self.state == "suggest_restaurant"
+                self.state ="suggest_restaurant"
 
         elif self.state == "request_restaurant_information":
-            if act == "reqmore":
-                self.state = "request_add_info"
-            elif act == "thankyou":
-                self.state == "goodbye"
-
-        print('state is now :', self.state)
+            #if act == "reqmore":
+            #    self.state = "request_add_info"
+            if act == "thankyou":
+                self.state = "goodbye"
 
     def extract_preferences(self, customer_input):
         return

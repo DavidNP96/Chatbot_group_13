@@ -43,7 +43,6 @@ def extract_preferences(utterance):
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict)
     preferences_dict = match_patterns(utterance, preferences_dict)
-    print(preferences_dict)
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
@@ -109,12 +108,10 @@ def find_similar_word(potential_keyword, attribute):
                 if levenshtein_dist < 3:
                     #if another spelling variation of the same keyword was already saved, check if this variation has a lower score
                     if keyword in distance_dict:
-                        print(distance_dict)
                         if levenshtein_dist < distance_dict[keyword]:
                             distance_dict[keyword] = levenshtein_dist
                     #otherwise, save the score of this variation
                     else:
-                        print(distance_dict)
                         distance_dict[keyword] = levenshtein_dist
         else:
             #compare distance between keyword and potential keyword
