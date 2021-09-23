@@ -41,6 +41,8 @@ class Dialog_system:
         self.missing_preferences = ["area", "food", "pricerange"]
         self.restaurant_suggestion = None
         self.provided_info = []
+        self.item = ""
+        self.count_options = 0
 
     def updated_customer_input(self, customer_input):
         # triggered if new customer input received
@@ -90,17 +92,20 @@ class Dialog_system:
         if len(self.missing_preferences) > 0:
             if self.missing_preferences[0] == 'area':
                 response = confirmation + 'In what area would you like to eat?'
+                self.item = "area"
             elif self.missing_preferences[0] == 'food':
                 response = confirmation + 'What type of cuisine would you prefer?'
+                self.item = "food"
             else:
                 response = confirmation + 'Excuse me for asking, but what is your pricerange today?'
+                self.item = "pricerange"
         else:
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
             response = self.create_response()
         return response
 
     def extract_preferences(self):
-        preferences = extract_meaning.extract_preferences(self.customer_input)
+        preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
         if preferences == {}:
             confirmation = 'I am sorry I did not quite get that. '
         else: 
@@ -112,9 +117,9 @@ class Dialog_system:
         return confirmation
 
     def refresh_preferences(self):
-        self.preferences = {"area": "",
-                            "food": "",
-                            "pricerange": ""}
+        self.preferences = {"area": "any",
+                            "food": "any",
+                            "pricerange": "any"}
         self.missing_preferences = ["area", "food", "pricerange"]
 
     def hello(self):
@@ -124,13 +129,19 @@ class Dialog_system:
     def suggest_restaurant(self):
         #  filter restaurants
         restaurant_options = self.restaurant_info.filter_info(self.preferences)
-        if len(restaurant_options) == 0:
+        if self.dialog_state.prev_state == "suggest_restaurant":
+            self.count_options += 1
+        else:
+            self.count_options = 0
+        if len(restaurant_options) == 0 or self.count_options >= len(restaurant_options):
             response = 'Unfortunately I have not found any restaurant that matches your whishes. Is there anything else you would like to eat?'
+            self.count_options = 0
             self.refresh_preferences()
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
         else:
-            self.restaurant_suggestion = restaurant_options.iloc[0]
+            self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
             response = 'I recommend you to go to ' + self.restaurant_suggestion['restaurantname'] + '. Would you like to go there?'
+        print(len(restaurant_options))
         return response
 
     def extract_asked_information(self, costumer_input):
@@ -225,6 +236,7 @@ class Dialog_state:
 
     def __init__(self):
         self.state = "hello"
+        self.prev_state = "hello"
 
     def update_info(self, request):
         self.info[request[0]] = request[1]
@@ -233,22 +245,29 @@ class Dialog_state:
         if self.state == "hello":
             if act == "inform":
                 self.state = "express_preferences"
+                self.prev_state = "hello"
             elif act == "hello":
                 self.state == "hello"
+                self.prev_state = "hello"
 
         elif self.state == "express_preferences":
             if len(missing_preferences) == 0:
                 self.state = "suggest_restaurant"
+                self.prev_state = "express_preferences"
             else:
                 self.state = "express_preferences"
+                self.prev_state = "express_preferences"
 
         elif self.state == "suggest_restaurant":
             if len(missing_preferences) > 0:
                 self.state = "express_preferences"
+                self.prev_state = "suggest_restaurant"
             if act == "affirm":
                 self.state = "request_restaurant_information"
+                self.prev_state = "suggest_restaurant"
             elif act == "deny" or act == "negate" or act == "reqalts" or act == "reqmore":
                 self.state ="suggest_restaurant"
+                self.prev_state = "suggest_restaurant"
 
         elif self.state == "request_restaurant_information":
             #if act == "reqmore":
@@ -264,6 +283,7 @@ class RestaurantInfo:
 
     def __init__(self):
         self.data = self.load_data()
+        self.recommendations = []
 
     # Load restaurant to a dataframe
     def load_data(self):
@@ -279,34 +299,35 @@ class RestaurantInfo:
         food = filter_preferences["food"]
         pricerange = filter_preferences["pricerange"]
 
+        filtered_restaurant_info = self.data
+        
         # check if variables exist, and if so, filter the dataframe on it
-        if (area != "") & (food != "") & (pricerange != ""):
+        if (area != "any") & (food != "any") & (pricerange != "any"):
             filtered_restaurant_info = self.data[((self.data["area"] == area) & (
                 self.data["food"] == food)) & (self.data["pricerange"] == pricerange)]
 
-        elif (area != "") & (food != ""):
+        elif (area != "any") & (food != "any"):
             filtered_restaurant_info = self.data[(
                 (self.data["area"] == area) & (self.data["food"] == food))]
 
-        elif (area != "") & (pricerange != ""):
+        elif (area != "any") & (pricerange != "any"):
             filtered_restaurant_info = self.data[(
                 (self.data["area"] == area) & (self.data["pricerange"] == pricerange))]
 
-        elif (food != "") & (pricerange != ""):
+        elif (food != "any") & (pricerange != "any"):
             filtered_restaurant_info = self.data[(
                 ((self.data["food"] == food)) & (self.data["pricerange"] == pricerange))]
 
-        elif (area != ""):
+        elif (area != "any"):
             filtered_restaurant_info = self.data["area"] == area
 
-        elif (pricerange != ""):
+        elif (pricerange != "any"):
             filtered_restaurant_info = self.data["pricerange"] == pricerange
 
-        elif (food != ""):
+        elif (food != "any"):
             filtered_restaurant_info = self.data["food"] == food
-
-
-        return filtered_restaurant_info
+            
+        return self.data[filtered_restaurant_info]
 
 
 if __name__ == "__main__":
