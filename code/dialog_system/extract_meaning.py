@@ -22,11 +22,11 @@ pref_keywords = {
 pref_patterns = {
     'food' : [('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l')],
     'area' : [('part of town', 'l'), ('area', 'l'), ('in the', 'r')],
-    'pricerange': [('priced', 'l'), ('restaurant', 'l')]
+    'pricerange': [('priced', 'l'), ('restaurant', 'l'), ('price', 'l')]
 }
 
 #list of words that map to 'dontcare'
-dontcare_keywords = ['any']
+dontcare_keywords = ['any', 'matter']
 
 #a list of sentences to test our algorithm on
 test_sents = ['I\'m looking for world food', 'I want a restaurant that serves world food', 'I want a restaurant serving Swedish food',
@@ -129,4 +129,4 @@ if __name__ == "__main__":
     #test performance for test sentences
     for sent in test_sents:
         print(sent)
-        extract_preferences(sent)
+        print(extract_preferences(sent))

@@ -107,6 +107,7 @@ class Dialog_system:
             confirmation  = 'Great choice. '
         # update preferences
         for preference, value in preferences.items():
+            print(preference, value)
             self.preferences[preference] = value
         return confirmation
 
