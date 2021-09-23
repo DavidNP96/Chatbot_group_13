@@ -12,8 +12,8 @@ sys.path.append("../../data")
 
 
 # relevant filepaths
-TRAINED_MODELS_FP = "./trained_models/"
-DATAPATH = "./data/"
+TRAINED_MODELS_FP = "../../trained_models/"
+DATAPATH = "../../data/"
 
 
 def main():
@@ -157,12 +157,18 @@ class Dialog_system:
             response = "Great! "
         else:
             response = ""
-        if "address" in information_req:
-            response += "The address is " + self.restaurant_suggestion['addr'] +  ". "
-        if "phone_number" in information_req:
-            response += "The phone number is " + self.restaurant_suggestion['phone'] + ". "
-        if "postcode" in information_req :
-            response += "The postal code is " + self.restaurant_suggestion['postcode'] + ". "
+        if str(self.restaurant_suggestion['addr']) == "nan":
+            response += "Sorry, we do not have a address registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+        elif "address" in information_req:
+            response += "The address is " + str(self.restaurant_suggestion['addr']) +  ". "
+        if str(self.restaurant_suggestion['phone']) == "nan":
+            response += "Sorry, we do not have a phone number registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+        elif "phone_number" in information_req:
+            response += "The phone number is " + str(self.restaurant_suggestion['phone']) + ". "
+        if str(self.restaurant_suggestion['postcode']) == "nan":
+            response += "Sorry, we do not have a postal code registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+        elif "postcode" in information_req :
+            response += "The postal code is " + str(self.restaurant_suggestion['postcode']) + ". "
         if information_req == [] or self.provided_info == []:
             response += 'Would you like to know the phone number or the postcode? Or maybe both?'
         for information in information_req:
@@ -180,9 +186,9 @@ class Dialog_act:
         self.dialog_act = ""
         self.models = self.load_models()
         self.count_vect = pickle.load(
-            open("./trained_models/vectorizer.pickle", 'rb'))
+            open("../../trained_models/vectorizer.pickle", 'rb'))
         self.tfidf_transformer = pickle.load(
-            open("./trained_models/tfidf.pickle", 'rb'))
+            open("../../trained_models/tfidf.pickle", 'rb'))
 
     #classify the dialog act of the user's input
     def update_act(self, customer_input, classifier="logistic_regression"):
