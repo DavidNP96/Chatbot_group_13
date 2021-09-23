@@ -22,7 +22,7 @@ pref_keywords = {
 pref_patterns = {
     'food' : [('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l')],
     'area' : [('part of town', 'l'), ('area', 'l'), ('in the', 'r')],
-    'pricerange': [('priced', 'l')]
+    'pricerange': [('priced', 'l'), ('restaurant', 'l')]
 }
 
 #list of words that map to 'dontcare'
