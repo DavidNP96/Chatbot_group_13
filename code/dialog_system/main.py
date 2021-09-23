@@ -12,8 +12,8 @@ sys.path.append("../../data")
 
 
 # relevant filepaths
-TRAINED_MODELS_FP = "./trained_models/"
-DATAPATH = "./data/"
+TRAINED_MODELS_FP = "../../trained_models/"
+DATAPATH = "../../data/"
 
 
 def main():
@@ -180,9 +180,9 @@ class Dialog_act:
         self.dialog_act = ""
         self.models = self.load_models()
         self.count_vect = pickle.load(
-            open("./trained_models/vectorizer.pickle", 'rb'))
+            open(f"{TRAINED_MODELS_FP}vectorizer.pickle", 'rb'))
         self.tfidf_transformer = pickle.load(
-            open("./trained_models/tfidf.pickle", 'rb'))
+            open(f"{TRAINED_MODELS_FP}tfidf.pickle", 'rb'))
 
     #classify the dialog act of the user's input
     def update_act(self, customer_input, classifier="logistic_regression"):
@@ -257,6 +257,7 @@ class RestaurantInfo:
 
     def __init__(self):
         self.data = self.load_data()
+        self.options = []
 
     # Load restaurant to a dataframe
     def load_data(self):
@@ -267,11 +268,14 @@ class RestaurantInfo:
     # Filter restaurants given the user's preferences
     def filter_info(self, filter_preferences):
 
+        print(filter_preferences)
+
         # unpack array and place array elements into variables
         area = filter_preferences["area"]
         food = filter_preferences["food"]
         pricerange = filter_preferences["pricerange"]
 
+        print(area, food, pricerange)
         # check if variables exist, and if so, filter the dataframe on it
         if (area != "") & (food != "") & (pricerange != ""):
             filtered_restaurant_info = self.data[((self.data["area"] == area) & (
@@ -298,6 +302,7 @@ class RestaurantInfo:
         elif (food != ""):
             filtered_restaurant_info = self.data["food"] == food
 
+        print(filtered_restaurant_info)
 
         return filtered_restaurant_info
 
