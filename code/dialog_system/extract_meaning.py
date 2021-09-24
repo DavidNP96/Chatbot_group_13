@@ -26,7 +26,8 @@ pref_patterns = {
 }
 
 #list of words that map to 'dontcare'
-dontcare_keywords = ['any', 'matter']
+dontcare_keywords = ['any', "don't", "care", 'dont', "doesn't", 'matter', 'doesnt', 'anything', 'dont care', "don't care", "doesn't matter",
+                     'doesnt matter']
 
 #a list of sentences to test our algorithm on
 test_sents = ['I\'m looking for world food', 'I want a restaurant that serves world food', 'I want a restaurant serving Swedish food',
@@ -39,16 +40,23 @@ test_sents = ['I\'m looking for world food', 'I want a restaurant that serves wo
 test_sents = [sent.lower() for sent in test_sents]
 
 #to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
-def extract_preferences(utterance):
+def extract_preferences(utterance, item):
     preferences_dict = {}
-    preferences_dict = match_keywords(utterance, preferences_dict)
+    preferences_dict = match_keywords(utterance, preferences_dict, item)
     preferences_dict = match_patterns(utterance, preferences_dict)
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
 # if so, add the the preference to the preferences dictionary
-def match_keywords(utterance, preferences_dict):
+def match_keywords(utterance, preferences_dict, item):
+    # map utterance to dontcare 
+    for word in dontcare_keywords:
+        if word == utterance:
+            preferences_dict[item] = "any"
+            return(preferences_dict)
+            
     sent = utterance.split()
+
     for attribute, preference in pref_keywords.items():
         #if a keyword has multiple spelling variations, check if any of the variations is present in the text
         #if so add the keyword to the preferences dictionary
@@ -56,6 +64,7 @@ def match_keywords(utterance, preferences_dict):
             if type(pref) == dict:
                 for preference_variation in list(pref.values())[0]:
                     if preference_variation in sent:
+
                         preferences_dict[attribute] = list(pref.keys())[0]
             #check if keyword is expressed in the sentence, if so add preference to preferences dictionary
             else:
@@ -81,7 +90,7 @@ def match_patterns(utterance, preferences_dict):
                     potential_keyword = right.split()[0]
                 #check if potential keyword expresses there is no preference
                 if potential_keyword in dontcare_keywords:
-                    preferences_dict[attribute] = 'dontcare'
+                    preferences_dict[attribute] = 'any'
                 #compare whether potential keyword is similar to any known keywords belonging to given attribute
                 else:
                     closest_word = find_similar_word(potential_keyword, attribute)
