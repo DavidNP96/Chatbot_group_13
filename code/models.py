@@ -7,7 +7,7 @@ import sys
 sys.path.append("../../data")
 import data_class
 
-TRAINED_MODEL_FILEPATH = "./trained_models"
+TRAINED_MODEL_FILEPATH = "../trained_models"
 
 class Models:
 
