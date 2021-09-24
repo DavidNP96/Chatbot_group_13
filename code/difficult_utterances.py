@@ -1,23 +1,22 @@
 #In this file, we find sentences that are classified incorrectly for sentences from all models
-import models.inform_baseline as inform_baseline
-import models.key_word_matching as key_word_matching
-import models.logistic_regression as logistic_regression
-import models.random_forest as random_forest
+import models as m
 import data_class
 
 #load data
-data = data_class.Data("./data/dialog_acts.dat")
+data = data_class.Data("../data/dialog_acts.dat")
 train_sents = data.train_sents
 train_labels = data.train_labels
 test_sents = data.test_sents
 test_labels = data.test_labels
+models = m.Models()
 
 #load predictions from all models
 predictions = [[], [], [], [], []]
-predictions[0] = inform_baseline.main(data)
-predictions[1] = key_word_matching.main(test_sents, test_labels)
-predictions[2] = logistic_regression.main(data).tolist()
-shallow_tree, deep_tree = random_forest.main(data)
+predictions[0] = models.inform_baseline()
+predictions[1] = models.keyword_matcher()
+predictions[2] = models.logistic_regression().tolist()
+shallow_tree = models.random_forest(4)
+deep_tree = models.random_forest(20)
 predictions[3] = shallow_tree.tolist()
 predictions[4] = deep_tree.tolist()
 listofzeros = [0] * len(test_labels)
