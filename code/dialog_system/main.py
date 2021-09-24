@@ -272,7 +272,7 @@ class Dialog_state:
         elif self.state == "request_restaurant_information":
             #if act == "reqmore":
             #    self.state = "request_add_info"
-            if act == "thankyou":
+            if act == "thankyou" or act == "bye":
                 self.state = "goodbye"
 
     def extract_preferences(self, customer_input):
