@@ -193,6 +193,7 @@ class Dialog_system:
         return response
 
 
+
 class Dialog_act:
     def __init__(self):
         self.dialog_act = ""
@@ -231,6 +232,8 @@ class Dialog_act:
     def create_bow(self, customer_input):
         bow = self.tfidf_transformer.transform(self.count_vect.transform([customer_input]))
         return bow
+
+
 
 class Dialog_state:
 
@@ -330,6 +333,9 @@ class RestaurantInfo:
             filtered_restaurant_info = self.data["food"] == food
             
         return self.data[filtered_restaurant_info]
+
+    def restaurant_count(self, filter_preferences):
+        return len(self.filter_info(filter_preferences))
 
 
 if __name__ == "__main__":
