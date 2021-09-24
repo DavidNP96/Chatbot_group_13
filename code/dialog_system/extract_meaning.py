@@ -6,7 +6,7 @@ pref_keywords = {
             'vietnamese', 'greek', 'english', 'british', 'thai', 'corsica', 'gastropub', 'christmas', 'indian', 'turkish', 'polynesian', 
             'gastropub', 'japanese', 'kosher', 'venetian', 'dontcare', 'tuscan', 'korean', 'spanish', 'portuguese', 'danish', 'world', 
             'vegetarian', 'creative', 'international', 'cantonese', 'italian', '"modern', 'french', 'basque', 'traditional', 'brazilian', 
-            'canapes', 'moroccan', 'romanian', 'hungarian', 'austrian', '"north', 'indonesian', 'halal', 'african', 'australian', 'german', 
+            'canapes', 'moroccan', 'romanian', 'hungarian', 'austrian', 'indonesian', 'halal', 'african', 'australian', 'german', 
             'cuban', 'steakhouse', 'catalan', 'caribbean', 'scandinavian', 'russian', 'singaporean', 'belgian', 'welsh', 'afghan', 
             'malaysian', 'persian', 'barbeque', 'irish', 'swiss', 'lebanese', 'jamaican', 'eritrean', 'unusual', 'swedish', 'polish', 
             'australasian', 'singaporean'],
@@ -19,10 +19,11 @@ pref_keywords = {
 #('TEXT PATTERN', 'KEYWORD_POSITION') where TEXT PATTERN is the textual pattern (str) to be recognized and
 # KEYWORD_POSITION indicated the relative position of the keyword where 
 # 'l' indicates the keyword is positioned left of the pattern and 'r' indicated the keyword can be found at the right of the pattern
+# 'c' indicates that the keyword is the whole utterance (1 word)
 pref_patterns = {
-    'food' : [('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l')],
-    'area' : [('part of town', 'l'), ('area', 'l'), ('in the', 'r')],
-    'pricerange': [('priced', 'l'), ('restaurant', 'l'), ('price', 'l')]
+    'food' : [('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l'), ('', 'c')],
+    'area' : [('part of town', 'l'), ('area', 'l'), ('in the', 'r'), ('', 'c')],
+    'pricerange': [('priced', 'l'), ('restaurant', 'l'), ('price', 'l'), ('', 'c')]
 }
 
 #list of words that map to 'dontcare'
@@ -44,6 +45,7 @@ def extract_preferences(utterance, item):
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
     preferences_dict = match_patterns(utterance, preferences_dict)
+    print(preferences_dict)
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
@@ -54,7 +56,6 @@ def match_keywords(utterance, preferences_dict, item):
         if word == utterance:
             preferences_dict[item] = "any"
             return(preferences_dict)
-            
     sent = utterance.split()
 
     for attribute, preference in pref_keywords.items():
@@ -64,7 +65,6 @@ def match_keywords(utterance, preferences_dict, item):
             if type(pref) == dict:
                 for preference_variation in list(pref.values())[0]:
                     if preference_variation in sent:
-
                         preferences_dict[attribute] = list(pref.keys())[0]
             #check if keyword is expressed in the sentence, if so add preference to preferences dictionary
             else:
@@ -81,13 +81,17 @@ def match_patterns(utterance, preferences_dict):
             continue
         for pattern, position in patterns:
             if pattern in utterance:
-                #split sentence into a part left and right from the identified pattern
-                left, _, right = utterance.partition(pattern)
                 #take the potential keyword at the position relevant to the pattern
                 if position == 'l':
+                    #split sentence into a part left and right from the identified pattern
+                    left, _, right = utterance.partition(pattern)
                     potential_keyword = left.split()[-1]
-                else:
+                elif position == 'r':
+                    #split sentence into a part left and right from the identified pattern
+                    left, _, right = utterance.partition(pattern)
                     potential_keyword = right.split()[0]
+                else:
+                    potential_keyword = utterance
                 #check if potential keyword expresses there is no preference
                 if potential_keyword in dontcare_keywords:
                     preferences_dict[attribute] = 'any'
@@ -96,7 +100,7 @@ def match_patterns(utterance, preferences_dict):
                     closest_word = find_similar_word(potential_keyword, attribute)
                     if closest_word != None:
                         check_correction = input('I did not recognize '+ potential_keyword + '. Did you mean '+ closest_word + '?' +
-                                            'Please reply yes (y) or no (n). ')
+                                            ' Please reply yes (y) or no (n). ')
                         while check_correction not in ['yes', 'y', 'no', 'n']:
                             check_correction = input("Sorry I did not understand. Please reply with yes or no. ")
                         if check_correction == 'yes' or check_correction == 'y':
