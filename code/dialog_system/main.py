@@ -35,9 +35,9 @@ class Dialog_system:
         self.dialog_state = Dialog_state()
         self.dialog_act = Dialog_act()
         self.restaurant_info = RestaurantInfo()
-        self.preferences = {"area": "",
-                            "food": "",
-                            "pricerange": ""}
+        self.preferences = {"area": [],
+                            "food": [],
+                            "pricerange": []}
         self.missing_preferences = ["area", "food", "pricerange"]
         self.restaurant_suggestion = None
         self.provided_info = []
@@ -71,9 +71,9 @@ class Dialog_system:
                    "goodbye": self.goodbye
                    }
         action = options[self.dialog_state.state]
-
+        
         response = action()
-
+        print(self.preferences)
         # return response
         return response
 
@@ -85,7 +85,7 @@ class Dialog_system:
 
         # check for missing preferences
         for key, value in self.preferences.items():
-            if value == "":
+            if value == []:
                 self.missing_preferences.append(key)
 
         # still missing preferences
@@ -117,9 +117,9 @@ class Dialog_system:
         return confirmation
 
     def refresh_preferences(self):
-        self.preferences = {"area": "",
-                            "food": "",
-                            "pricerange": ""}
+        self.preferences = {"area": [],
+                            "food": [],
+                            "pricerange": []}
         self.missing_preferences = ["area", "food", "pricerange"]
 
     def hello(self):
@@ -309,38 +309,35 @@ class RestaurantInfo:
         filtered_restaurant_info = self.data
         
         # change empty string to any to filter
-        if area == "":
-            area = "any"
-        if food == "":
-            food = "any"
-        if pricerange == "":
-            pricerange = "any"
+        if area == []:
+            area = ["any"]
+        if food == []:
+            food = ["any"]
+        if pricerange == []:
+            pricerange = ["any"]
             
         # check if variables exist, and if so, filter the dataframe on it
-        if (area != "any") & (food != "any") & (pricerange != "any"):
-            filtered_restaurant_info = self.data[((self.data["area"] == area) & (
-                self.data["food"] == food)) & (self.data["pricerange"] == pricerange)]
+        if (area != ["any"]) & (food != ["any"]) & (pricerange != ["any"]):
+            filtered_restaurant_info = self.data[(self.data.area.isin(area)) & (
+                self.data.food.isin(food)) & (self.data.pricerange.isin(pricerange))]
 
-        elif (area != "any") & (food != "any"):
-            filtered_restaurant_info = self.data[(
-                (self.data["area"] == area) & (self.data["food"] == food))]
+        elif (area != ["any"]) & (food != ["any"]):
+            filtered_restaurant_info = self.data[(self.data.area.isin(area)) & (self.data.food.isin(food))]
 
-        elif (area != "any") & (pricerange != "any"):
-            filtered_restaurant_info = self.data[(
-                (self.data["area"] == area) & (self.data["pricerange"] == pricerange))]
+        elif (area != ["any"]) & (pricerange != ["any"]):
+            filtered_restaurant_info = self.data[(self.data.area.isin(area)) & (self.data.pricerange.isin(pricerange))]
 
-        elif (food != "any") & (pricerange != "any"):
-            filtered_restaurant_info = self.data[(
-                ((self.data["food"] == food)) & (self.data["pricerange"] == pricerange))]
+        elif (food != ["any"]) & (pricerange != ["any"]):
+            filtered_restaurant_info = self.data[(self.data.food.isin(food)) & (self.data.pricerange.isin(pricerange))]
 
-        elif (area != "any"):
-            filtered_restaurant_info = self.data[self.data["area"] == area]
+        elif (area != ["any"]):
+            filtered_restaurant_info = self.data[self.data.area.isin(area)]
 
-        elif (pricerange != "any"):
-            filtered_restaurant_info = self.data[self.data["pricerange"] == pricerange]
+        elif (pricerange != ["any"]):
+            filtered_restaurant_info = self.data[self.data.pricerange.isin(pricerange)]
 
-        elif (food != "any"):
-            filtered_restaurant_info = self.data[self.data["food"] == food]
+        elif (food != ["any"]):
+            filtered_restaurant_info = self.data[self.data.food.isin(food)]
 
         return filtered_restaurant_info
     

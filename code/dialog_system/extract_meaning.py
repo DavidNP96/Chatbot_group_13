@@ -22,9 +22,9 @@ pref_keywords = {
 # 'l' indicates the keyword is positioned left of the pattern and 'r' indicated the keyword can be found at the right of the pattern
 # 'c' indicates that the keyword is the whole utterance (1 word)
 pref_patterns = { 
-    'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')], #('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l'), ('', 'c')],
-    'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],# ('', 'c')],
-    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')]#, ('', 'c')]
+    'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')],
+    'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],
+    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')]
 }
 
 #list of words that map to 'dontcare'
@@ -34,7 +34,8 @@ dontcare_keywords = ['any', "don't", "care", 'dont', "doesn't", 'matter', 'doesn
 #a list of sentences to test our algorithm on
 test_sents = ['I\'m looking for world food', 'I want a restaurant that serves world food', 'I want a restaurant serving Swedish food',
             'I\'m looking for a restaurant in the center', 'I would like a cheap restaurant in the west part of town', 
-            'I\'m looking for a moderately priced restaurant in the west part of town', 'I\'m looking for a restaurant in any area that serves Tuscan food',
+            'I\'m looking for a moderately priced restaurant in the west part of town', 
+            'I\'m looking for a restaurant in any area that serves Tuscan food',
             'Can I have an expensive restaurant', 'I\'m looking for an expensive restaurant and it should serve international food',
             'I need a Cuban restaurant that is moderately priced', 'I\'m looking for a moderately priced restaurant with Catalan food',
             'What is a cheap restaurant in the south part of town', 'What about Chinese food', 'I wanna find a cheap restaurant', 
@@ -46,6 +47,7 @@ def extract_preferences(utterance, item):
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
     preferences_dict = match_patterns(utterance, preferences_dict)
+    print(preferences_dict)
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
@@ -54,22 +56,27 @@ def match_keywords(utterance, preferences_dict, item):
     # map utterance to dontcare 
     for word in dontcare_keywords:
         if word == utterance:
-            preferences_dict[item] = "any"
+            preferences_dict[item] = ["any"]
             return(preferences_dict)
     sent = utterance.split()
 
     for attribute, preference in pref_keywords.items():
+        attribute_matches = []
         #if a keyword has multiple spelling variations, check if any of the variations is present in the text
         #if so add the keyword to the preferences dictionary
         for pref in preference:
             if type(pref) == dict:
                 for preference_variation in list(pref.values())[0]:
                     if preference_variation in sent:
-                        preferences_dict[attribute] = list(pref.keys())[0]
+                        attribute_matches.append(list(pref.keys())[0])
+                        #preferences_dict[attribute] = list(pref.keys())[0]
             #check if keyword is expressed in the sentence, if so add preference to preferences dictionary
             else:
                 if pref in sent:
-                    preferences_dict[attribute] = pref
+                    attribute_matches.append(pref)
+                    #preferences_dict[attribute] = pref
+        if len(attribute_matches) > 0:
+            preferences_dict[attribute] = attribute_matches
     return(preferences_dict)
 
 #recognizes patterns in the text that belong to certain attributes, and compares whether the found potential keywords 
@@ -91,17 +98,17 @@ def match_patterns(utterance, preferences_dict):
 def match_keyword(potential_keyword, preferences_dict, attribute):
     #check if potential keyword expresses there is no preference
     if potential_keyword in dontcare_keywords and attribute not in preferences_dict:
-        preferences_dict[attribute] = 'any'
+        preferences_dict[attribute] = ['any']
     #compare whether potential keyword is similar to any known keywords belonging to given attribute
     else:
         closest_word = find_similar_word(potential_keyword, attribute)
         if closest_word != None:
-            check_correction = input('I did not recognize '+ potential_keyword + '. Did you mean '+ closest_word + '?' +
-                                ' Please reply yes (y) or no (n). ')
+            check_correction = input(f'I did not recognize {potential_keyword}. Did you mean {closest_word}?' + 
+                                        'Please reply yes (y) or no (n).')
             while check_correction not in ['yes', 'y', 'no', 'n']:
-                check_correction = input("Sorry I did not understand. Please reply with yes or no. ")
+                check_correction = input(f'Sorry I did not understand. Please reply with yes or no. ')
             if check_correction == 'yes' or check_correction == 'y':
-                preferences_dict[attribute] = closest_word
+                preferences_dict[attribute] = [closest_word]
 
 #this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
 def find_similar_word(potential_keyword, attribute):
