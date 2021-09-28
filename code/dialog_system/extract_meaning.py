@@ -44,6 +44,7 @@ test_sents = [sent.lower() for sent in test_sents]
 def extract_preferences(utterance, item):
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
+    print(preferences_dict)
     preferences_dict = match_patterns(utterance, preferences_dict)
     print(preferences_dict)
     return preferences_dict
@@ -110,6 +111,10 @@ def match_patterns(utterance, preferences_dict):
 #this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
 def find_similar_word(potential_keyword, attribute):
     distance_dict = {}
+    if len(potential_keyword) > 5:
+        threshold = 3
+    else:
+        threshold = 2
     #go through keywords belonging to relevant attribute
     for word in pref_keywords[attribute]:
         #if keyword has multiple spelling variations, go through all of them
@@ -118,7 +123,7 @@ def find_similar_word(potential_keyword, attribute):
             for word_variantion in list(word.values())[0]:
                 #calculate distance for each variation
                 levenshtein_dist = distance(potential_keyword, word_variantion)
-                if levenshtein_dist < 3:
+                if levenshtein_dist < threshold:
                     #if another spelling variation of the same keyword was already saved, check if this variation has a lower score
                     if keyword in distance_dict:
                         if levenshtein_dist < distance_dict[keyword]:
@@ -130,7 +135,7 @@ def find_similar_word(potential_keyword, attribute):
             #compare distance between keyword and potential keyword
             levenshtein_dist = distance(potential_keyword, word)
             #if distance is smaller than 3, save the score
-            if levenshtein_dist < 3:
+            if levenshtein_dist < threshold:
                 distance_dict[word] = levenshtein_dist
     #if multiple similar words are found, return the one with the lowest distance score
     if len(distance_dict.keys()) > 0:

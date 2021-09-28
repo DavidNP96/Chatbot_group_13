@@ -168,18 +168,21 @@ class Dialog_system:
             response = "Great! "
         else:
             response = ""
-        if str(self.restaurant_suggestion['addr']) == "nan":
-            response += "Sorry, we do not have a address registered for " + self.restaurant_suggestion['restaurantname'] + ". "
-        elif "address" in information_req:
-            response += "The address is " + str(self.restaurant_suggestion['addr']) +  ". "
-        if str(self.restaurant_suggestion['phone']) == "nan":
-            response += "Sorry, we do not have a phone number registered for " + self.restaurant_suggestion['restaurantname'] + ". "
-        elif "phone_number" in information_req:
-            response += "The phone number is " + str(self.restaurant_suggestion['phone']) + ". "
-        if str(self.restaurant_suggestion['postcode']) == "nan":
-            response += "Sorry, we do not have a postal code registered for " + self.restaurant_suggestion['restaurantname'] + ". "
-        elif "postcode" in information_req :
-            response += "The postal code is " + str(self.restaurant_suggestion['postcode']) + ". "
+        if "address" in information_req:
+            if str(self.restaurant_suggestion['addr']) == "nan":
+                response += "Sorry, we do not have a address registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+            else:
+                response += "The address is " + str(self.restaurant_suggestion['addr']) +  ". "
+        if "phone_number" in information_req:
+            if str(self.restaurant_suggestion['phone']) == "nan":
+                response += "Sorry, we do not have a phone number registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+            else:
+                response += "The phone number is " + str(self.restaurant_suggestion['phone']) + ". "
+        if "postcode" in information_req :
+            if str(self.restaurant_suggestion['postcode']) == "nan":
+                response += "Sorry, we do not have a postal code registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+            else:
+                response += "The postal code is " + str(self.restaurant_suggestion['postcode']) + ". "
         if information_req == [] or self.provided_info == []:
             response += 'Would you like to know the phone number or the postcode? Or maybe both?'
         for information in information_req:
@@ -269,6 +272,9 @@ class Dialog_state:
             elif act == "deny" or act == "negate" or act == "reqalts" or act == "reqmore":
                 self.state ="suggest_restaurant"
                 self.prev_state = "suggest_restaurant"
+            else:
+                self.prev_state = "express_preferences"
+                print("Sorry I didn't understand that, please answer with yes or no.")
         
 
         elif self.state == "request_restaurant_information":
