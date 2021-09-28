@@ -22,7 +22,7 @@ def main():
 
     ds = Dialog_system()
 
-    print("Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and where you would like to eat and how much you are willing to spend, I can recommend you some nice restaurants: \n ")
+    print(f"Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and where you would like to eat and how much you are willing to spend, I can recommend you some nice restaurants: \n ")
 
     while match == False:
         customer_input = input("").lower()
@@ -91,13 +91,13 @@ class Dialog_system:
         # still missing preferences
         if len(self.missing_preferences) > 0:
             if self.missing_preferences[0] == 'area':
-                response = confirmation + 'In what area would you like to eat?'
+                response = f'{confirmation} In what area would you like to eat?'
                 self.item = "area"
             elif self.missing_preferences[0] == 'food':
-                response = confirmation + 'What type of cuisine would you prefer?'
+                response = f'{confirmation} What type of cuisine would you prefer?'
                 self.item = "food"
             else:
-                response = confirmation + 'Excuse me for asking, but what is your pricerange today?'
+                response = f'{confirmation} Excuse me for asking, but what is your pricerange today?'
                 self.item = "pricerange"
             print(f"So far i've found {self.restaurant_info.restaurant_count(self.preferences)} restaurants")
         else:
@@ -108,9 +108,9 @@ class Dialog_system:
     def extract_preferences(self):
         preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
         if preferences == {}:
-            confirmation = 'I am sorry I did not quite get that. '
+            confirmation = f'I am sorry I did not quite get that. '
         else: 
-            confirmation  = 'Great choice. '
+            confirmation  = f'Great choice. '
         # update preferences
         for preference, value in preferences.items():
             self.preferences[preference] = value
@@ -123,7 +123,7 @@ class Dialog_system:
         self.missing_preferences = ["area", "food", "pricerange"]
 
     def hello(self):
-        response = "Hi! so nice to meet you. What would you like to eat today?"
+        response = f'Hi! so nice to meet you. What would you like to eat today?'
         return response
 
     def suggest_restaurant(self):
@@ -134,13 +134,13 @@ class Dialog_system:
         else:
             self.count_options = 0
         if len(restaurant_options) == 0 or self.count_options >= len(restaurant_options):
-            response = 'Unfortunately I have not found any restaurant that matches your whishes. Is there anything else you would like to eat?'
+            response = f'Unfortunately I have not found any restaurant that matches your whishes. Is there anything else you would like to eat?'
             self.count_options = 0
             self.refresh_preferences()
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
         else:
             self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
-            response = 'I recommend you to go to ' + str(self.restaurant_suggestion['restaurantname']) + '. Would you like to go there?'
+            response = f'I recommend you to go to %s. Would you like to go there?'% self.restaurant_suggestion['restaurantname']
         return response
 
     def extract_asked_information(self, costumer_input):
@@ -165,30 +165,30 @@ class Dialog_system:
         information_req = self.extract_asked_information(self.customer_input)
         if self.provided_info == [] and information_req == []:
             information_req.append('address') 
-            response = "Great! "
+            response = f'Great! '
         else:
             response = ""
         if str(self.restaurant_suggestion['addr']) == "nan":
-            response += "Sorry, we do not have a address registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+            response += f'Sorry, we do not have a address registered for %s. ' % self.restaurant_suggestion['restaurantname']
         elif "address" in information_req:
-            response += "The address is " + str(self.restaurant_suggestion['addr']) +  ". "
+            response += f'The address is %s.' % self.restaurant_suggestion['addr']
         if str(self.restaurant_suggestion['phone']) == "nan":
-            response += "Sorry, we do not have a phone number registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+            response += f'Sorry, we do not have a phone number registered for %s.' % self.restaurant_suggestion['restaurantname']
         elif "phone_number" in information_req:
-            response += "The phone number is " + str(self.restaurant_suggestion['phone']) + ". "
+            response += f'The phone number is %s.' % self.restaurant_suggestion['phone']
         if str(self.restaurant_suggestion['postcode']) == "nan":
-            response += "Sorry, we do not have a postal code registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+            response += f'Sorry, we do not have a postal code registered for %s.' % self.restaurant_suggestion['restaurantname']
         elif "postcode" in information_req :
-            response += "The postal code is " + str(self.restaurant_suggestion['postcode']) + ". "
+            response += f'The postal code is %s.' % self.restaurant_suggestion['postcode']
         if information_req == [] or self.provided_info == []:
-            response += 'Would you like to know the phone number or the postcode? Or maybe both?'
+            response += f'Would you like to know the phone number or the postcode? Or maybe both?'
         for information in information_req:
             self.provided_info.append(information)
 
         return response
 
     def goodbye(self):
-        response = "Enjoy your dinner"
+        response = f'Enjoy your dinner'
         return response
 
 
