@@ -106,7 +106,9 @@ def match_keyword(potential_keyword, preferences_dict, attribute):
 #this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
 def find_similar_word(potential_keyword, attribute):
     distance_dict = {}
-    if len(potential_keyword) > 5:
+    if len(potential_keyword) > 8:
+        threshold = 4
+    elif len(potential_keyword) > 5:
         threshold = 3
     else:
         threshold = 2
