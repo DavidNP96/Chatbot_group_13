@@ -99,6 +99,7 @@ class Dialog_system:
             else:
                 response = confirmation + 'Excuse me for asking, but what is your pricerange today?'
                 self.item = "pricerange"
+            print(f"so far i've found {self.restaurant_info.restaurant_count(self.preferences)} restaurants")
         else:
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
             response = self.create_response()
@@ -113,7 +114,8 @@ class Dialog_system:
         # update preferences
         for preference, value in preferences.items():
             print(preference, value)
-            self.preferences[preference] = value
+            if preference != "":
+                self.preferences[preference] = value
         return confirmation
 
     def refresh_preferences(self):
@@ -297,7 +299,7 @@ class RestaurantInfo:
     # Filter restaurants given the user's preferences
     def filter_info(self, filter_preferences):
 
-        print(filter_preferences)
+        print("filter preference",filter_preferences)
 
         # unpack array and place array elements into variables
         area = filter_preferences["area"]
@@ -331,8 +333,8 @@ class RestaurantInfo:
 
         elif (food != "any"):
             filtered_restaurant_info = self.data["food"] == food
-            
-        return self.data[filtered_restaurant_info]
+        
+        return filtered_restaurant_info
 
     def restaurant_count(self, filter_preferences):
         return len(self.filter_info(filter_preferences))
