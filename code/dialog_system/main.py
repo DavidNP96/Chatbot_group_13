@@ -168,41 +168,25 @@ class Dialog_system:
             response = f'Great! '
         else:
             response = ""
-<<<<<<< HEAD
         if "address" in information_req:
             if str(self.restaurant_suggestion['addr']) == "nan":
-                response += "Sorry, we do not have a address registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+                response += f'Sorry, we do not have a address registered for %s. ' % self.restaurant_suggestion['restaurantname']
             else:
-                response += "The address is " + str(self.restaurant_suggestion['addr']) +  ". "
+                response += f'The address is %s.' % self.restaurant_suggestion['addr']
         if "phone_number" in information_req:
             if str(self.restaurant_suggestion['phone']) == "nan":
-                response += "Sorry, we do not have a phone number registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+                response += f'Sorry, we do not have a phone number registered for %s.' % self.restaurant_suggestion['restaurantname']
             else:
-                response += "The phone number is " + str(self.restaurant_suggestion['phone']) + ". "
-        if "postcode" in information_req :
+                response += f'The phone number is %s.' % self.restaurant_suggestion['phone']
+        if "postcode" in information_req:
             if str(self.restaurant_suggestion['postcode']) == "nan":
-                response += "Sorry, we do not have a postal code registered for " + self.restaurant_suggestion['restaurantname'] + ". "
+                response += f'Sorry, we do not have a postal code registered for %s.' % self.restaurant_suggestion['restaurantname']
             else:
-                response += "The postal code is " + str(self.restaurant_suggestion['postcode']) + ". "
-=======
-        if str(self.restaurant_suggestion['addr']) == "nan":
-            response += f'Sorry, we do not have a address registered for %s. ' % self.restaurant_suggestion['restaurantname']
-        elif "address" in information_req:
-            response += f'The address is %s.' % self.restaurant_suggestion['addr']
-        if str(self.restaurant_suggestion['phone']) == "nan":
-            response += f'Sorry, we do not have a phone number registered for %s.' % self.restaurant_suggestion['restaurantname']
-        elif "phone_number" in information_req:
-            response += f'The phone number is %s.' % self.restaurant_suggestion['phone']
-        if str(self.restaurant_suggestion['postcode']) == "nan":
-            response += f'Sorry, we do not have a postal code registered for %s.' % self.restaurant_suggestion['restaurantname']
-        elif "postcode" in information_req :
-            response += f'The postal code is %s.' % self.restaurant_suggestion['postcode']
->>>>>>> 1d1e538e4345f375cb494392ff840b7edc8fd7d7
+                response += f'The postal code is %s.' % self.restaurant_suggestion['postcode'] 
         if information_req == [] or self.provided_info == []:
             response += f'Would you like to know the phone number or the postcode? Or maybe both?'
         for information in information_req:
             self.provided_info.append(information)
-
         return response
 
     def goodbye(self):
