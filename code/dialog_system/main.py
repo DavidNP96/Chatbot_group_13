@@ -273,7 +273,7 @@ class Dialog_state:
                 self.prev_state = "suggest_restaurant"
             else:
                 self.prev_state = "express_preferences"
-                print("Sorry I didn't understand that, please answer with yes or no.")
+                f'Sorry I didn\'t understand that, please answer with yes or no.'
         
 
         elif self.state == "request_restaurant_information":

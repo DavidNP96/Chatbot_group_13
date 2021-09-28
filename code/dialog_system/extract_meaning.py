@@ -45,9 +45,7 @@ test_sents = [sent.lower() for sent in test_sents]
 def extract_preferences(utterance, item):
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
-    print(preferences_dict)
     preferences_dict = match_patterns(utterance, preferences_dict)
-    print(preferences_dict)
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
@@ -86,7 +84,7 @@ def match_patterns(utterance, preferences_dict):
             for match in matches:
                 potential_keyword = match.replace(keyword, '').replace(' ', '')
                 match_keyword(potential_keyword, preferences_dict, attribute)
-        if attribute not in preferences_dict and len(utterance.split()) == 1:
+        if attribute not in preferences_dict and len(utterance.split()) == 1 and utterance != "any":
             match_keyword(utterance, preferences_dict, attribute)
     return preferences_dict
 
