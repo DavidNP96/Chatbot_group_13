@@ -1,5 +1,6 @@
 from Levenshtein import distance
 import re
+import pyttsx3
 
 #this list stores keywords related to each category. Some keywords are stored as different variations (value) of the same keyword (key)
 pref_keywords = {
@@ -42,8 +43,12 @@ test_sents = ['I\'m looking for world food', 'I want a restaurant that serves wo
             'I\'m looking for Persian food please', 'Find a Cuban restaurant in the center', 'I want to go to a restaurant in the weest']
 test_sents = [sent.lower() for sent in test_sents]
 
+engine = pyttsx3.init()
+
 #to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
-def extract_preferences(utterance, item):
+def extract_preferences(utterance, item, text2speech):
+    global TEXT2SPEECH
+    TEXT2SPEECH = text2speech
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
     preferences_dict = match_patterns(utterance, preferences_dict)
@@ -103,10 +108,19 @@ def match_keyword(potential_keyword, preferences_dict, attribute):
     else:
         closest_word = find_similar_word(potential_keyword, attribute)
         if closest_word != None:
-            check_correction = input(f'I did not recognize {potential_keyword}. Did you mean {closest_word}?' + 
-                                        'Please reply yes (y) or no (n).')
+            correction_message = f'I did not recognize {potential_keyword}. Did you mean {closest_word}?' + \
+                                        'Please reply yes (y) or no (n).'
+            if TEXT2SPEECH:
+                engine.say(correction_message)
+                engine.runAndWait()
+            check_correction = input(correction_message)
+            
             while check_correction not in ['yes', 'y', 'no', 'n']:
-                check_correction = input(f'Sorry I did not understand. Please reply with yes or no. ')
+                correction_message_2 = f'Sorry I did not understand. Please reply with yes or no. '
+                if TEXT2SPEECH:
+                    engine.say(correction_message_2)
+                    engine.runAndWait()
+                check_correction = input()
             if check_correction == 'yes' or check_correction == 'y':
                 preferences_dict[attribute] = [closest_word]
 

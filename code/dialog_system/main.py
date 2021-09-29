@@ -1,11 +1,11 @@
 # the main file to run the dialog system
 
 # import models
-from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.feature_extraction.text import CountVectorizer
+import pyttsx3
 import extract_meaning
 import pandas as pd
 import pickle
+import time
 import sys
 sys.path.append("../models")
 sys.path.append("../../data")
@@ -15,19 +15,44 @@ sys.path.append("../../data")
 TRAINED_MODELS_FP = "../../trained_models/"
 DATAPATH = "../../data/"
 
+##SETTINGS:
+TEXT2SPEECH = True
+INFORMAL    = True
 
 def main():
     # initial interface for the dialog system
     match = False
 
     ds = Dialog_system()
+    engine = pyttsx3.init()
 
-    print(f"Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and where you would like to eat and how much you are willing to spend, I can recommend you some nice restaurants: \n ")
+    welcome_message = f"Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and where you"+ \
+        " would like to eat and how much you are willing to spend, I can recommend you some nice restaurants. \n" + \
+        "If you would like to restart the dialog you can do so at any point by typing \'restart dialog\'."
+    
+    if TEXT2SPEECH:
+        engine.say(welcome_message)
+        engine.runAndWait()
+    print(welcome_message)
+
 
     while match == False:
         customer_input = input("").lower()
-        response, match = ds.updated_customer_input(customer_input)
-        print(response)
+        if customer_input == 'restart dialog':
+            ds = Dialog_system()
+            if TEXT2SPEECH:
+                engine.say(welcome_message)
+                engine.runAndWait()
+            print(welcome_message)
+        else:
+            response, match = ds.updated_customer_input(customer_input)
+            if TEXT2SPEECH:
+                engine.say(response)
+                engine.runAndWait()
+            else:
+                time.sleep(0.5)
+            print(response)
+
 
 class Dialog_system:
 
@@ -90,23 +115,26 @@ class Dialog_system:
 
         # still missing preferences
         if len(self.missing_preferences) > 0:
+            if self.restaurant_info.restaurant_count(self.preferences) == 1: #use singular of restaurant when we have 1 restaurant
+                retrieval_update = f"So far i've found {self.restaurant_info.restaurant_count(self.preferences)} restaurant. "
+            else: #otherwise use plural for restaurants
+                retrieval_update = f"So far i've found {self.restaurant_info.restaurant_count(self.preferences)} restaurants. "
             if self.missing_preferences[0] == 'area':
-                response = f'{confirmation} In what area would you like to eat?'
+                response = f'{confirmation} {retrieval_update} In what area would you like to eat?'
                 self.item = "area"
             elif self.missing_preferences[0] == 'food':
-                response = f'{confirmation} What type of cuisine would you prefer?'
+                response = f'{confirmation} {retrieval_update} What type of cuisine would you prefer?'
                 self.item = "food"
             else:
-                response = f'{confirmation} Excuse me for asking, but what is your pricerange today?'
+                response = f'{confirmation} {retrieval_update} Excuse me for asking, but what is your pricerange today?'
                 self.item = "pricerange"
-            print(f"So far i've found {self.restaurant_info.restaurant_count(self.preferences)} restaurants")
         else:
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
             response = self.create_response()
         return response
 
     def extract_preferences(self):
-        preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
+        preferences = extract_meaning.extract_preferences(self.customer_input, self.item, TEXT2SPEECH)
         if preferences == {}:
             confirmation = f'I am sorry I did not quite get that. '
         else: 
@@ -172,25 +200,25 @@ class Dialog_system:
             if str(self.restaurant_suggestion['addr']) == "nan":
                 response += f'Sorry, we do not have a address registered for %s. ' % self.restaurant_suggestion['restaurantname']
             else:
-                response += f'The address is %s.' % self.restaurant_suggestion['addr']
+                response += f'The address is %s. ' % self.restaurant_suggestion['addr']
         if "phone_number" in information_req:
             if str(self.restaurant_suggestion['phone']) == "nan":
-                response += f'Sorry, we do not have a phone number registered for %s.' % self.restaurant_suggestion['restaurantname']
+                response += f'Sorry, we do not have a phone number registered for %s. ' % self.restaurant_suggestion['restaurantname']
             else:
-                response += f'The phone number is %s.' % self.restaurant_suggestion['phone']
+                response += f'The phone number is %s. ' % self.restaurant_suggestion['phone']
         if "postcode" in information_req:
             if str(self.restaurant_suggestion['postcode']) == "nan":
-                response += f'Sorry, we do not have a postal code registered for %s.' % self.restaurant_suggestion['restaurantname']
+                response += f'Sorry, we do not have a postal code registered for %s. ' % self.restaurant_suggestion['restaurantname']
             else:
-                response += f'The postal code is %s.' % self.restaurant_suggestion['postcode'] 
+                response += f'The postal code is %s. ' % self.restaurant_suggestion['postcode'] 
         if information_req == [] or self.provided_info == []:
-            response += f'Would you like to know the phone number or the postcode? Or maybe both?'
+            response += f'Would you like to know the phone number or the postcode? Or maybe both? '
         for information in information_req:
             self.provided_info.append(information)
         return response
 
     def goodbye(self):
-        response = f'Enjoy your dinner'
+        response = f'Enjoy your dinner '
         return response
 
 
@@ -282,8 +310,8 @@ class Dialog_state:
             if act == "thankyou" or act == "bye" or act == "deny" or act == "negate":
                 self.state = "goodbye"
 
-    def extract_preferences(self, customer_input):
-        return
+    #def extract_preferences(self, customer_input):
+    #    return
 
 
 class RestaurantInfo:
