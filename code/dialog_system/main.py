@@ -64,10 +64,9 @@ class Dialog_system:
 
         # create response based on dialog_state and cutomer_input
         options = {"hello": self.hello,
-                   "express_preferences": self.update_preferences,
+                   "retrieve_preferences": self.update_preferences,
                    "suggest_restaurant": self.suggest_restaurant,
-                   "request_restaurant_information": self.request_restaurant_information,
-                   "request_add_info": self.request_restaurant_information,
+                   "return_restaurant_information": self.return_restaurant_information,
                    "goodbye": self.goodbye
                    }
         action = options[self.dialog_state.state]
@@ -161,7 +160,7 @@ class Dialog_system:
                         required_info.append(information)
         return required_info
 
-    def request_restaurant_information(self):
+    def return_restaurant_information(self):
         information_req = self.extract_asked_information(self.customer_input)
         if self.provided_info == [] and information_req == []:
             information_req.append('address') 
@@ -243,42 +242,40 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
+
         if act == "bye":
             self.state = "goodbye"
         elif self.state == "hello":
             if act == "inform":
-                self.state = "express_preferences"
+                self.state = "retrieve_preferences"
                 self.prev_state = "hello"
             elif act == "hello":
                 self.state == "hello"
                 self.prev_state = "hello"
 
-        elif self.state == "express_preferences":
+        elif self.state == "retrieve_preferences":
             if len(missing_preferences) == 0:
                 self.state = "suggest_restaurant"
-                self.prev_state = "express_preferences"
+                self.prev_state = "retrieve_preferences"
             else:
-                self.state = "express_preferences"
-                self.prev_state = "express_preferences"
+                self.state = "retrieve_preferences"
+                self.prev_state = "retrieve_preferences"
 
         elif self.state == "suggest_restaurant":
             if len(missing_preferences) > 0:
-                self.state = "express_preferences"
+                self.state = "retrieve_preferences"
                 self.prev_state = "suggest_restaurant"
             if act == "affirm":
-                self.state = "request_restaurant_information"
+                self.state = "return_restaurant_information"
                 self.prev_state = "suggest_restaurant"
             elif act == "deny" or act == "negate" or act == "reqalts" or act == "reqmore":
                 self.state ="suggest_restaurant"
                 self.prev_state = "suggest_restaurant"
             else:
-                self.prev_state = "express_preferences"
-                f'Sorry I didn\'t understand that, please answer with yes or no.'
-        
+                self.prev_state = "retrieve_preferences"
+                print("Sorry I didn\'t understand that, please answer with yes or no.")
 
-        elif self.state == "request_restaurant_information":
-            #if act == "reqmore":
-            #    self.state = "request_add_info"
+        elif self.state == "return_restaurant_information":
             if act == "thankyou" or act == "bye" or act == "deny" or act == "negate":
                 self.state = "goodbye"
 
