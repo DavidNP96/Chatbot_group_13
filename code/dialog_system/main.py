@@ -175,15 +175,16 @@ class Dialog_system:
         #  get restaurant info based on preferences
         restaurant_options = self.restaurant_info.filter_info(self.preferences)
 
-        additional_preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
+        self.additional_preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
 
         # based on additional_preferences get antecedents
-        antecedents = self.get_antecedents(additional_preferences)
+        antecedents = self.get_antecedents(self.additional_preferences)
 
         # filter restaurant info based on additional preferences
         self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
 
     def get_antecedents(self):
+        #TODO based on the additional preferences use the dictionary to map the preferences such as 'romantic' to a list of ordered antecedents
         pass
 
     def extract_asked_information(self, costumer_input):
@@ -397,6 +398,7 @@ class RestaurantInfo:
         return filtered_restaurant_info
     
     def filter_on_additional_info(self, filter_preferences, restaurant_options):
+        # within the restaurant options perform a second filter based on the filter preferences
         pass
 
 
