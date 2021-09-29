@@ -1,5 +1,6 @@
 from Levenshtein import distance
 import re
+import pyttsx3
 
 #this list stores keywords related to each category. Some keywords are stored as different variations (value) of the same keyword (key)
 pref_keywords = {
@@ -36,18 +37,24 @@ dontcare_keywords = ['any', "don't", "care", 'dont', "doesn't", 'matter', 'doesn
 #a list of sentences to test our algorithm on
 test_sents = ['I\'m looking for world food', 'I want a restaurant that serves world food', 'I want a restaurant serving Swedish food',
             'I\'m looking for a restaurant in the center', 'I would like a cheap restaurant in the west part of town', 
-            'I\'m looking for a moderately priced restaurant in the west part of town', 'I\'m looking for a restaurant in any area that serves Tuscan food',
+            'I\'m looking for a moderately priced restaurant in the west part of town', 
+            'I\'m looking for a restaurant in any area that serves Tuscan food',
             'Can I have an expensive restaurant', 'I\'m looking for an expensive restaurant and it should serve international food',
             'I need a Cuban restaurant that is moderately priced', 'I\'m looking for a moderately priced restaurant with Catalan food',
             'What is a cheap restaurant in the south part of town', 'What about Chinese food', 'I wanna find a cheap restaurant', 
             'I\'m looking for Persian food please', 'Find a Cuban restaurant in the center', 'I want to go to a restaurant in the weest']
 test_sents = [sent.lower() for sent in test_sents]
 
+engine = pyttsx3.init()
+
 #to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
-def extract_preferences(utterance, item=None):
+def extract_preferences(utterance, item, text2speech):
+    global TEXT2SPEECH
+    TEXT2SPEECH = text2speech
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
     preferences_dict = match_patterns(utterance, preferences_dict)
+    print(preferences_dict)
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
@@ -56,22 +63,27 @@ def match_keywords(utterance, preferences_dict, item):
     # map utterance to dontcare 
     for word in dontcare_keywords:
         if word == utterance:
-            preferences_dict[item] = "any"
+            preferences_dict[item] = ["any"]
             return(preferences_dict)
     sent = utterance.split()
 
     for attribute, preference in pref_keywords.items():
+        attribute_matches = []
         #if a keyword has multiple spelling variations, check if any of the variations is present in the text
         #if so add the keyword to the preferences dictionary
         for pref in preference:
             if type(pref) == dict:
                 for preference_variation in list(pref.values())[0]:
                     if preference_variation in sent:
-                        preferences_dict[attribute] = list(pref.keys())[0]
+                        attribute_matches.append(list(pref.keys())[0])
+                        #preferences_dict[attribute] = list(pref.keys())[0]
             #check if keyword is expressed in the sentence, if so add preference to preferences dictionary
             else:
                 if pref in sent:
-                    preferences_dict[attribute] = pref
+                    attribute_matches.append(pref)
+                    #preferences_dict[attribute] = pref
+        if len(attribute_matches) > 0:
+            preferences_dict[attribute] = attribute_matches
     return(preferences_dict)
 
 #recognizes patterns in the text that belong to certain attributes, and compares whether the found potential keywords 
@@ -93,22 +105,33 @@ def match_patterns(utterance, preferences_dict):
 def match_keyword(potential_keyword, preferences_dict, attribute):
     #check if potential keyword expresses there is no preference
     if potential_keyword in dontcare_keywords and attribute not in preferences_dict:
-        preferences_dict[attribute] = 'any'
+        preferences_dict[attribute] = ['any']
     #compare whether potential keyword is similar to any known keywords belonging to given attribute
     else:
         closest_word = find_similar_word(potential_keyword, attribute)
         if closest_word != None:
-            check_correction = input('I did not recognize '+ potential_keyword + '. Did you mean '+ closest_word + '?' +
-                                ' Please reply yes (y) or no (n). ')
+            correction_message = f'I did not recognize {potential_keyword}. Did you mean {closest_word}?' + \
+                                        'Please reply yes (y) or no (n).'
+            if TEXT2SPEECH:
+                engine.say(correction_message)
+                engine.runAndWait()
+            check_correction = input(correction_message)
+            
             while check_correction not in ['yes', 'y', 'no', 'n']:
-                check_correction = input("Sorry I did not understand. Please reply with yes or no. ")
+                correction_message_2 = f'Sorry I did not understand. Please reply with yes or no. '
+                if TEXT2SPEECH:
+                    engine.say(correction_message_2)
+                    engine.runAndWait()
+                check_correction = input()
             if check_correction == 'yes' or check_correction == 'y':
-                preferences_dict[attribute] = closest_word
+                preferences_dict[attribute] = [closest_word]
 
 #this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
 def find_similar_word(potential_keyword, attribute):
     distance_dict = {}
-    if len(potential_keyword) > 5:
+    if len(potential_keyword) > 8:
+        threshold = 4
+    elif len(potential_keyword) > 5:
         threshold = 3
     else:
         threshold = 2
