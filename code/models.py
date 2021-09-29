@@ -24,7 +24,7 @@ class Models:
         #load t test labels
         #we don't need to load train data as this model is not trained
         test_labels = self.data.test_labels
-
+        
         #the inform baseline model classifies each label as 'inform'
         y_pred = ['inform' for label in test_labels]
         return y_pred
@@ -32,6 +32,7 @@ class Models:
     def keyword_matcher(self):
         test_sents = self.data.test_sents
         test_labels = self.data.train_labels
+
         ### classify sentence based on keywords found in sentence
         labels = ['inform', 'request', 'thankyou', 'reqalts', 'null', 'affirm', 'bye',
                 'confirm', 'hello', 'negate', 'deny', 'repeat', 'ack', 'restart', 'reqmore']
@@ -87,7 +88,6 @@ class Models:
         #load train/test text and labels. Transform text to Bag-of-Words representation
         y_train = self.data.train_labels
         y_test = self.data.test_labels
-        
 
         #train logistic model on train data, make predictions on test data
         logistic_model = LogisticRegression(multi_class='multinomial').fit(self.X_train, y_train)

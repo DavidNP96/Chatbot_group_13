@@ -1,6 +1,7 @@
 # the main file to run the dialog system
 
 # import models
+import extract_meaning
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 import extract_meaning
@@ -22,7 +23,7 @@ def main():
 
     ds = Dialog_system()
 
-    print("Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and where you would like to eat and how much you are willing to spend, I can recommend you some nice restaurants: \n ")
+    print(f"Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and where you would like to eat and how much you are willing to spend, I can recommend you some nice restaurants: \n ")
 
     while match == False:
         customer_input = input("").lower()
@@ -67,7 +68,7 @@ class Dialog_system:
                    "express_preferences": self.update_preferences,
                    "suggest_restaurant": self.suggest_restaurant,
                    "request_restaurant_information": self.request_restaurant_information,
-                   "request_add_info": self.request_restaurant_information,
+                   "get_add_preferences": self.get_additional_information,
                    "goodbye": self.goodbye
                    }
         action = options[self.dialog_state.state]
@@ -91,15 +92,15 @@ class Dialog_system:
         # still missing preferences
         if len(self.missing_preferences) > 0:
             if self.missing_preferences[0] == 'area':
-                response = confirmation + 'In what area would you like to eat?'
+                response = f'{confirmation} In what area would you like to eat?'
                 self.item = "area"
             elif self.missing_preferences[0] == 'food':
-                response = confirmation + 'What type of cuisine would you prefer?'
+                response = f'{confirmation} What type of cuisine would you prefer?'
                 self.item = "food"
             else:
-                response = confirmation + 'Excuse me for asking, but what is your pricerange today?'
+                response = f'{confirmation} Excuse me for asking, but what is your pricerange today?'
                 self.item = "pricerange"
-            print(f"so far i've found {self.restaurant_info.restaurant_count(self.preferences)} restaurants")
+            print(f"So far i've found {self.restaurant_info.restaurant_count(self.preferences)} restaurants")
         else:
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
             response = self.create_response()
@@ -108,24 +109,22 @@ class Dialog_system:
     def extract_preferences(self):
         preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
         if preferences == {}:
-            confirmation = 'I am sorry I did not quite get that. '
+            confirmation = f'I am sorry I did not quite get that. '
         else: 
-            confirmation  = 'Great choice. '
+            confirmation  = f'Great choice. '
         # update preferences
         for preference, value in preferences.items():
-            print(preference, value)
-            if preference != "":
-                self.preferences[preference] = value
+            self.preferences[preference] = value
         return confirmation
 
     def refresh_preferences(self):
-        self.preferences = {"area": "any",
-                            "food": "any",
-                            "pricerange": "any"}
+        self.preferences = {"area": "",
+                            "food": "",
+                            "pricerange": ""}
         self.missing_preferences = ["area", "food", "pricerange"]
 
     def hello(self):
-        response = "Hi! so nice to meet you. What would you like to eat today?"
+        response = f'Hi! so nice to meet you. What would you like to eat today?'
         return response
 
     def suggest_restaurant(self):
@@ -136,15 +135,29 @@ class Dialog_system:
         else:
             self.count_options = 0
         if len(restaurant_options) == 0 or self.count_options >= len(restaurant_options):
-            response = 'Unfortunately I have not found any restaurant that matches your whishes. Is there anything else you would like to eat?'
+            response = f'Unfortunately I have not found any restaurant that matches your whishes. Is there anything else you would like to eat?'
             self.count_options = 0
             self.refresh_preferences()
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
         else:
             self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
-            response = 'I recommend you to go to ' + self.restaurant_suggestion['restaurantname'] + '. Would you like to go there?'
-        print(len(restaurant_options))
+            response = f'I recommend you to go to %s. Would you like to go there?'% self.restaurant_suggestion['restaurantname']
         return response
+
+    def get_additional_information(self):
+        #  get restaurant info based on preferences
+        restaurant_options = self.restaurant_info.filter_info(self.preferences)
+
+        additional_preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
+
+        # based on additional_preferences get antecedents
+        antecedents = self.get_antecedents(additional_preferences)
+
+        # filter restaurant info based on additional preferences
+        self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
+
+    def get_antecedents(self):
+        pass
 
     def extract_asked_information(self, costumer_input):
         information_dict = {'address' : ['address', 'adress', 'adres', 'street', 'location'],
@@ -168,30 +181,32 @@ class Dialog_system:
         information_req = self.extract_asked_information(self.customer_input)
         if self.provided_info == [] and information_req == []:
             information_req.append('address') 
-            response = "Great! "
+            response = f'Great! '
         else:
             response = ""
-        if str(self.restaurant_suggestion['addr']) == "nan":
-            response += "Sorry, we do not have a address registered for " + self.restaurant_suggestion['restaurantname'] + ". "
-        elif "address" in information_req:
-            response += "The address is " + str(self.restaurant_suggestion['addr']) +  ". "
-        if str(self.restaurant_suggestion['phone']) == "nan":
-            response += "Sorry, we do not have a phone number registered for " + self.restaurant_suggestion['restaurantname'] + ". "
-        elif "phone_number" in information_req:
-            response += "The phone number is " + str(self.restaurant_suggestion['phone']) + ". "
-        if str(self.restaurant_suggestion['postcode']) == "nan":
-            response += "Sorry, we do not have a postal code registered for " + self.restaurant_suggestion['restaurantname'] + ". "
-        elif "postcode" in information_req :
-            response += "The postal code is " + str(self.restaurant_suggestion['postcode']) + ". "
+        if "address" in information_req:
+            if str(self.restaurant_suggestion['addr']) == "nan":
+                response += f'Sorry, we do not have a address registered for %s. ' % self.restaurant_suggestion['restaurantname']
+            else:
+                response += f'The address is %s.' % self.restaurant_suggestion['addr']
+        if "phone_number" in information_req:
+            if str(self.restaurant_suggestion['phone']) == "nan":
+                response += f'Sorry, we do not have a phone number registered for %s.' % self.restaurant_suggestion['restaurantname']
+            else:
+                response += f'The phone number is %s.' % self.restaurant_suggestion['phone']
+        if "postcode" in information_req:
+            if str(self.restaurant_suggestion['postcode']) == "nan":
+                response += f'Sorry, we do not have a postal code registered for %s.' % self.restaurant_suggestion['restaurantname']
+            else:
+                response += f'The postal code is %s.' % self.restaurant_suggestion['postcode'] 
         if information_req == [] or self.provided_info == []:
-            response += 'Would you like to know the phone number or the postcode? Or maybe both?'
+            response += f'Would you like to know the phone number or the postcode? Or maybe both?'
         for information in information_req:
             self.provided_info.append(information)
-
         return response
 
     def goodbye(self):
-        response = "Enjoy your dinner"
+        response = f'Enjoy your dinner'
         return response
 
 
@@ -247,7 +262,9 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
-        if self.state == "hello":
+        if act == "bye":
+            self.state = "goodbye"
+        elif self.state == "hello":
             if act == "inform":
                 self.state = "express_preferences"
                 self.prev_state = "hello"
@@ -257,11 +274,18 @@ class Dialog_state:
 
         elif self.state == "express_preferences":
             if len(missing_preferences) == 0:
-                self.state = "suggest_restaurant"
+                self.state = "get_add_preferences"
                 self.prev_state = "express_preferences"
             else:
                 self.state = "express_preferences"
                 self.prev_state = "express_preferences"
+
+        elif self.state == "get_add_preferences":
+            if act == "deny" or act == "negate":
+                self.state = "suggest_restaurant"
+            else:
+                self.state = "express_preferences"
+                self.additional_information = True
 
         elif self.state == "suggest_restaurant":
             if len(missing_preferences) > 0:
@@ -273,11 +297,15 @@ class Dialog_state:
             elif act == "deny" or act == "negate" or act == "reqalts" or act == "reqmore":
                 self.state ="suggest_restaurant"
                 self.prev_state = "suggest_restaurant"
+            else:
+                self.prev_state = "express_preferences"
+                f'Sorry I didn\'t understand that, please answer with yes or no.'
+        
 
         elif self.state == "request_restaurant_information":
             #if act == "reqmore":
             #    self.state = "request_add_info"
-            if act == "thankyou":
+            if act == "thankyou" or act == "bye" or act == "deny" or act == "negate":
                 self.state = "goodbye"
 
     def extract_preferences(self, customer_input):
@@ -308,6 +336,14 @@ class RestaurantInfo:
 
         filtered_restaurant_info = self.data
         
+        # change empty string to any to filter
+        if area == "":
+            area = "any"
+        if food == "":
+            food = "any"
+        if pricerange == "":
+            pricerange = "any"
+            
         # check if variables exist, and if so, filter the dataframe on it
         if (area != "any") & (food != "any") & (pricerange != "any"):
             filtered_restaurant_info = self.data[((self.data["area"] == area) & (
@@ -326,18 +362,23 @@ class RestaurantInfo:
                 ((self.data["food"] == food)) & (self.data["pricerange"] == pricerange))]
 
         elif (area != "any"):
-            filtered_restaurant_info = self.data["area"] == area
+            filtered_restaurant_info = self.data[self.data["area"] == area]
 
         elif (pricerange != "any"):
-            filtered_restaurant_info = self.data["pricerange"] == pricerange
+            filtered_restaurant_info = self.data[self.data["pricerange"] == pricerange]
 
         elif (food != "any"):
-            filtered_restaurant_info = self.data["food"] == food
-        
+            filtered_restaurant_info = self.data[self.data["food"] == food]
+
         return filtered_restaurant_info
+    
+    def filter_on_additional_info(self, filter_preferences, restaurant_options):
+        pass
+
 
     def restaurant_count(self, filter_preferences):
         return len(self.filter_info(filter_preferences))
+
 
 
 if __name__ == "__main__":
