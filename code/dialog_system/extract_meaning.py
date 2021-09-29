@@ -14,8 +14,8 @@ pref_keywords = {
             'australasian', 'singaporean'],
     'area' : ['west', 'north', 'south', {'centre': ['centre', 'center']}, 'east'],
     'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']}, 
-                    {'cheap': ['cheap', 'cheaply']}]
-    # 'additional_preferences': [TODO]
+                    {'cheap': ['cheap', 'cheaply']}],
+    'additional_preferences': ['romantic']
 }
 
 #this dictionary stores common textual patterns for different attributes in the following way:
@@ -26,8 +26,8 @@ pref_keywords = {
 pref_patterns = { 
     'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')], #('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l'), ('', 'c')],
     'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],# ('', 'c')],
-    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')]#, ('', 'c')]
-    # 'additional_preferences' : [ TODO]  
+    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')],#, ('', 'c')]
+    'additional_preferences' : [(r'[^\s]*[\s]restaurant', 'restaurant') ]  
 }
 
 #list of words that map to 'dontcare'

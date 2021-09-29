@@ -16,7 +16,7 @@ TRAINED_MODELS_FP = "../../trained_models/"
 DATAPATH = "../../data/"
 
 ##SETTINGS:
-TEXT2SPEECH = True
+TEXT2SPEECH = False
 INFORMAL    = True
 
 def main():
@@ -98,7 +98,7 @@ class Dialog_system:
         action = options[self.dialog_state.state]
         
         response = action()
-        print(self.preferences)
+        print(f"preferences after {self.dialog_state.state}",self.preferences)
         # return response
         return response
 
@@ -156,7 +156,12 @@ class Dialog_system:
 
     def suggest_restaurant(self):
         #  filter restaurants
-        restaurant_options = self.restaurant_info.filter_info(self.preferences)
+        if self.dialog_state.add_pref == True:
+            print("IIN")
+            restaurant_options = self.restaurant_info.restaurant_options
+        else:
+            restaurant_options = self.restaurant_info.filter_info(self.preferences)
+        
         if self.dialog_state.prev_state == "suggest_restaurant":
             self.count_options += 1
         else:
@@ -175,17 +180,38 @@ class Dialog_system:
         #  get restaurant info based on preferences
         restaurant_options = self.restaurant_info.filter_info(self.preferences)
 
-        self.additional_preferences = extract_meaning.extract_preferences(self.customer_input, self.item)
+        if self.dialog_state.prev_state == "get_add_preferences":
+            self.item = "additional_preferences"
 
-        # based on additional_preferences get antecedents
-        antecedents = self.get_antecedents(self.additional_preferences)
+            self.preferences["additional_preferences"] = extract_meaning.extract_preferences(self.customer_input, self.item, TEXT2SPEECH)["additional_preferences"]
 
-        # filter restaurant info based on additional preferences
-        self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
+            print('PREFERENCES',self.preferences)
+            # based on additional_preferences get antecedents
+            antecedents = self.get_antecedents()
+
+            # filter restaurant info based on additional preferences
+            self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
+
+            self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
+            print("current dialog state", self.dialog_state.state)
+            response = self.create_response()
+
+        else:
+            response = f'alright, do you have any other requirements for your restaurant?'
+
+
+
+        return response
 
     def get_antecedents(self):
         #TODO based on the additional preferences use the dictionary to map the preferences such as 'romantic' to a list of ordered antecedents
-        pass
+        options = {"romantic":  [("crowdedness","calm"), ("food_quality" ,"good"), ("length_of_stay","long")]}
+
+        preference = self.preferences["additional_preferences"][0]
+        antecedents = options[preference]
+
+        return antecedents
+
 
     def extract_asked_information(self, costumer_input):
         information_dict = {'address' : ['address', 'adress', 'adres', 'street', 'location'],
@@ -285,6 +311,7 @@ class Dialog_state:
     def __init__(self):
         self.state = "hello"
         self.prev_state = "hello"
+        self.add_pref = False
 
     def update_info(self, request):
         self.info[request[0]] = request[1]
@@ -309,11 +336,12 @@ class Dialog_state:
                 self.prev_state = "express_preferences"
 
         elif self.state == "get_add_preferences":
-            if act == "deny" or act == "negate":
+            if act == "deny" or act == "negate" or self.prev_state == "get_add_preferences":
                 self.state = "suggest_restaurant"
             else:
-                self.state = "express_preferences"
-                self.additional_information = True
+                self.state = "get_add_preferences"
+                self.add_pref = True
+            self.prev_state = "get_add_preferences"
 
         elif self.state == "suggest_restaurant":
             if len(missing_preferences) > 0:
@@ -345,11 +373,12 @@ class RestaurantInfo:
     def __init__(self):
         self.data = self.load_data()
         self.recommendations = []
+        self.restaurant_options = self.data
 
     # Load restaurant to a dataframe
     def load_data(self):
         restaurants_info = pd.read_csv(
-            f"{DATAPATH}restaurant_info.csv")
+            f"{DATAPATH}updated_restaurant_info.csv")
         return restaurants_info
 
     # Filter restaurants given the user's preferences
@@ -395,11 +424,59 @@ class RestaurantInfo:
         elif (food != ["any"]):
             filtered_restaurant_info = self.data[self.data.food.isin(food)]
 
+        self.restaurant_options = filtered_restaurant_info
         return filtered_restaurant_info
     
-    def filter_on_additional_info(self, filter_preferences, restaurant_options):
+    def filter_on_additional_info(self, antecedents, restaurant_options):
         # within the restaurant options perform a second filter based on the filter preferences
-        pass
+        all_restaurant_options = restaurant_options
+        found = False
+        length_of_stay = ["any"]
+        crowdedness = ["any"]
+        food_quality = ["any"]
+        # make shure that list object does not convert to tuple
+        if not type(antecedents) == list:
+            antecedents = [antecedents]
+        if len(antecedents) <= 1:
+
+            filtered_restaurant_info = []
+        else:
+            # filter the antecedents from 
+            for key,antecedent in antecedents:
+                antecedent = [antecedent]
+                print("ANTECEDENT",antecedent)
+                if key == "length_of_stay":
+                    length_of_stay = antecedent
+                elif key == "crowdedness":
+                    crowdedness = antecedent
+                else:
+                    food_quality = antecedent
+
+            print('length_of_stay',length_of_stay,'crowdedness',crowdedness,'food_quality', food_quality)
+            if (length_of_stay != ["any"]) & (crowdedness != ["any"]) & (food_quality != ["any"]):
+                filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(length_of_stay)) & (
+                    restaurant_options.crowdedness.isin(crowdedness)) & (restaurant_options.food_quality.isin(food_quality))]
+            elif (length_of_stay != ["any"]) & (crowdedness != ["any"]) & (food_quality == ["any"]):
+                filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(length_of_stay)) & (restaurant_options.crowdedness.isin(crowdedness))]
+
+            elif (length_of_stay != ["any"]) & (food_quality != ["any"]) & (crowdedness == ["any"]):
+                filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(length_of_stay)) & (restaurant_options.food_quality.isin(food_quality))]
+
+            elif (crowdedness != ["any"]) & (food_quality != ["any"]) & (length_of_stay == ["any"]):
+                filtered_restaurant_info = restaurant_options[(restaurant_options.crowdedness.isin(crowdedness)) & (restaurant_options.food_quality.isin(food_quality))]
+
+            elif (length_of_stay != ["any"]) & (crowdedness == ["any"]) & (food_quality == ["any"]):
+                filtered_restaurant_info = restaurant_options[restaurant_options.length_of_stay.isin(length_of_stay)]
+
+            elif (food_quality != ["any"]) & (crowdedness == ["any"]) & (length_of_stay == ["any"]):
+                filtered_restaurant_info = restaurant_options[restaurant_options.food_quality.isin(food_quality)]
+
+            elif (crowdedness != ["any"]) & (length_of_stay == ["any"]) & (food_quality == ["any"]):
+                filtered_restaurant_info = restaurant_options[restaurant_options.crowdedness.isin(crowdedness)]
+            
+            if len(filtered_restaurant_info) < 1:
+                antecedents.pop()
+                self.filtered_restaurant_options = self.filter_on_additional_info(antecedents, all_restaurant_options)
 
 
     def restaurant_count(self, filter_preferences):
