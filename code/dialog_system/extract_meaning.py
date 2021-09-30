@@ -1,5 +1,6 @@
 from Levenshtein import distance
 import re
+import pyttsx3
 
 #this list stores keywords related to each category. Some keywords are stored as different variations (value) of the same keyword (key)
 pref_keywords = {
@@ -13,7 +14,8 @@ pref_keywords = {
             'australasian', 'singaporean'],
     'area' : ['west', 'north', 'south', {'centre': ['centre', 'center']}, 'east'],
     'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']}, 
-                    {'cheap': ['cheap', 'cheaply']}]
+                    {'cheap': ['cheap', 'cheaply']}],
+    'additional_preferences': ['romantic', "Busy","children", "long", {"short":["fast"]}]
 }
 
 #this dictionary stores common textual patterns for different attributes in the following way:
@@ -22,9 +24,10 @@ pref_keywords = {
 # 'l' indicates the keyword is positioned left of the pattern and 'r' indicated the keyword can be found at the right of the pattern
 # 'c' indicates that the keyword is the whole utterance (1 word)
 pref_patterns = { 
-    'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')],
-    'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],
-    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')]
+    'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')], #('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l'), ('', 'c')],
+    'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],# ('', 'c')],
+    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')],#, ('', 'c')]
+    'additional_preferences' : [(r'[^\s]*[\s]restaurant', 'restaurant'), (r'without[^\s]*[\s]', 'without'), (r'with[^\s]*[\s]', 'with') ]  
 }
 
 #list of words that map to 'dontcare'
@@ -42,8 +45,12 @@ test_sents = ['I\'m looking for world food', 'I want a restaurant that serves wo
             'I\'m looking for Persian food please', 'Find a Cuban restaurant in the center', 'I want to go to a restaurant in the weest']
 test_sents = [sent.lower() for sent in test_sents]
 
+engine = pyttsx3.init()
+
 #to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
-def extract_preferences(utterance, item):
+def extract_preferences(utterance, item, text2speech):
+    global TEXT2SPEECH
+    TEXT2SPEECH = text2speech
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
     preferences_dict = match_patterns(utterance, preferences_dict)
@@ -103,10 +110,19 @@ def match_keyword(potential_keyword, preferences_dict, attribute):
     else:
         closest_word = find_similar_word(potential_keyword, attribute)
         if closest_word != None:
-            check_correction = input(f'I did not recognize {potential_keyword}. Did you mean {closest_word}?' + 
-                                        'Please reply yes (y) or no (n).')
+            correction_message = f'I did not recognize {potential_keyword}. Did you mean {closest_word}?' + \
+                                        'Please reply yes (y) or no (n).'
+            if TEXT2SPEECH:
+                engine.say(correction_message)
+                engine.runAndWait()
+            check_correction = input(correction_message)
+            
             while check_correction not in ['yes', 'y', 'no', 'n']:
-                check_correction = input(f'Sorry I did not understand. Please reply with yes or no. ')
+                correction_message_2 = f'Sorry I did not understand. Please reply with yes or no. '
+                if TEXT2SPEECH:
+                    engine.say(correction_message_2)
+                    engine.runAndWait()
+                check_correction = input()
             if check_correction == 'yes' or check_correction == 'y':
                 preferences_dict[attribute] = [closest_word]
 
