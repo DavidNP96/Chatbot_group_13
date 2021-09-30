@@ -98,7 +98,6 @@ class Dialog_system:
         action = options[self.dialog_state.state]
         
         response = action()
-        print(f"preferences after {self.dialog_state.state}",self.preferences)
         # return response
         return response
 
@@ -157,7 +156,6 @@ class Dialog_system:
     def suggest_restaurant(self):
         #  filter restaurants
         if self.dialog_state.add_pref == True:
-            print("IIN")
             restaurant_options = self.restaurant_info.restaurant_options
         else:
             restaurant_options = self.restaurant_info.filter_info(self.preferences)
@@ -185,7 +183,6 @@ class Dialog_system:
 
             self.preferences["additional_preferences"] = extract_meaning.extract_preferences(self.customer_input, self.item, TEXT2SPEECH)["additional_preferences"]
 
-            print('PREFERENCES',self.preferences)
             # based on additional_preferences get antecedents
             antecedents = self.get_antecedents()
 
@@ -193,7 +190,6 @@ class Dialog_system:
             self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
 
             self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
-            print("current dialog state", self.dialog_state.state)
             response = self.create_response()
 
         else:
@@ -205,7 +201,10 @@ class Dialog_system:
 
     def get_antecedents(self):
         #TODO based on the additional preferences use the dictionary to map the preferences such as 'romantic' to a list of ordered antecedents
-        options = {"romantic":  [("crowdedness","calm"), ("food_quality" ,"good"), ("length_of_stay","long")]}
+        options = {"romantic":  [("crowdedness","calm"), ("food_quality" ,"good"), ("length_of_stay","long")],
+                   "busy": [("food_quality","good"), ("pricerange","cheap"), ("length_of_stay","long")], 
+                   "children": [("length_of_stay","short")],
+                   "long": [("food_quality","good"), ("pricerange","expensive"), ("crowdedness","calm")]}
 
         preference = self.preferences["additional_preferences"][0]
         antecedents = options[preference]
@@ -384,8 +383,6 @@ class RestaurantInfo:
     # Filter restaurants given the user's preferences
     def filter_info(self, filter_preferences):
 
-        print("filter preference",filter_preferences)
-
         # unpack array and place array elements into variables
         area = filter_preferences["area"]
         food = filter_preferences["food"]
@@ -444,7 +441,6 @@ class RestaurantInfo:
             # filter the antecedents from 
             for key,antecedent in antecedents:
                 antecedent = [antecedent]
-                print("ANTECEDENT",antecedent)
                 if key == "length_of_stay":
                     length_of_stay = antecedent
                 elif key == "crowdedness":
@@ -452,7 +448,6 @@ class RestaurantInfo:
                 else:
                     food_quality = antecedent
 
-            print('length_of_stay',length_of_stay,'crowdedness',crowdedness,'food_quality', food_quality)
             if (length_of_stay != ["any"]) & (crowdedness != ["any"]) & (food_quality != ["any"]):
                 filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(length_of_stay)) & (
                     restaurant_options.crowdedness.isin(crowdedness)) & (restaurant_options.food_quality.isin(food_quality))]
