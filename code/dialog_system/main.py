@@ -160,7 +160,7 @@ class Dialog_system:
             if FRIENDLY:
                 confirmation = f'I\'m sorry I did not quite get that. '
             else:
-                conformation = f'I\'m sorry I do not understand. '
+                confirmation = f'I\'m sorry I do not understand. '
         else: 
             if FRIENDLY:
                 confirmation  = f'Great choice. '
@@ -228,7 +228,7 @@ class Dialog_system:
 
                     descript = f"restaurant where you can stay {self.preferences['additional_preferences'][0]}"  if self.preferences["additional_preferences"][0] == "long" or self.preferences["additional_preferences"][0]  == "short" else f"{self.preferences['additional_preferences'][0]} restaurant"
 
-                    print ("descript", descript)
+                    #print ("descript", descript)
                     response = f'I recommend {self.restaurant_suggestion["restaurantname"]}. ' +\
                         f'It is a {self.preferences["pricerange"][0] if self.preferences["food"][0] != "any" else ""} {self.preferences["food"][0] if self.preferences["food"][0] != "any" else ""} restaurant in the {self.restaurant_suggestion["area"]} of town.\n' +\
                         f'It is a {descript}  because {self.give_reasons()}. Do you want to go there?'        
@@ -258,11 +258,10 @@ class Dialog_system:
     def get_additional_information(self):
         #  get restaurant info based on preferences
         restaurant_options = self.restaurant_info.filter_info(self.preferences)
-
         if self.dialog_state.prev_state == "get_add_preferences":
             self.item = "additional_preferences"
-            print("extracted meaning",extract_meaning.extract_preferences(
-                self.customer_input, self.item, TEXT2SPEECH))
+            #print("extracted meaning",extract_meaning.extract_preferences(
+            #    self.customer_input, self.item, TEXT2SPEECH))
             self.preferences["additional_preferences"] = extract_meaning.extract_preferences(
                 self.customer_input, self.item, TEXT2SPEECH)["additional_preferences"]
 
@@ -272,7 +271,7 @@ class Dialog_system:
             # filter restaurant info based on additional preferences
             self.antecedents = self.restaurant_info.filter_on_additional_info(
                 antecedents, restaurant_options)
-
+            
             self.dialog_state.update_state(
                 self.dialog_act.dialog_act, self.missing_preferences)
             response = self.create_response()
@@ -297,7 +296,6 @@ class Dialog_system:
 
         preference = self.preferences["additional_preferences"][0]
         antecedents = options[preference]
-
         return antecedents
 
     def extract_asked_information(self, costumer_input):
@@ -532,7 +530,7 @@ class RestaurantInfo:
             filtered_restaurant_info = self.data[self.data.food.isin(food)]
 
         self.restaurant_options = filtered_restaurant_info
-        print(self.restaurant_options)
+        #print(self.restaurant_options)
         return filtered_restaurant_info
 
     def filter_on_additional_info(self, antecedents, restaurant_options):
@@ -542,11 +540,11 @@ class RestaurantInfo:
         length_of_stay = ["any"]
         crowdedness = ["any"]
         food_quality = ["any"]
+        #print(all_restaurant_options)
         # make shure that list object does not convert to tuple
         if not type(antecedents) == list:
             antecedents = [antecedents]
         if len(antecedents) < 1:
-
             filtered_restaurant_info = []
         else:
             # filter the antecedents from
@@ -558,7 +556,6 @@ class RestaurantInfo:
                     crowdedness = antecedent
                 else:
                     food_quality = antecedent
-
             if (length_of_stay != ["any"]) & (crowdedness != ["any"]) & (food_quality != ["any"]):
                 filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(length_of_stay)) & (
                     restaurant_options.crowdedness.isin(crowdedness)) & (restaurant_options.food_quality.isin(food_quality))]
@@ -586,10 +583,11 @@ class RestaurantInfo:
                 filtered_restaurant_info = restaurant_options[restaurant_options.crowdedness.isin(
                     crowdedness)]
 
+
             if len(filtered_restaurant_info) < 1:
 
                 antecedents.pop()
-                print("antecedents", antecedents)
+                #print("antecedents", antecedents)
                 self.filter_on_additional_info(
                     antecedents, all_restaurant_options)
             else:

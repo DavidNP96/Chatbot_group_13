@@ -15,7 +15,7 @@ pref_keywords = {
     'area' : ['west', 'north', 'south', {'centre': ['centre', 'center']}, 'east'],
     'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']}, 
                     {'cheap': ['cheap', 'cheaply']}],
-    'additional_preferences': ['romantic', "busy","children", "long", {"short":["fast"]}]
+    'additional_preferences': ['romantic', "busy", "children", "long", {"short":["fast"]}]
 }
 
 #this dictionary stores common textual patterns for different attributes in the following way:
@@ -54,7 +54,6 @@ def extract_preferences(utterance, item, text2speech):
     preferences_dict = {}
     preferences_dict = match_keywords(utterance, preferences_dict, item)
     preferences_dict = match_patterns(utterance, preferences_dict)
-
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
