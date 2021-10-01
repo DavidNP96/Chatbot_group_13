@@ -15,7 +15,7 @@ pref_keywords = {
     'area' : ['west', 'north', 'south', {'centre': ['centre', 'center']}, 'east'],
     'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']}, 
                     {'cheap': ['cheap', 'cheaply']}],
-    'additional_preferences': ['romantic', "Busy","children", "long", {"short":["fast"]}]
+    'additional_preferences': ['romantic', "busy","children", "long", {"short":["fast"]}]
 }
 
 #this dictionary stores common textual patterns for different attributes in the following way:
