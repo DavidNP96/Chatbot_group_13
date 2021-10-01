@@ -153,6 +153,7 @@ class Dialog_system:
         return response
 
     def extract_preferences(self):
+        # extract the preferences from the user input and store these
         preferences = extract_meaning.extract_preferences(
             self.customer_input, self.item, TEXT2SPEECH)
         if preferences == {}:
@@ -172,12 +173,14 @@ class Dialog_system:
         return confirmation
 
     def refresh_preferences(self):
+        # reset the user preference when the dialog restarts or when no restaurant has been found
         self.preferences = {"area": [],
                             "food": [],
                             "pricerange": []}
         self.missing_preferences = ["area", "food", "pricerange"]
 
     def hello(self):
+        # welcome message
         if FRIENDLY:
             response = f'Hi! so nice to meet you. What do you feel like eating today?'
         else:
@@ -191,7 +194,7 @@ class Dialog_system:
         else:
             restaurant_options = self.restaurant_info.filter_info(
                 self.preferences)
-
+        # get next restaurant option if user declines the restaurant suggestion
         if self.dialog_state.prev_state == "suggest_restaurant":
             self.count_options += 1
         else:
@@ -209,7 +212,6 @@ class Dialog_system:
             self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
 
             if FRIENDLY:
-
                 # check for additional preferences
                 if "additional_preferences" in self.preferences:
                     response = f'I think {self.restaurant_suggestion["restaurantname"]} would be the perfect restaurant for you.' +\
@@ -221,7 +223,6 @@ class Dialog_system:
                     f'It is a {self.preferences["pricerange"][0]} {self.preferences["food"][0]} restaurant' +\
                     f'in the {self.restaurant_suggestion["area"]} of town,  Do you feel like to going there?'
             else:
-
                 # check for additional preferences
                 if "additional_preferences" in self.preferences:
 
@@ -237,6 +238,7 @@ class Dialog_system:
         return response
 
     def give_reasons(self):
+        # return the reason for the choice of restaurant.
         n = 0
         reasons = []
         for key, value in self.antecedents:
@@ -299,6 +301,7 @@ class Dialog_system:
         return antecedents
 
     def extract_asked_information(self, costumer_input):
+        # get the information that the user wants of the suggested restaurant
         information_dict = {'address': ['address', 'adress', 'adres', 'street', 'location'],
                             'phone_number': ['phone', 'number', 'telephone'],
                             'postcode': ['postcode', 'zipcode', 'post', 'zip', 'postalcode', 'code', 'postal'],
@@ -317,6 +320,7 @@ class Dialog_system:
         return required_info
 
     def request_restaurant_information(self):
+        # give the information that the user desires of the suggested restaurant
         information_req = self.extract_asked_information(self.customer_input)
         if self.provided_info == [] and information_req == []:
             information_req.append('address') 
@@ -360,6 +364,7 @@ class Dialog_system:
         return response
 
     def goodbye(self):
+        # goodbye message
         if FRIENDLY:
             response = f'Enjoy your dinner '
         else:
@@ -420,6 +425,7 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
+        # update the current state with the previous state and the dialog act of the user input
         if act == "bye":
             self.state = "goodbye"
         elif self.state == "hello":
@@ -461,13 +467,9 @@ class Dialog_state:
                 f'Sorry I didn\'t understand that, please answer with yes or no.'
 
         elif self.state == "request_restaurant_information":
-            # if act == "reqmore":
-            #    self.state = "request_add_info"
             if act == "thankyou" or act == "bye" or act == "deny" or act == "negate":
                 self.state = "goodbye"
 
-    # def extract_preferences(self, customer_input):
-    #    return
 
 
 class RestaurantInfo:
@@ -596,6 +598,7 @@ class RestaurantInfo:
         return antecedents
 
     def restaurant_count(self, filter_preferences):
+        # return the number of restaurants found 
         return len(self.filter_info(filter_preferences))
 
 
