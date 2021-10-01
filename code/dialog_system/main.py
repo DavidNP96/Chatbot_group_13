@@ -152,13 +152,14 @@ class Dialog_system:
         return response
 
     def extract_preferences(self):
+        # extract the preferences of the user from their input
         preferences = extract_meaning.extract_preferences(
             self.customer_input, self.item, TEXT2SPEECH)
         if preferences == {}:
             if INFORMAL:
                 confirmation = f'I\'m sorry I did not quite get that. '
             else:
-                conformation = f'I am sorry I do not understand. '
+                confirmation = f'I am sorry I do not understand. '
         else:
             if INFORMAL:
                 confirmation = f'Great choice. '
@@ -170,12 +171,14 @@ class Dialog_system:
         return confirmation
 
     def refresh_preferences(self):
+        # to reset the user preferences if the dialog restarts or no restaurant has been found
         self.preferences = {"area": [],
                             "food": [],
                             "pricerange": []}
         self.missing_preferences = ["area", "food", "pricerange"]
 
     def hello(self):
+        # welcome message
         if INFORMAL:
             response = f'Hi! so nice to meet you. What do you feel like eating today?'
         else:
@@ -189,7 +192,7 @@ class Dialog_system:
         else:
             restaurant_options = self.restaurant_info.filter_info(
                 self.preferences)
-
+        # get next restaurant option if previous has been suggested
         if self.dialog_state.prev_state == "suggest_restaurant":
             self.count_options += 1
         else:
@@ -206,7 +209,6 @@ class Dialog_system:
         else:
             self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
             if INFORMAL:
-
                 # check for additional preferences
                 if "additional_preferences" in self.preferences:
                     response = f'I think {self.restaurant_suggestion["restaurantname"]} would be the perfect restaurant for you.' +\
@@ -218,7 +220,6 @@ class Dialog_system:
                     f'It is a {self.preferences["pricerange"][0]} {self.preferences["food"][0]} restaurant' +\
                     f'in the {self.restaurant_suggestion["area"]} of town,  Do you feel like to going there?'
             else:
-
                 # check for additional preferences
                 if "additional_preferences" in self.preferences:
 
@@ -231,10 +232,10 @@ class Dialog_system:
                 else:
                     response = f'I recommend you to go to {self.restaurant_suggestion["restaurantname"]}. It is a {self.preferences["pricerange"][0] if self.preferences["food"][0] != "any" else ""} +\
                     {self.preferences["food"][0] if self.preferences["food"][0] != "any" else ""} restaurant in the {self.restaurant_suggestion["area"]} of town, Would you like to go there?'
-
         return response
 
     def give_reasons(self):
+        # give reasons for the choice of restaurant based on the additional preference of the user
         n = 0
         reasons = []
         for key, value in self.antecedents:
@@ -297,6 +298,7 @@ class Dialog_system:
         return antecedents
 
     def extract_asked_information(self, costumer_input):
+        # get user input to check what information the user wants
         information_dict = {'address': ['address', 'adress', 'adres', 'street', 'location'],
                             'phone_number': ['phone', 'number', 'telephone'],
                             'postcode': ['postcode', 'zipcode', 'post', 'zip', 'postalcode', 'code', 'postal'],
@@ -315,6 +317,7 @@ class Dialog_system:
         return required_info
 
     def request_restaurant_information(self):
+        # give back asked restaurant information to the user
         information_req = self.extract_asked_information(self.customer_input)
         if self.provided_info == [] and information_req == []:
             information_req.append('address')
@@ -346,6 +349,7 @@ class Dialog_system:
         return response
 
     def goodbye(self):
+        # ending message
         response = f'Enjoy your dinner '
         return response
 
@@ -403,6 +407,7 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
+        # update current state based on previous state and dialog act
         if act == "bye":
             self.state = "goodbye"
         elif self.state == "hello":
@@ -448,9 +453,6 @@ class Dialog_state:
             #    self.state = "request_add_info"
             if act == "thankyou" or act == "bye" or act == "deny" or act == "negate":
                 self.state = "goodbye"
-
-    # def extract_preferences(self, customer_input):
-    #    return
 
 
 class RestaurantInfo:
@@ -579,6 +581,7 @@ class RestaurantInfo:
         return antecedents
 
     def restaurant_count(self, filter_preferences):
+        # get number of found restaurants
         return len(self.filter_info(filter_preferences))
 
 
