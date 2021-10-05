@@ -227,7 +227,7 @@ class Dialog_system:
                     print ("descript", descript)
                     response = f'I recommend you to go to {self.restaurant_suggestion["restaurantname"]}. ' +\
                         f'It is a {self.preferences["pricerange"][0] if self.preferences["food"][0] != "any" else ""} {self.preferences["food"][0] if self.preferences["food"][0] != "any" else ""} restaurant in the {self.restaurant_suggestion["area"]} of town.\n' +\
-                        f'It is a {descript}  because {self.give_reasons()}. Would you like to go there?'        
+                        f'It is a {descript}  because {self.give_reasons()}. Would you like to go there?'       
                 else:
                     response = f'I recommend you to go to {self.restaurant_suggestion["restaurantname"]}. It is a {self.preferences["pricerange"][0] if self.preferences["food"][0] != "any" else ""} +\
                     {self.preferences["food"][0] if self.preferences["food"][0] != "any" else ""} restaurant in the {self.restaurant_suggestion["area"]} of town, Would you like to go there?'
