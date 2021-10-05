@@ -12,8 +12,8 @@ sys.path.append("../../data")
 
 
 # relevant filepaths
-TRAINED_MODELS_FP = "C:\\Users\\Simon\\Desktop\\Code\\Master_Code\\Chatbot_group_13\\trained_models\\"
-DATAPATH = "C:\\Users\\Simon\\Desktop\\Code\\Master_Code\\Chatbot_group_13\\data\\"
+TRAINED_MODELS_FP = "../../trained_models/"
+DATAPATH = "../../data/"
 
 # SETTINGS:
 TEXT2SPEECH = False
