@@ -12,8 +12,8 @@ sys.path.append("../../data")
 
 
 # relevant filepaths
-TRAINED_MODELS_FP = "../../trained_models/"
-DATAPATH = "../../data/"
+TRAINED_MODELS_FP = "C:\\Users\\Simon\\Desktop\\Code\\Master_Code\\Chatbot_group_13\\trained_models\\"
+DATAPATH = "C:\\Users\\Simon\\Desktop\\Code\\Master_Code\\Chatbot_group_13\\data\\"
 
 # SETTINGS:
 TEXT2SPEECH = False
@@ -596,7 +596,8 @@ class RestaurantInfo:
         return antecedents
 
     def restaurant_count(self, filter_preferences):
-        # return the number of restaurants found 
+        # return the number of restaurants found
+        #print("Found Restuarants:{}".format(self.filter_info(filter_preferences)))
         return len(self.filter_info(filter_preferences))
 
 
