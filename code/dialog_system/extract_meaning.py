@@ -12,7 +12,7 @@ pref_keywords = {
             'cuban', 'steakhouse', 'catalan', 'caribbean', 'scandinavian', 'russian', 'singaporean', 'belgian', 'welsh', 'afghan', 
             'malaysian', 'persian', 'barbeque', 'irish', 'swiss', 'lebanese', 'jamaican', 'eritrean', 'unusual', 'swedish', 'polish', 
             'australasian', 'singaporean'],
-    'area' : ['west', 'north', 'south', {'centre': ['centre', 'center']}, 'east'],
+    'area' : ['west', 'north', 'south', 'east', {'centre': ['centre', 'center']}],
     'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']}, 
                     {'cheap': ['cheap', 'cheaply']}],
     'additional_preferences': ['romantic', "busy", "children", "long", {"short":["fast"]}]
@@ -26,13 +26,13 @@ pref_keywords = {
 pref_patterns = { 
     'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')], #('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l'), ('', 'c')],
     'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],# ('', 'c')],
-    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')],#, ('', 'c')]
+    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]priced', 'price'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')],#, ('', 'c')]
     'additional_preferences' : [(r'[^\s]*[\s]restaurant', 'restaurant'), (r'without[^\s]*[\s]', 'without'), (r'with[^\s]*[\s]', 'with') ]  
 }
 
 #list of words that map to 'dontcare'
 dontcare_keywords = ['any', "don't", "care", 'dont', "doesn't", 'matter', 'doesnt', 'anything', 'dont care', "don't care", "doesn't matter",
-                     'doesnt matter']
+                     'doesnt matter', 'i dont care', "i don't care"]
 
 #a list of sentences to test our algorithm on
 test_sents = ['I\'m looking for world food', 'I want a restaurant that serves world food', 'I want a restaurant serving Swedish food',
@@ -61,7 +61,7 @@ def extract_preferences(utterance, item, text2speech):
 def match_keywords(utterance, preferences_dict, item):
     # map utterance to dontcare 
     for word in dontcare_keywords:
-        if word == utterance:
+        if word in utterance:
             preferences_dict[item] = ["any"]
             return(preferences_dict)
     sent = utterance.split()

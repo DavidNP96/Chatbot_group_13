@@ -562,7 +562,8 @@ class RestaurantInfo:
         return antecedents
 
     def restaurant_count(self, filter_preferences):
-        # return the number of restaurants found 
+        # return the number of restaurants found
+        #print("Found Restuarants:{}".format(self.filter_info(filter_preferences)))
         return len(self.filter_info(filter_preferences))
 
 
