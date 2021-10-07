@@ -80,7 +80,6 @@ class Dialog_system:
         # update state and customer input
         self.customer_input = customer_input
         self.dialog_act.update_act(customer_input)
-        print(self.dialog_act.dialog_act)
         self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
         # create reponse based on updated dialog_state
         response = self.create_response()
@@ -182,7 +181,6 @@ class Dialog_system:
             restaurant_options = self.restaurant_info.filtered_restaurant_options
         else:
             restaurant_options = self.restaurant_info.filter_info(self.preferences)
-        print(restaurant_options)
         # get next restaurant option if user declines the restaurant suggestion
         if self.dialog_state.prev_state == "suggest_restaurant":
             self.count_options += 1
@@ -255,7 +253,6 @@ class Dialog_system:
 
                 # filter restaurant info based on additional preferences
                 self.antecedents = self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
-                
                 self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
                 response = self.create_response()
             except:
@@ -497,74 +494,28 @@ class RestaurantInfo:
             filtered_restaurant_info = self.data[self.data.food.isin(food)]
 
         self.restaurant_options = filtered_restaurant_info
-        #print(self.restaurant_options)
         return filtered_restaurant_info
 
     def filter_on_additional_info(self, antecedents, restaurant_options):
-        # within the restaurant options perform a second filter based on the filter preferences
-        all_restaurant_options = restaurant_options
-        found = False
-        length_of_stay = ["any"]
-        crowdedness = ["any"]
-        food_quality = ["any"]
-        #print(all_restaurant_options)
-        # make shure that list object does not convert to tuple
-        if not type(antecedents) == list:
-            antecedents = [antecedents]
-        if len(antecedents) < 1:
-            filtered_restaurant_info = []
-        else:
-            # filter the antecedents from
-            for key, antecedent in antecedents:
-                antecedent = [antecedent]
-                if key == "length_of_stay":
-                    length_of_stay = antecedent
-                elif key == "crowdedness":
-                    crowdedness = antecedent
-                else:
-                    food_quality = antecedent
-            if (length_of_stay != ["any"]) & (crowdedness != ["any"]) & (food_quality != ["any"]):
-                filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(length_of_stay)) & (
-                    restaurant_options.crowdedness.isin(crowdedness)) & (restaurant_options.food_quality.isin(food_quality))]
-            elif (length_of_stay != ["any"]) & (crowdedness != ["any"]) & (food_quality == ["any"]):
-                filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(
-                    length_of_stay)) & (restaurant_options.crowdedness.isin(crowdedness))]
+            # create general reasoning function
 
-            elif (length_of_stay != ["any"]) & (food_quality != ["any"]) & (crowdedness == ["any"]):
-                filtered_restaurant_info = restaurant_options[(restaurant_options.length_of_stay.isin(
-                    length_of_stay)) & (restaurant_options.food_quality.isin(food_quality))]
+            # temp df used to update dataframe
+            temp_df = restaurant_options
 
-            elif (crowdedness != ["any"]) & (food_quality != ["any"]) & (length_of_stay == ["any"]):
-                filtered_restaurant_info = restaurant_options[(restaurant_options.crowdedness.isin(
-                    crowdedness)) & (restaurant_options.food_quality.isin(food_quality))]
-
-            elif (length_of_stay != ["any"]) & (crowdedness == ["any"]) & (food_quality == ["any"]):
-                filtered_restaurant_info = restaurant_options[restaurant_options.length_of_stay.isin(
-                    length_of_stay)]
-
-            elif (food_quality != ["any"]) & (crowdedness == ["any"]) & (length_of_stay == ["any"]):
-                filtered_restaurant_info = restaurant_options[restaurant_options.food_quality.isin(
-                    food_quality)]
-
-            elif (crowdedness != ["any"]) & (length_of_stay == ["any"]) & (food_quality == ["any"]):
-                filtered_restaurant_info = restaurant_options[restaurant_options.crowdedness.isin(
-                    crowdedness)]
-
-
-            if len(filtered_restaurant_info) < 1:
-
-                antecedents.pop()
-                #print("antecedents", antecedents)
-                self.filter_on_additional_info(
-                    antecedents, all_restaurant_options)
-            else:
-                self.filtered_restaurant_options = filtered_restaurant_info
-
-        return antecedents
+            for key,antecedent in antecedents:
+                # look for every key if it occurs in dataframe
+                filtererd_result = temp_df
+                temp_df = filtererd_result[filtererd_result[key] == antecedent]
+                # checks if restaurant no longer fulfills requirements
+                if temp_df.empty:
+                    self.filtered_restaurant_options  = filtererd_result
+                    return antecedents
+                
+            self.filtered_restaurant_options = temp_df
+            return antecedents
 
     def restaurant_count(self, filter_preferences):
         # return the number of restaurants found
-        #print("Found Restuarants:{}".format(self.filter_info(filter_preferences)))
         return len(self.filter_info(filter_preferences))
 
 

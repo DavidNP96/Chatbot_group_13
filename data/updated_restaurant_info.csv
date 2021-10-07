@@ -1,56 +1,32 @@
-<<<<<<< HEAD
 ﻿restaurantname,pricerange,area,food,phone,addr,postcode,food_quality,crowdedness,length_of_stay
 saint johns chop house,moderate,west,british,01223 353110,21 - 24 northampton street,c.b 3,good,busy,short
 restaurant alimentum,moderate,north,modern european,01223 413000,152 - 154 hills road,c.b 2,bad,calm,short
 pizza hut cherry hinton,moderate,south,italian,01223 323737,g4 cambridge leisure park clifton way cherry hinton,c.b 1,good,busy,short
-the gardenia,moderate,west,romanian,01223 356354,2 rose crescent city centre,c.b 2,good ,busy,long
-=======
-restaurantname,pricerange,area,food,phone,addr,postcode,food_quality,crowdedness,length_of_stay
-saint johns chop house,moderate,west,british,01223 353110,21 - 24 northampton street,c.b 3,good,busy,short
-restaurant alimentum,moderate,north,modern european,01223 413000,152 - 154 hills road,c.b 2,bad,calm,short
-pizza hut cherry hinton,moderate,south,italian,01223 323737,g4 cambridge leisure park clifton way cherry hinton,c.b 1,good,busy,short
 the gardenia,moderate,west,romanian,01223 356354,2 rose crescent city centre,c.b 2,good,busy,long
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 loch fyne,moderate,centre,seafood,01223 362433,the little rose 37 trumpington street,c.b 2,bad,calm,long
 yu garden,expensive,east,chinese,01223 248882,529 newmarket road fen ditton,c.b 5,good,busy,long
 sitar tandoori,expensive,east,steakhouse,01223 249955,43 high street cherry hinton cherry hinton,c.b 1,good,busy,long
 saigon city,expensive,north,asian oriental,01223 356555,169 high street chesterton chesterton,c.b 4,bad,calm,long
 restaurant two two,expensive,north,french,01223 351880,22 chesterton road chesterton,c.b 4,good,calm,short
-<<<<<<< HEAD
-the hotpot,expensive,north,chinese,01223 366552,66 chesterton road chesterton,c.b 4,good ,calm,short
-=======
 the hotpot,expensive,north,chinese,01223 366552,66 chesterton road chesterton,c.b 4,good,calm,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 nandos,cheap,south,portuguese,01223 327908,cambridge leisure park clifton way,c.b 1,bad,calm,short
 peking restaurant,expensive,south,chinese,01223 354755,10 homerton street city centre,c.b 2,good,busy,long
 rajmahal,moderate,east,indian,01223 244955,7 barnwell road fen ditton,c.b 5,good,busy,long
 pizza hut fen ditton,moderate,east,italian,01223 323737,cambridge retail park newmarket road fen ditton,c.b 5,bad,calm,short
 the missing sock,cheap,south,chinese,01223 812660,finders corner newmarket road,c.b 25,good,busy,short
-<<<<<<< HEAD
-royal standard,expensive,east,spanish,01223 247877,290 mill road city centre,c.b 1,good ,calm,short
-=======
 royal standard,expensive,east,spanish,01223 247877,290 mill road city centre,c.b 1,good,calm,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 grafton hotel restaurant,expensive,east,british,01223 241387,grafton hotel 619 newmarket road fen ditton,c.b 5,bad,calm,long
 dojo noodle bar,expensive,centre,asian oriental,01223 363471,40210 millers yard city centre,c.b 2,good,busy,long
 cambridge lodge restaurant,expensive,west,european,01223 355166,cambridge lodge hotel 139 huntingdon road city centre,c.b 3,bad,busy,short
 thanh binh,cheap,west,vietnamese,01223 362456,17 magdalene street city centre,c.b 3,bad,calm,long
 stazione restaurant and coffee bar,expensive,centre,korean,01223 352607,market hill city centre,,good,busy,long
-<<<<<<< HEAD
-cote,expensive,centre,french,01223 311053,bridge street city centre,c.b 2,good ,busy,short
-=======
 cote,expensive,centre,french,01223 311053,bridge street city centre,c.b 2,good,busy,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 cotto,moderate,centre,british,01223 302010,183 east road city centre,c.b 1,good,calm,short
 bangkok city,expensive,centre,thai,01223 354382,24 green street city centre,c.b 2,good,busy,long
 frankie and bennys,expensive,south,italian,01223 412430,cambridge leisure park clifton way cherry hinton,c.b 1,good,busy,long
 the cow pizza kitchen and bar,moderate,centre,moroccan,01223 308871,corn exchange street,c.b 2,bad,calm,long
 eraina,expensive,centre,european,01223 368786,free school lane city centre,c.b 2,good,busy,short
-<<<<<<< HEAD
-curry garden,expensive,centre,asian oriental,01223 302330,106 regent street city centre,,good ,busy,short
-=======
 curry garden,expensive,centre,asian oriental,01223 302330,106 regent street city centre,,good,busy,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 mahal of cambridge,cheap,centre,indian,01223 360409,3 - 5 millers yard mill lane,,bad,calm,short
 golden wok,moderate,north,asian oriental,01223 350688,191 histon road chesterton,c.b 4,good,busy,long
 meghna,moderate,north,indian,01223 727410,205 victoria road chesterton,c.b 4,bad,calm,long
@@ -65,21 +41,6 @@ cocum,expensive,east,gastropub,01223 366668,71 castle street city centre,c.b 3,b
 city stop restaurant,expensive,north,tuscan,01223 363270,cambridge city football club milton road chesterton,,good,busy,short
 sala thong,expensive,west,thai,01223 323178,35 newnham road newnham,c.b 3,good,calm,short
 don pasquale pizzeria,expensive,south,european,01223 350106,12 market hill city centre,,good,busy,short
-<<<<<<< HEAD
-little seoul,expensive,centre,korean,01223 308681,108 regent street city centre,c.b 2,good ,busy,long
-rice house,cheap,south,chinese,01223 367755,88 mill road city centre,,bad,calm,long
-the river bar steakhouse and grill,cheap,centre,modern european,01223 307030,quayside off bridge street,c.b 5,good,busy,short
-nandos city centre,cheap,centre,portuguese,01223 327908,33-34 saint andrews street,c.b 2,bad,calm,long
-prezzo,moderate,west,italian,01799 521260,21 - 24 northampton road,c.b 3,bad,calm,long
-galleria,moderate,centre,european,01223 362054,33 bridge street,c.b 2,good,busy,short
-bloomsbury restaurant,moderate,north,international,0871 942 9180,crowne plaza hotel 20 downing street,c.b 2,good ,busy,short
-the good luck chinese food takeaway,expensive,south,chinese,01223 244149,82 cherry hinton road cherry hinton,c.b 1,bad,calm,long
-the varsity restaurant,moderate,centre,international,01223 356060,35 saint andrews street city centre,c.b 2,good,busy,long
-de luca cucina and bar,moderate,centre,modern european,01223 356666,83 regent street,c.b 2,bad,calm,long
-da vinci pizzeria,cheap,north,traditional,01223 351707,20 milton road chesterton,c.b 4,bad,calm,short
-shiraz restaurant,expensive,centre,mediterranean,01223 307581,84 regent street city centre,c.b 2,good,calm,short
-the lucky star,cheap,south,chinese,01223 244277,cambridge leisure park clifton way cherry hinton,c.b 1,good ,busy,short
-=======
 little seoul,expensive,centre,korean,01223 308681,108 regent street city centre,c.b 2,good,busy,long
 rice house,cheap,south,chinese,01223 367755,88 mill road city centre,,bad,calm,long
 the river bar steakhouse and grill,cheap,centre,modern european,01223 307030,quayside off bridge street,c.b 5,good,busy,short
@@ -93,27 +54,18 @@ de luca cucina and bar,moderate,centre,modern european,01223 356666,83 regent st
 da vinci pizzeria,cheap,north,traditional,01223 351707,20 milton road chesterton,c.b 4,bad,calm,short
 shiraz restaurant,expensive,centre,mediterranean,01223 307581,84 regent street city centre,c.b 2,good,calm,short
 the lucky star,cheap,south,chinese,01223 244277,cambridge leisure park clifton way cherry hinton,c.b 1,good,busy,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 royal spice,cheap,north,indian,01733 553355,victoria avenue chesterton,c.b 4,bad,calm,long
 ask,cheap,centre,seafood,01223 364917,12 bridge street city centre,c.b 2,good,busy,long
 taj tandoori,expensive,south,portuguese,01223 412299,64 cherry hinton road cherry hinton,c.b 1,bad,calm,short
 tandoori palace,moderate,north,indian,01223 506055,68 histon road chesterton,c.b 4,good,busy,long
 yippee noodle bar,moderate,centre,asian oriental,01223 518111,40428 king street city centre,c.b 1,good,busy,long
-<<<<<<< HEAD
-travellers rest,expensive,west,british,01223 276182,huntingdon road city centre,,good ,busy,short
-=======
 travellers rest,expensive,west,british,01223 276182,huntingdon road city centre,,good,busy,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 maharajah tandoori restaurant,expensive,east,indian,01223 358399,41518 castle street city centre,c.b 3,bad,calm,short
 shanghai family restaurant,moderate,east,chinese,01223 301761,39 burleigh street city centre,,good,busy,long
 curry prince,expensive,east,indian,01223 566388,451 newmarket road fen ditton,c.b 5,bad,calm,long
 the gandhi,cheap,centre,indian,01223 353942,72 regent street city centre,,bad,calm,long
 kymmoy,expensive,centre,asian oriental,01223 311911,52 mill road city centre,c.b 1,good,calm,short
-<<<<<<< HEAD
-golden house,cheap,centre,polynesian,01842 753771,12 lensfield road city centre,,good ,busy,short
-=======
 golden house,cheap,centre,polynesian,01842 753771,12 lensfield road city centre,,good,busy,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 bedouin,expensive,centre,african,01223 367660,100 mill road city centre,c.b 1,bad,calm,short
 pipasha restaurant,expensive,east,indian,01223 577786,newmarket road fen ditton,c.b 5,good,busy,long
 charlie chan,cheap,centre,chinese,01223 361763,regent street city centre,c.b 2,bad,calm,long
@@ -128,45 +80,24 @@ anatolia,moderate,centre,turkish,01223 362372,30 bridge street city centre,c.b 2
 clowns cafe,moderate,centre,bistro,01223 355711,,c.b 1,good,busy,short
 kohinoor,cheap,west,indian,01223 323639,74 mill road city centre,,bad,calm,short
 the cambridge chop house,cheap,centre,british,01223 359506,1 kings parade,,good,busy,short
-<<<<<<< HEAD
-gourmet burger kitchen,expensive,centre,north american,01223 312598,regent street city centre,c.b 2,good ,busy,long
-=======
 gourmet burger kitchen,expensive,centre,north american,01223 312598,regent street city centre,c.b 2,good,busy,long
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 la mimosa,expensive,centre,mediterranean,01223 362525,thompsons lane fen ditton,c.b 5,bad,calm,long
 meze bar restaurant,expensive,centre,turkish,,196 mill road city centre,c.b 1,good,calm,short
 the golden curry,expensive,south,australasian,01223 329432,,,bad,calm,long
 curry queen,moderate,,indian,,106 mill road city centre,c.b 1,bad,calm,long
 hakka,cheap,north,persian,01223 568988,milton road chesterton,c.b 4,good,busy,short
-<<<<<<< HEAD
-the oak bistro,moderate,centre,british,01223 323361,6 lensfield road,,good ,busy,short
-=======
 the oak bistro,moderate,centre,british,01223 323361,6 lensfield road,,good,busy,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 riverside brasserie,moderate,centre,gastropub,01223 259988,doubletree by hilton cambridge granta place mill lane,,bad,calm,long
 the copper kettle,moderate,east,british,01223 365068,4 kings parade city centre,c.b 2,good,busy,long
 zizzi cambridge,expensive,south,italian,01223 365599,47-53 regent street,,bad,calm,long
 saffron brasserie,expensive,centre,jamaican,,,,bad,calm,short
 india house,expensive,west,indian,01223 461661,31 newnham road newnham,,good,busy,short
-<<<<<<< HEAD
-ali baba,moderate,centre,lebanese,01462 432565,59 hills road city centre,c.b 2,good ,busy,short
-=======
 ali baba,moderate,centre,lebanese,01462 432565,59 hills road city centre,c.b 2,good,busy,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 rice boat,expensive,north,indian,01223 302800,37 newnham road newnham,,bad,calm,long
 midsummer house restaurant,expensive,centre,british,01223 369299,midsummer common,,good,busy,long
 hotel du vin and bistro,moderate,centre,european,01223 227330,15 - 19 trumpington street,c.b 2,bad,calm,short
 darrys cookhouse and wine shop,expensive,south,modern european,01223 505015,40270 king street city centre,c.b 1,bad,calm,long
 pizza express,cheap,centre,spanish,01223 324033,,c.b 2,good,busy,long
-<<<<<<< HEAD
-jinling noodle bar,moderate,centre,cuban,01223 566188,11 peas hill city centre,c.b 2,good ,calm,short
-graffiti,moderate,north,indian,01223 277977,hotel felix whitehouse lane huntingdon road,c.b 3,bad,calm,short
-wagamama,expensive,centre,japanese,01223 462354,36 saint andrews street,c.b 2,good,busy,long
-pizza hut city centre,cheap,centre,italian,01223 323737,regent street city centre,,bad,calm,long
-curry king,expensive,centre,seafood,01223 324351,5 jordans yard bridge street city centre,,bad,calm,long
-panahar,expensive,centre,mediterranean,,,,good,busy,short
-ugly duckling,expensive,centre,catalan,,12 st. johns street city centre,,good ,calm,short
-=======
 jinling noodle bar,moderate,centre,cuban,01223 566188,11 peas hill city centre,c.b 2,good,calm,short
 graffiti,moderate,north,indian,01223 277977,hotel felix whitehouse lane huntingdon road,c.b 3,bad,calm,short
 wagamama,expensive,centre,japanese,01223 462354,36 saint andrews street,c.b 2,good,busy,long
@@ -174,7 +105,6 @@ pizza hut city centre,cheap,centre,italian,01223 323737,regent street city centr
 curry king,expensive,centre,seafood,01223 324351,5 jordans yard bridge street city centre,,good,calm,long
 panahar,expensive,centre,mediterranean,,,,good,busy,short
 ugly duckling,expensive,centre,catalan,,12 st. johns street city centre,,good,calm,short
->>>>>>> c97936810e1a153b2bf0cb9957b92f57bdb90db0
 pizza express fen ditton,moderate,centre,european,,jesus lane fen ditton,,bad,calm,short
 sesame restaurant and bar,moderate,,turkish,,,,good,busy,long
 hk fusion,expensive,centre,thai,,21 burleigh street city centre,c.b 1,bad,calm,long
