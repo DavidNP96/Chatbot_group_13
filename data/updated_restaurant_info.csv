@@ -1,4 +1,4 @@
-restaurantname,pricerange,area,food,phone,addr,postcode,food_quality,crowdedness,length_of_stay
+﻿restaurantname,pricerange,area,food,phone,addr,postcode,food_quality,crowdedness,length_of_stay
 saint johns chop house,moderate,west,british,01223 353110,21 - 24 northampton street,c.b 3,good,busy,short
 restaurant alimentum,moderate,north,modern european,01223 413000,152 - 154 hills road,c.b 2,bad,calm,short
 pizza hut cherry hinton,moderate,south,italian,01223 323737,g4 cambridge leisure park clifton way cherry hinton,c.b 1,good,busy,short
@@ -14,7 +14,7 @@ peking restaurant,expensive,south,chinese,01223 354755,10 homerton street city c
 rajmahal,moderate,east,indian,01223 244955,7 barnwell road fen ditton,c.b 5,good,busy,long
 pizza hut fen ditton,moderate,east,italian,01223 323737,cambridge retail park newmarket road fen ditton,c.b 5,bad,calm,short
 the missing sock,cheap,south,chinese,01223 812660,finders corner newmarket road,c.b 25,good,busy,short
-royal standard,expensive,east,spanish,01223 247877,290 mill road city centre,c.b 1,good,calm,short
+royal standard,expensive,east,spanish,01223 247877,290 mill road city centre,c.b 1,good,calm,long
 grafton hotel restaurant,expensive,east,british,01223 241387,grafton hotel 619 newmarket road fen ditton,c.b 5,bad,calm,long
 dojo noodle bar,expensive,centre,asian oriental,01223 363471,40210 millers yard city centre,c.b 2,good,busy,long
 cambridge lodge restaurant,expensive,west,european,01223 355166,cambridge lodge hotel 139 huntingdon road city centre,c.b 3,bad,busy,short
@@ -72,7 +72,7 @@ charlie chan,cheap,centre,chinese,01223 361763,regent street city centre,c.b 2,b
 lan hong house,moderate,centre,thai,01223 350420,12 norfolk street city centre,,good,busy,short
 la tasca,moderate,centre,spanish,01223 464630,14 -16 bridge street,c.b 2,good,busy,long
 backstreet bistro,expensive,south,gastropub,01223 306306,2 sturton street city centre,c.b 1,good,busy,long
-la raza,cheap,centre,spanish,01223 464550,4 - 6 rose crescent,c.b 2,bad,calm,short
+la raza,cheap,centre,spanish,01223 464550,4 - 6 rose crescent,c.b 2,bad,calm,long
 the slug and lettuce,expensive,east,gastropub,dontcare,34 - 35 green street,c.b 2,good,busy,short
 restaurant one seven,moderate,north,british,01223 337766,de vere university arms regent street city centre,,good,busy,long
 fitzbillies restaurant,expensive,centre,british,01223 352500,51 trumpington street city centre,,good,busy,long
