@@ -182,13 +182,11 @@ class Dialog_system:
             restaurant_options = self.restaurant_info.filtered_restaurant_options
         else:
             restaurant_options = self.restaurant_info.filter_info(self.preferences)
-        print(restaurant_options)
         # get next restaurant option if user declines the restaurant suggestion
         if self.dialog_state.prev_state == "suggest_restaurant":
             self.count_options += 1
         else:
             self.count_options = 0
-        print(self.count_options)
         if len(restaurant_options) == 0 or self.count_options >= len(restaurant_options):
             response = {"FRIENDLY" : "Unfortunately I cannot find any restaurant that matches your whishes! What else " +\
                                      "you would like to eat?",
@@ -230,7 +228,10 @@ class Dialog_system:
         for key, value in self.antecedents:
             n += 1
             if key == "length_of_stay":
-                reasons.append(f"it allows for {value} stays")
+                if value == "long" and self.preferences["food"][0] == "spanish":
+                    reasons.append("spanish restaurants serve extensive dinners that take a long time to finish")
+                else:
+                    reasons.append(f"it allows for {value} stays")
             elif key == "crowdedness":
                 reasons.append(f"it is usually nice and {value}")
             elif key == "food_quality":
@@ -249,13 +250,10 @@ class Dialog_system:
             try:
                 self.preferences["additional_preferences"] = extract_meaning.extract_preferences(
                                                             self.customer_input, self.item, TEXT2SPEECH)["additional_preferences"]
-
                 # based on additional_preferences get antecedents
                 antecedents = self.get_antecedents()
-
                 # filter restaurant info based on additional preferences
-                self.antecedents = self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
-                
+                self.antecedents = self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options, self.preferences["additional_preferences"])
                 self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
                 response = self.create_response()
             except:
@@ -277,7 +275,7 @@ class Dialog_system:
         options = {"romantic":  [("crowdedness", "calm"), ("length_of_stay", "long"), ("food_quality", "good")],
                    "busy": [("food_quality", "good"), ("pricerange", "cheap"), ("length_of_stay", "long")],
                    "children": [("length_of_stay", "short")],
-                   "long": [("food_quality", "good"), ("pricerange", "expensive"), ("crowdedness", "calm")],}
+                   "long": [("length_of_stay", "long"), ("food_quality", "good"), ("pricerange", "expensive"), ("crowdedness", "calm")]}
 
         preference = self.preferences["additional_preferences"][0]
         antecedents = options[preference]
@@ -500,7 +498,7 @@ class RestaurantInfo:
         #print(self.restaurant_options)
         return filtered_restaurant_info
 
-    def filter_on_additional_info(self, antecedents, restaurant_options):
+    def filter_on_additional_info(self, antecedents, restaurant_options, preference):
         # within the restaurant options perform a second filter based on the filter preferences
         all_restaurant_options = restaurant_options
         found = False
@@ -550,16 +548,14 @@ class RestaurantInfo:
                 filtered_restaurant_info = restaurant_options[restaurant_options.crowdedness.isin(
                     crowdedness)]
 
-
             if len(filtered_restaurant_info) < 1:
-
                 antecedents.pop()
                 #print("antecedents", antecedents)
                 self.filter_on_additional_info(
-                    antecedents, all_restaurant_options)
+                    antecedents, all_restaurant_options, preference)
             else:
                 self.filtered_restaurant_options = filtered_restaurant_info
-
+        
         return antecedents
 
     def restaurant_count(self, filter_preferences):
