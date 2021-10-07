@@ -12,11 +12,11 @@ pref_keywords = {
             'cuban', 'steakhouse', 'catalan', 'caribbean', 'scandinavian', 'russian', 'singaporean', 'belgian', 'welsh', 'afghan', 
             'malaysian', 'persian', 'barbeque', 'irish', 'swiss', 'lebanese', 'jamaican', 'eritrean', 'unusual', 'swedish', 'polish', 
             'australasian', 'singaporean'],
-    'area' : ['west', 'north', 'south', 'east', {'centre': ['centre', 'center']}],
-    'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']}, 
-                    {'cheap': ['cheap', 'cheaply']}],
-    'additional_preferences': ['romantic', "busy", "children", "long", {"short":["fast"]}]
-}
+    'area' : ['west', 'north', 'south', {'centre': ['centre', 'center']}, 'east'],
+    'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']},
+                    {'cheap': ['cheap', 'cheaply']}]}
+additional_pref_keywords = {
+    'additional_preferences': ['romantic', "busy", "children", "long", {"short":["fast"]}]}
 
 #this dictionary stores common textual patterns for different attributes in the following way:
 #('TEXT PATTERN', 'KEYWORD_POSITION') where TEXT PATTERN is the textual pattern (str) to be recognized and
@@ -24,49 +24,44 @@ pref_keywords = {
 # 'l' indicates the keyword is positioned left of the pattern and 'r' indicated the keyword can be found at the right of the pattern
 # 'c' indicates that the keyword is the whole utterance (1 word)
 pref_patterns = { 
-    'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')], #('restaurant', 'l'), ('food', 'l'), ('food restaurant', 'l'), ('', 'c')],
-    'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],# ('', 'c')],
-    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]priced', 'price'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')],#, ('', 'c')]
+    'food' : [(r'[^\s]*[\s]food', 'food'), (r'[^\s]*[\s]restaurant','restaurant'), (r'[^\s]*[\s]food restautant', 'food restaurant')],
+    'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],
+    'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')]}
+additional_pref_patterns = {
     'additional_preferences' : [(r'[^\s]*[\s]restaurant', 'restaurant'), (r'without[^\s]*[\s]', 'without'), (r'with[^\s]*[\s]', 'with') ]  
 }
 
 #list of words that map to 'dontcare'
-dontcare_keywords = ['any', "don't", "care", 'dont', "doesn't", 'matter', 'doesnt', 'anything', 'dont care', "don't care", "doesn't matter",
-                     'doesnt matter', 'i dont care', "i don't care"]
-
-#a list of sentences to test our algorithm on
-test_sents = ['I\'m looking for world food', 'I want a restaurant that serves world food', 'I want a restaurant serving Swedish food',
-            'I\'m looking for a restaurant in the center', 'I would like a cheap restaurant in the west part of town', 
-            'I\'m looking for a moderately priced restaurant in the west part of town', 
-            'I\'m looking for a restaurant in any area that serves Tuscan food',
-            'Can I have an expensive restaurant', 'I\'m looking for an expensive restaurant and it should serve international food',
-            'I need a Cuban restaurant that is moderately priced', 'I\'m looking for a moderately priced restaurant with Catalan food',
-            'What is a cheap restaurant in the south part of town', 'What about Chinese food', 'I wanna find a cheap restaurant', 
-            'I\'m looking for Persian food please', 'Find a Cuban restaurant in the center', 'I want to go to a restaurant in the weest']
-test_sents = [sent.lower() for sent in test_sents]
+dontcare_keywords = ["any", "anything", "don't", "care", 'dont', "doesn't", 'matter', 'doesnt', 'dont care', "don't care", "doesn't matter",
+                     'doesnt matter']
 
 engine = pyttsx3.init()
 
 #to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
-def extract_preferences(utterance, item, text2speech):
+def extract_preferences(utterance, item, text2speech, additional_prefs = False):
     global TEXT2SPEECH
     TEXT2SPEECH = text2speech
     preferences_dict = {}
-    preferences_dict = match_keywords(utterance, preferences_dict, item)
-    preferences_dict = match_patterns(utterance, preferences_dict)
+    preferences_dict = match_keywords(utterance, preferences_dict, item, additional_prefs)
+    preferences_dict = match_patterns(utterance, preferences_dict, additional_prefs)
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
 # if so, add the the preference to the preferences dictionary
-def match_keywords(utterance, preferences_dict, item):
+def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
     # map utterance to dontcare 
     for word in dontcare_keywords:
-        if word in utterance:
+        if word == utterance:
             preferences_dict[item] = ["any"]
             return(preferences_dict)
     sent = utterance.split()
 
-    for attribute, preference in pref_keywords.items():
+    #compare against appropriate set of keywords
+    if additional_prefs:
+        keywords = additional_pref_keywords
+    else:
+        keywords = pref_keywords
+    for attribute, preference in keywords.items():
         attribute_matches = []
         #if a keyword has multiple spelling variations, check if any of the variations is present in the text
         #if so add the keyword to the preferences dictionary
@@ -87,8 +82,13 @@ def match_keywords(utterance, preferences_dict, item):
 
 #recognizes patterns in the text that belong to certain attributes, and compares whether the found potential keywords 
 #are similar to any known keywords
-def match_patterns(utterance, preferences_dict):
-    for attribute, patterns in pref_patterns.items():
+def match_patterns(utterance, preferences_dict, additional_prefs=False):
+    #take appropriate set of patterns
+    if additional_prefs:
+        patterns = additional_pref_patterns
+    else:
+        patterns = pref_patterns
+    for attribute, patterns in patterns.items():
         #check the patterns for all attributes that are not yet known
         if attribute in preferences_dict:
             continue
@@ -98,19 +98,19 @@ def match_patterns(utterance, preferences_dict):
                 potential_keyword = match.replace(keyword, '').replace(' ', '')
                 match_keyword(potential_keyword, preferences_dict, attribute)
         if attribute not in preferences_dict and len(utterance.split()) == 1 and utterance != "any":
-            match_keyword(utterance, preferences_dict, attribute)
+            match_keyword(utterance, preferences_dict, attribute, additional_prefs)
     return preferences_dict
 
-def match_keyword(potential_keyword, preferences_dict, attribute):
+def match_keyword(potential_keyword, preferences_dict, attribute, additional_prefs=False):
     #check if potential keyword expresses there is no preference
     if potential_keyword in dontcare_keywords and attribute not in preferences_dict:
         preferences_dict[attribute] = ['any']
     #compare whether potential keyword is similar to any known keywords belonging to given attribute
     else:
-        closest_word = find_similar_word(potential_keyword, attribute)
+        closest_word = find_similar_word(potential_keyword, attribute, additional_prefs)
         if closest_word != None:
             correction_message = f'I did not recognize {potential_keyword}. Did you mean {closest_word}?' + \
-                                        'Please reply yes (y) or no (n).'
+                                        ' Please reply yes (y) or no (n).'
             if TEXT2SPEECH:
                 engine.say(correction_message)
                 engine.runAndWait()
@@ -126,7 +126,7 @@ def match_keyword(potential_keyword, preferences_dict, attribute):
                 preferences_dict[attribute] = [closest_word]
 
 #this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
-def find_similar_word(potential_keyword, attribute):
+def find_similar_word(potential_keyword, attribute, additional_prefs =False):
     distance_dict = {}
     if len(potential_keyword) > 8:
         threshold = 4
@@ -134,8 +134,13 @@ def find_similar_word(potential_keyword, attribute):
         threshold = 3
     else:
         threshold = 2
+    #take appropriate set of keywords
+    if additional_prefs:
+        keywords = additional_pref_keywords
+    else:
+        keywords = pref_keywords
     #go through keywords belonging to relevant attribute
-    for word in pref_keywords[attribute]:
+    for word in keywords[attribute]:
         #if keyword has multiple spelling variations, go through all of them
         if type(word) == dict:
             keyword = list(word.keys())[0]

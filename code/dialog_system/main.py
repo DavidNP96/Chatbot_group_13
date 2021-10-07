@@ -150,8 +150,7 @@ class Dialog_system:
 
     def extract_preferences(self):
         # extract the preferences from the user input and store these
-        preferences = extract_meaning.extract_preferences(
-            self.customer_input, self.item, TEXT2SPEECH)
+        preferences = extract_meaning.extract_preferences(self.customer_input, self.item, TEXT2SPEECH)
         if preferences == {}:
             confirmation = {"FRIENDLY" : f"I\'m sorry I did not quite get that. ",
                             "TERSE"    : f"I don\'t understand. "}
@@ -169,11 +168,12 @@ class Dialog_system:
                             "food": [],
                             "pricerange": []}
         self.missing_preferences = ["area", "food", "pricerange"]
+        self.filtered_restaurant_options = []
 
     def hello(self):
         # welcome message
         response = {"FRIENDLY" : f"Hi! so nice to meet you. What do you feel like eating today?",
-                    "TERSE" : f"What do you want to eat today?"}
+                    "TERSE" : f"What kind of food?"}
         return response[FRIENDLINESS]
 
     def suggest_restaurant(self):
@@ -248,7 +248,7 @@ class Dialog_system:
             self.item = "additional_preferences"
             try:
                 self.preferences["additional_preferences"] = extract_meaning.extract_preferences(
-                                                            self.customer_input, self.item, TEXT2SPEECH)["additional_preferences"]
+                                                            self.customer_input, self.item, TEXT2SPEECH, True)["additional_preferences"]
 
                 # based on additional_preferences get antecedents
                 antecedents = self.get_antecedents()
