@@ -207,7 +207,7 @@ class Dialog_system:
                             self.preferences["additional_preferences"][0]  == "short" else \
                             f"{self.preferences['additional_preferences'][0]} restaurant"
                 response = {"FRIENDLY" : f"I think {self.restaurant_suggestion['restaurantname']} would be the perfect restaurant "+\
-                                        f"for you. It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant" \
+                                        f"for you. It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant. " \
                                         f"It is a {descript} because {self.give_reasons()}. Do you feel like going there?",
                             "TERSE" : f"I recommend {self.restaurant_suggestion['restaurantname']}. " +\
                                     f"It is a {self.restaurant_suggestion['pricerange'] if self.preferences['pricerange'][0] != 'any' else '' } " +\
