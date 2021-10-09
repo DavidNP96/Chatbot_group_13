@@ -49,6 +49,8 @@ def main():
                 engine.say(welcome_message[FRIENDLINESS])
                 engine.runAndWait()
             print(welcome_message[FRIENDLINESS])
+        if "retrain" in customer_input:
+            retrain_models()
         else:
             response, match = ds.updated_customer_input(customer_input)
             if TEXT2SPEECH:
@@ -520,6 +522,8 @@ class RestaurantInfo:
         # return the number of restaurants found
         return len(self.filter_info(filter_preferences))
 
+def retrain_models():
+    
 
 if __name__ == "__main__":
     main()
