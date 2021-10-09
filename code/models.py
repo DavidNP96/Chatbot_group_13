@@ -12,7 +12,7 @@ TRAINED_MODEL_FILEPATH = "../trained_models"
 class Models:
 
     def __init__(self):
-        self.data = data_class.Data("../data/dialog_acts.dat")
+        self.data = data_class.Data("../../data/dialog_acts.dat")
         self.X_train, self.X_test, self.count_vect, self.tfidf = self.data.create_bow()
         self.save_vectorizers()
 

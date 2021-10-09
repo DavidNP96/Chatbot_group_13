@@ -1,15 +1,16 @@
 # the main file to run the dialog system
 
 # import models
+from sklearn.utils.extmath import log_logistic
 import pyttsx3
 import extract_meaning
 import pandas as pd
 import pickle
 import time
 import sys
-sys.path.append("../models")
 sys.path.append("../../data")
-
+sys.path.append("../../code")
+from models import Models
 
 # relevant filepaths
 TRAINED_MODELS_FP = "../../trained_models/"
@@ -18,12 +19,12 @@ DATAPATH = "../../data/"
 # SETTINGS:
 TEXT2SPEECH  = False
 #friendliness settings: choose between "FRIENDLY" and "TERSE"
-FRIENDLINESS = "TERSE"
+FRIENDLINESS = "FRIENDLY"
 
 
 
 def main():
-    # initial interface for the dialog system
+    # Interface for the dialog system
     match = False
 
     ds = Dialog_system()
@@ -50,7 +51,7 @@ def main():
                 engine.runAndWait()
             print(welcome_message[FRIENDLINESS])
         if "retrain" in customer_input:
-            retrain_models()
+            ds.dialog_act.retrain_model()
         else:
             response, match = ds.updated_customer_input(customer_input)
             if TEXT2SPEECH:
@@ -139,7 +140,7 @@ class Dialog_system:
                             "TERSE": f"{retrieval_update[FRIENDLINESS]} What cuisine ?"}
                 self.item = "food"
             else:
-                response = {"FRIENDLY" : f"{confirmation} {retrieval_update} Excuse me for asking, but what is your pricerange today?",
+                response = {"FRIENDLY" : f"{confirmation} {retrieval_update[FRIENDLINESS]} Excuse me for asking, but what is your pricerange today?",
                             "TERSE": f"{retrieval_update[FRIENDLINESS]} What pricerange?"}
                 self.item = "pricerange"
             response = response[FRIENDLINESS]
@@ -255,7 +256,6 @@ class Dialog_system:
                 if self.preferences["additional_preferences"] == ["any"]:
                     self.dialog_state.add_pref = False
                     self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
-                    print(self.dialog_state.state)
                     response = self.create_response()
                 else:
                     self.dialog_state.add_pref = True
@@ -349,6 +349,7 @@ class Dialog_system:
         return response[FRIENDLINESS]
 
 
+
 class Dialog_act:
     def __init__(self):
         self.dialog_act = ""
@@ -369,18 +370,29 @@ class Dialog_act:
             self.dialog_act = model.predict(self.create_bow(customer_input))[0]
 
     # load all models we have available
-    def load_models(self):
-        trained_models = {}
-        # all available models
-        trained_model_names = ["logistic_regression", "deep_tree", "shallow_tree"]
+    def load_models(self, model="logistic_regression"):
 
-        # load all classifier models
-        for trained_model_name in trained_model_names:
+        trained_models = {}
+
+        # only load logistic_regression model
+        if model == "logistic_regression":
             trained_model = open(
-                f"{TRAINED_MODELS_FP}{trained_model_name}.pickle", 'rb')
+                f"{TRAINED_MODELS_FP}{model}.pickle", 'rb')
             classifier = pickle.load(trained_model)
-            trained_models["{}".format(trained_model_name)] = classifier
+            trained_models["{}".format(model)] = classifier
             trained_model.close()
+        else:  
+            # all available models
+            trained_model_names = ["logistic_regression", "deep_tree", "shallow_tree"]
+
+            # load all classifier models
+            for trained_model_name in trained_model_names:
+                trained_model = open(
+                    f"{TRAINED_MODELS_FP}{trained_model_name}.pickle", 'rb')
+                classifier = pickle.load(trained_model)
+                trained_models["{}".format(trained_model_name)] = classifier
+                trained_model.close()
+
         return trained_models
 
     # selects classifier model
@@ -393,6 +405,10 @@ class Dialog_act:
             self.count_vect.transform([customer_input]))
         return bow
 
+    def retrain_model(self):
+        new_models = Models()
+        new_models.logistic_regression()
+        self.load_models()
 
 class Dialog_state:
 
@@ -425,7 +441,7 @@ class Dialog_state:
                 self.prev_state = "express_preferences"
 
         elif self.state == "get_add_preferences":
-            if act == "deny" or act == "negate" or (self.prev_state == "get_add_preferences" and self.add_pref==True):
+            if act == "deny" or act == "negate" or (self.prev_state == "get_add_preferences" and self.add_pref==False):
                 self.state = "suggest_restaurant"
             else:
                 self.state = "get_add_preferences"
@@ -530,7 +546,7 @@ class RestaurantInfo:
         # return the number of restaurants found
         return len(self.filter_info(filter_preferences))
 
-def retrain_models():
+
     
 
 if __name__ == "__main__":
