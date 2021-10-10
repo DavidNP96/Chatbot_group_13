@@ -17,9 +17,9 @@ TRAINED_MODELS_FP = "../../trained_models/"
 DATAPATH = "../../data/"
 
 # SETTINGS:
-TEXT2SPEECH  = False
+TEXT2SPEECH  = True
 #friendliness settings: choose between "FRIENDLY" and "TERSE"
-FRIENDLINESS = "FRIENDLY"
+FRIENDLINESS = "TERSE"
 
 
 
@@ -38,7 +38,7 @@ def main():
                                     "preferences I recommend restaurants. The dialog can be restarted at " +\
                                     "any moment by typing \'restart dialog\'."} 
     if TEXT2SPEECH:
-        engine.say(welcome_message)
+        engine.say(welcome_message[FRIENDLINESS])
         engine.runAndWait()
     print(welcome_message[FRIENDLINESS])
 
