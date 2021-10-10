@@ -115,7 +115,6 @@ class Dialog_system:
     def update_preferences(self):
         # this function updates the preferences according to the user's input
         confirmation = self.extract_preferences()
-        print(self.preferences)
         self.missing_preferences = []
 
         # check for missing preferences
