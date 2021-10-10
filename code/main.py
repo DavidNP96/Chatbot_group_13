@@ -2,8 +2,8 @@
 
 # import models
 import sys
-sys.path.append("../../data")
-sys.path.append("../../code")
+sys.path.append("../data")
+sys.path.append("../code")
 
 from sklearn.utils.extmath import log_logistic
 import pyttsx3
@@ -15,8 +15,8 @@ import time
 from models import Models
 
 # relevant filepaths
-TRAINED_MODELS_FP = "../../trained_models/"
-DATAPATH = "../../data/"
+TRAINED_MODELS_FP = "../trained_models/"
+DATAPATH = "../data/"
 
 # SETTINGS:
 TEXT2SPEECH = False
@@ -53,6 +53,7 @@ def main():
             print(welcome_message[FRIENDLINESS])
         if "retrain" in customer_input:
             ds.dialog_act.retrain_model()
+            print("I just retrained my model how can I help you?")
         else:
             response, match = ds.updated_customer_input(customer_input)
             if TEXT2SPEECH:
