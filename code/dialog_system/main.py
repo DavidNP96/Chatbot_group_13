@@ -39,7 +39,7 @@ def main():
                        "preferences I recommend restaurants. The dialog can be restarted at " +
                        "any moment by typing \'restart dialog\'."}
     if TEXT2SPEECH:
-        engine.say(welcome_message)
+        engine.say(welcome_message[FRIENDLINESS])
         engine.runAndWait()
     print(welcome_message[FRIENDLINESS])
 
