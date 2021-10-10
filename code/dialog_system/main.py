@@ -204,6 +204,7 @@ class Dialog_system:
                 self.dialog_act.dialog_act, self.missing_preferences)
         else:
             self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
+            self.update_antecedents()
             # check for additional preferences
             if "additional_preferences" in self.preferences and self.preferences["additional_preferences"] != ["any"]:
 
@@ -299,7 +300,18 @@ class Dialog_system:
 
         preference = self.preferences["additional_preferences"][0]
         antecedents = options[preference]
+        self.all_antecedents = antecedents 
         return antecedents
+    def update_antecedents(self):
+        # check for next restaurant option which is viable
+        new_antecedents = []
+        res_sugg = self.restaurant_suggestion
+        res_antecedents = [res_sugg["crowdedness"], res_sugg["food_quality"], res_sugg["length_of_stay"]]
+        for antecedent in self.all_antecedents:
+            if antecedent[1] in res_antecedents: 
+                new_antecedents.append(antecedent)
+        self.antecedents = new_antecedents
+         
 
     def extract_asked_information(self, costumer_input):
         # get the information that the user wants of the suggested restaurant
@@ -422,6 +434,8 @@ class Dialog_act:
         self.load_models()
 
 
+
+
 class Dialog_state:
 
     def __init__(self):
@@ -542,22 +556,45 @@ class RestaurantInfo:
         return filtered_restaurant_info
 
     def filter_on_additional_info(self, antecedents, restaurant_options):
-        # create general reasoning function
+        # general reasoning function
 
         # temp df used to update dataframe
         temp_df = restaurant_options
-
+        final_df = pd.DataFrame(columns = list(restaurant_options.columns))
+        new_antecedents = []
+        dfs = []
         for key, antecedent in antecedents:
             # look for every key if it occurs in dataframe
             filtererd_result = temp_df
             temp_df = filtererd_result[filtererd_result[key] == antecedent]
+            dfs.append(temp_df)
+            new_antecedents.append((key,antecedent))
             # checks if restaurant no longer fulfills requirements
             if temp_df.empty:
-                self.filtered_restaurant_options = filtererd_result
-                return antecedents
+                # stack all erstaurant options form most relevant to less relevant
+                dfs.reverse()
 
+                # Give all df's common column names
+                for dataframe in dfs:
+                    dataframe.columns = list(restaurant_options.columns)
+
+                self.filtered_restaurant_options = pd.concat(dfs).reset_index(drop=True)
+                print("self.filtered_restaurant_options", self.filtered_restaurant_options)
+                # self.filtered_restaurant_options = filtererd_result
+                new_antecedents.pop()
+                # found a restauratn that fullfills minimal requirements
+                return new_antecedents
+        # found a restaurant that fulfills all requirements
+        dfs.reverse()
+
+        # Give all df's common column names
+        for dataframe in dfs:
+            dataframe.columns = list(restaurant_options.columns)
+
+        self.filtered_restaurant_options = pd.concat(dfs).reset_index(drop=True)
+        print("self.filtered_restaurant_options", self.filtered_restaurant_options)
         self.filtered_restaurant_options = temp_df
-        return antecedents
+        return new_antecedents
 
     def restaurant_count(self, filter_preferences):
         # return the number of restaurants found
