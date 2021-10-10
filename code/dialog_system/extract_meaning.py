@@ -43,7 +43,7 @@ def extract_preferences(utterance, item, text2speech, additional_prefs = False):
     return preferences_dict
 
 #go through the words in the given utterance, and compare if these words are relevant preference keywords
-# if so, add the the preference to the preferences dictionary
+#if so, add the the preference to the preferences dictionary
 def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
     # map utterance to dontcare 
     if item != "" :
@@ -67,12 +67,12 @@ def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
                 for preference_variation in list(pref.values())[0]:
                     if preference_variation in sent:
                         attribute_matches.append(list(pref.keys())[0])
-                        #preferences_dict[attribute] = list(pref.keys())[0]
+                        sent.remove(preference_variation)
             #check if keyword is expressed in the sentence, if so add preference to preferences dictionary
             else:
                 if pref in sent:
                     attribute_matches.append(pref)
-                    #preferences_dict[attribute] = pref
+                    sent.remove(pref)
         if len(attribute_matches) > 0:
             preferences_dict[attribute] = attribute_matches
     return(preferences_dict)
@@ -163,8 +163,3 @@ def find_similar_word(potential_keyword, attribute, additional_prefs =False):
     #if no similar words are found, return None
     else:
         return None
-# if __name__ == "__main__":
-#     #test performance for test sentences
-#     for sent in test_sents:
-#         print(sent)
-#         print(extract_preferences(sent))

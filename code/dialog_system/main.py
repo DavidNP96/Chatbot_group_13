@@ -19,7 +19,7 @@ TRAINED_MODELS_FP = "../../trained_models/"
 DATAPATH = "../../data/"
 
 # SETTINGS:
-TEXT2SPEECH = True
+TEXT2SPEECH = False
 # friendliness settings: choose between "FRIENDLY" and "TERSE"
 FRIENDLINESS = "TERSE"
 
