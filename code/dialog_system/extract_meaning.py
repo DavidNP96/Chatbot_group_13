@@ -46,11 +46,7 @@ def extract_preferences(utterance, item, text2speech, additional_prefs = False):
 #if so, add the the preference to the preferences dictionary
 def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
     # map utterance to dontcare 
-    if item != "" :
-        for word in dontcare_keywords:
-            if word in utterance:
-                preferences_dict[item] = ["any"]
-                return(preferences_dict)
+    
     sent = utterance.split()
 
     #compare against appropriate set of keywords
@@ -75,6 +71,10 @@ def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
                     sent.remove(pref)
         if len(attribute_matches) > 0:
             preferences_dict[attribute] = attribute_matches
+    if item != "" :
+        for word in dontcare_keywords:
+            if word in utterance:
+                preferences_dict[item] = ["any"]
     return(preferences_dict)
 #recognizes patterns in the text that belong to certain attributes, and compares whether the found potential keywords 
 #are similar to any known keywords
