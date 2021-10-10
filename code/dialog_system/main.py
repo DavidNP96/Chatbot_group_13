@@ -224,17 +224,15 @@ class Dialog_system:
                             f"for you. It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant. "
                             f"It is a {descript} because {self.give_reasons()}. Do you feel like going there?",
                             "TERSE": f"I recommend {self.restaurant_suggestion['restaurantname']}. " +
-                            f"It is a {self.restaurant_suggestion['pricerange'] if self.preferences['pricerange'][0] != 'any' else '' } " +
-                            f"{self.restaurant_suggestion['food'] if self.preferences['food'][0] != 'any' else ''} restaurant in " +
+                            f"It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant in " +
                             f"the {self.restaurant_suggestion['area']} of town.\n" +
                             f"It is a {descript} because {self.give_reasons()}. OK?"}
             else:
                 response = {"FRIENDLY": f"I think {self.restaurant_suggestion['restaurantname']} would be the perfect restaurant " +
                             f"for you.It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant" +
                             f"in the {self.restaurant_suggestion['area']} of town,  Do you feel like to going there?",
-                            "TERSE": f"I recommend {self.restaurant_suggestion['restaurantname']}. It is a "
-                            f"{self.restaurant_suggestion['pricerange'] if self.preferences['food'][0] != 'any' else '' } "
-                            f"{self.restaurant_suggestion['food'] if self.preferences['food'][0] != 'any' else ''} restaurant in the "
+                            "TERSE": f"I recommend {self.restaurant_suggestion['restaurantname']}. It is a " +
+                            f"{self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant in the " +
                             f"{self.restaurant_suggestion['area']} of town. OK?"}
         return response[FRIENDLINESS]
 

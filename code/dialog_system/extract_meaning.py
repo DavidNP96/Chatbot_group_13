@@ -20,7 +20,8 @@ additional_pref_keywords = {
 
 #this dictionary stores common textual patterns for different attributes using regular expressions
 pref_patterns = { 
-    "food" : [(r"[^\s]*[\s]food", "food"), (r"[^\s]*[\s]restaurant","restaurant"), (r"[^\s]*[\s]food restautant", "food restaurant")],
+    "food" : [(r"[^\s]*[\s]food", "food"), (r"[^\s]*[\s]restaurant","restaurant"), (r"[^\s]*[\s]food restautant", "food restaurant"), \
+                (r"[^\s]*[\s]cuisine", "cuisine"), (r"[^\s]*[\s]kitchen", "kitchen")],
     "area" : [(r"[^\s]*[\s]part of town", "part of town"), (r"[^\s]*[\s]area", "area"), (r"in the[^\s]*[\s]", "in the")],
     "pricerange": [(r"[^\s]*[\s]priced", "priced"), (r"[^\s]*[\s]price", "price"), (r"[^\s]*[\s]restaurant", "restaurant"), \
                     (r"[^\s]*[\s]pricerange", "pricerange"),]}
