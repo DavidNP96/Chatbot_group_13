@@ -22,7 +22,8 @@ additional_pref_keywords = {
 pref_patterns = { 
     "food" : [(r"[^\s]*[\s]food", "food"), (r"[^\s]*[\s]restaurant","restaurant"), (r"[^\s]*[\s]food restautant", "food restaurant")],
     "area" : [(r"[^\s]*[\s]part of town", "part of town"), (r"[^\s]*[\s]area", "area"), (r"in the[^\s]*[\s]", "in the")],
-    "pricerange": [(r"[^\s]*[\s]priced", "priced"), (r"[^\s]*[\s]restaurant", "restaurant"), (r"[^\s]*[\s]price", "restaurant")]}
+    "pricerange": [(r"[^\s]*[\s]priced", "priced"), (r"[^\s]*[\s]price", "price"), (r"[^\s]*[\s]restaurant", "restaurant"), \
+                    (r"[^\s]*[\s]price", "restaurant"), (r"[^\s]*[\s]pricerange", "pricerange"),]}
 additional_pref_patterns = {
     "additional_preferences" : [(r"[^\s]*[\s]restaurant", "restaurant"), (r"without[^\s]*[\s]", "without"), (r"with[^\s]*[\s]", "with"), (r"bit[^\s]*[\s]", "bit") ]  
 }
