@@ -1,15 +1,17 @@
 # the main file to run the dialog system
 
 # import models
+import sys
+sys.path.append("../../data")
+sys.path.append("../../code")
+
 from sklearn.utils.extmath import log_logistic
 import pyttsx3
 import extract_meaning
 import pandas as pd
 import pickle
 import time
-import sys
-sys.path.append("../../data")
-sys.path.append("../../code")
+
 from models import Models
 
 # relevant filepaths
@@ -17,10 +19,9 @@ TRAINED_MODELS_FP = "../../trained_models/"
 DATAPATH = "../../data/"
 
 # SETTINGS:
-TEXT2SPEECH  = False
-#friendliness settings: choose between "FRIENDLY" and "TERSE"
+TEXT2SPEECH = False
+# friendliness settings: choose between "FRIENDLY" and "TERSE"
 FRIENDLINESS = "FRIENDLY"
-
 
 
 def main():
@@ -30,13 +31,13 @@ def main():
     ds = Dialog_system()
     engine = pyttsx3.init()
 
-    welcome_message = {"FRIENDLY" : "Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and " +\
-                                    "where you would like to eat and how much you are willing to spend, I can recommend you some " +\
-                                    "nice places to  eat. \n If you would like to restart the dialog you can do so at any point by" +\
-                                    " typing \'restart dialog\'.", 
-                        "TERSE"   : "Welcome. I am a restaurant recommentation system. Based on cuisine, pricerange and area " +\
-                                    "preferences I recommend restaurants. The dialog can be restarted at " +\
-                                    "any moment by typing \'restart dialog\'."} 
+    welcome_message = {"FRIENDLY": "Welcome! I hope you are having a nice day. Are you feeling hungry? If you let me know what and " +
+                       "where you would like to eat and how much you are willing to spend, I can recommend you some " +
+                       "nice places to  eat. \n If you would like to restart the dialog you can do so at any point by" +
+                       " typing \'restart dialog\'.",
+                       "TERSE": "Welcome. I am a restaurant recommentation system. Based on cuisine, pricerange and area " +
+                       "preferences I recommend restaurants. The dialog can be restarted at " +
+                       "any moment by typing \'restart dialog\'."}
     if TEXT2SPEECH:
         engine.say(welcome_message)
         engine.runAndWait()
@@ -83,7 +84,8 @@ class Dialog_system:
         # update state and customer input
         self.customer_input = customer_input
         self.dialog_act.update_act(customer_input)
-        self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
+        self.dialog_state.update_state(
+            self.dialog_act.dialog_act, self.missing_preferences)
         # create reponse based on updated dialog_state
         response = self.create_response()
 
@@ -127,20 +129,20 @@ class Dialog_system:
                 restaurant = "restaurant"
             else:  # otherwise use plural for restaurants
                 restaurant = "restaurants"
-            retrieval_update = {"FRIENDLY" : f"So far I've found {self.restaurant_info.restaurant_count(self.preferences)} {restaurant} " +\
-                                             "that match your whishes. ",
-                                "TERSE" : f"{self.restaurant_info.restaurant_count(self.preferences)} {restaurant} matches. "}
+            retrieval_update = {"FRIENDLY": f"So far I've found {self.restaurant_info.restaurant_count(self.preferences)} {restaurant} " +
+                                "that match your whishes. ",
+                                "TERSE": f"{self.restaurant_info.restaurant_count(self.preferences)} {restaurant} matches. "}
 
             if self.missing_preferences[0] == "area":
-                response = {"FRIENDLY" : f"{confirmation} {retrieval_update[FRIENDLINESS]} In what area would you like to eat?",
+                response = {"FRIENDLY": f"{confirmation} {retrieval_update[FRIENDLINESS]} In what area would you like to eat?",
                             "TERSE": f"{retrieval_update[FRIENDLINESS]} What area?"}
                 self.item = "area"
             elif self.missing_preferences[0] == "food":
-                response = {"FRIENDLY" : f"{confirmation} {retrieval_update[FRIENDLINESS]} What type of cuisine do you feel like eating today?",
+                response = {"FRIENDLY": f"{confirmation} {retrieval_update[FRIENDLINESS]} What type of cuisine do you feel like eating today?",
                             "TERSE": f"{retrieval_update[FRIENDLINESS]} What cuisine ?"}
                 self.item = "food"
             else:
-                response = {"FRIENDLY" : f"{confirmation} {retrieval_update[FRIENDLINESS]} Excuse me for asking, but what is your pricerange today?",
+                response = {"FRIENDLY": f"{confirmation} {retrieval_update[FRIENDLINESS]} Excuse me for asking, but what is your pricerange today?",
                             "TERSE": f"{retrieval_update[FRIENDLINESS]} What pricerange?"}
                 self.item = "pricerange"
             response = response[FRIENDLINESS]
@@ -152,13 +154,14 @@ class Dialog_system:
 
     def extract_preferences(self):
         # extract the preferences from the user input and store these
-        preferences = extract_meaning.extract_preferences(self.customer_input, self.item, TEXT2SPEECH)
+        preferences = extract_meaning.extract_preferences(
+            self.customer_input, self.item, TEXT2SPEECH)
         if preferences == {}:
-            confirmation = {"FRIENDLY" : f"I\'m sorry I did not quite get that. ",
-                            "TERSE"    : f"I don\'t understand. "}
-        else: 
-            confirmation = {"FRIENDLY" : f"Great choice. ",
-                            "TERSE"    : f"OK. "}
+            confirmation = {"FRIENDLY": f"I\'m sorry I did not quite get that. ",
+                            "TERSE": f"I don\'t understand. "}
+        else:
+            confirmation = {"FRIENDLY": f"Great choice. ",
+                            "TERSE": f"OK. "}
         # update preferences
         for preference, value in preferences.items():
             self.preferences[preference] = value
@@ -174,8 +177,8 @@ class Dialog_system:
 
     def hello(self):
         # welcome message
-        response = {"FRIENDLY" : f"Hi! so nice to meet you. What do you feel like eating today?",
-                    "TERSE" : f"What kind of food?"}
+        response = {"FRIENDLY": f"Hi! so nice to meet you. What do you feel like eating today?",
+                    "TERSE": f"What kind of food?"}
         self.item = "food"
         return response[FRIENDLINESS]
 
@@ -184,44 +187,46 @@ class Dialog_system:
         if self.dialog_state.add_pref == True:
             restaurant_options = self.restaurant_info.filtered_restaurant_options
         else:
-            restaurant_options = self.restaurant_info.filter_info(self.preferences)
+            restaurant_options = self.restaurant_info.filter_info(
+                self.preferences)
         # get next restaurant option if user declines the restaurant suggestion
         if self.dialog_state.prev_state == "suggest_restaurant":
             self.count_options += 1
         else:
             self.count_options = 0
         if len(restaurant_options) == 0 or self.count_options >= len(restaurant_options):
-            response = {"FRIENDLY" : "Unfortunately I cannot find any restaurant that matches your whishes! What else " +\
-                                     "you would like to eat?",
-                        "TERSE" : "No matches. Restarting dialog. What else do you want to eat?"}
+            response = {"FRIENDLY": "Unfortunately I cannot find any restaurant that matches your whishes! What else " +
+                        "you would like to eat?",
+                        "TERSE": "No matches. Restarting dialog. What else do you want to eat?"}
             self.count_options = 0
             self.refresh_preferences()
-            self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
+            self.dialog_state.update_state(
+                self.dialog_act.dialog_act, self.missing_preferences)
         else:
             self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
             # check for additional preferences
             if "additional_preferences" in self.preferences and self.preferences["additional_preferences"] != ["any"]:
 
                 descript = f"restaurant where you can stay {self.preferences['additional_preferences'][0]}" \
-                            if self.preferences["additional_preferences"][0] == "long" or \
-                            self.preferences["additional_preferences"][0]  == "short" else \
-                            f"{self.preferences['additional_preferences'][0]} restaurant"
-                response = {"FRIENDLY" : f"I think {self.restaurant_suggestion['restaurantname']} would be the perfect restaurant "+\
-                                        f"for you. It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant. " \
-                                        f"It is a {descript} because {self.give_reasons()}. Do you feel like going there?",
-                            "TERSE" : f"I recommend {self.restaurant_suggestion['restaurantname']}. " +\
-                                    f"It is a {self.restaurant_suggestion['pricerange'] if self.preferences['pricerange'][0] != 'any' else '' } " +\
-                                    f"{self.restaurant_suggestion['food'] if self.preferences['food'][0] != 'any' else ''} restaurant in "+\
-                                    f"the {self.restaurant_suggestion['area']} of town.\n" +\
-                                    f"It is a {descript} because {self.give_reasons()}. OK?"}    
+                    if self.preferences["additional_preferences"][0] == "long" or \
+                    self.preferences["additional_preferences"][0] == "short" else \
+                    f"{self.preferences['additional_preferences'][0]} restaurant"
+                response = {"FRIENDLY": f"I think {self.restaurant_suggestion['restaurantname']} would be the perfect restaurant " +
+                            f"for you. It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant. "
+                            f"It is a {descript} because {self.give_reasons()}. Do you feel like going there?",
+                            "TERSE": f"I recommend {self.restaurant_suggestion['restaurantname']}. " +
+                            f"It is a {self.restaurant_suggestion['pricerange'] if self.preferences['pricerange'][0] != 'any' else '' } " +
+                            f"{self.restaurant_suggestion['food'] if self.preferences['food'][0] != 'any' else ''} restaurant in " +
+                            f"the {self.restaurant_suggestion['area']} of town.\n" +
+                            f"It is a {descript} because {self.give_reasons()}. OK?"}
             else:
-                response = {"FRIENDLY" : f"I think {self.restaurant_suggestion['restaurantname']} would be the perfect restaurant "+\
-                                        f"for you.It is a {self.preferences['pricerange'][0]} {self.preferences['food'][0]} restaurant" +\
-                                        f"in the {self.restaurant_suggestion['area']} of town,  Do you feel like to going there?",
-                            "TERSE" : f"I recommend {self.restaurant_suggestion['restaurantname']}. It is a " \
-                                    f"{self.preferences['pricerange'][0] if self.preferences['food'][0] != 'any' else '' } " \
-                                    f"{self.preferences['food'][0] if self.preferences['food'][0] != 'any' else ''} restaurant in the " \
-                                    f"{self.restaurant_suggestion['area']} of town. OK?"}
+                response = {"FRIENDLY": f"I think {self.restaurant_suggestion['restaurantname']} would be the perfect restaurant " +
+                            f"for you.It is a {self.preferences['pricerange'][0]} {self.preferences['food'][0]} restaurant" +
+                            f"in the {self.restaurant_suggestion['area']} of town,  Do you feel like to going there?",
+                            "TERSE": f"I recommend {self.restaurant_suggestion['restaurantname']}. It is a "
+                            f"{self.preferences['pricerange'][0] if self.preferences['food'][0] != 'any' else '' } "
+                            f"{self.preferences['food'][0] if self.preferences['food'][0] != 'any' else ''} restaurant in the "
+                            f"{self.restaurant_suggestion['area']} of town. OK?"}
         return response[FRIENDLINESS]
 
     def give_reasons(self):
@@ -232,7 +237,8 @@ class Dialog_system:
             n += 1
             if key == "length_of_stay":
                 if value == "long" and self.preferences["food"][0] == "spanish":
-                    reasons.append("spanish restaurants serve extensive dinners that take a long time to finish")
+                    reasons.append(
+                        "spanish restaurants serve extensive dinners that take a long time to finish")
                 else:
                     reasons.append(f"it allows for {value} stays")
             elif key == "crowdedness":
@@ -250,38 +256,42 @@ class Dialog_system:
         restaurant_options = self.restaurant_info.filter_info(self.preferences)
         if self.dialog_state.prev_state == "get_add_preferences":
             self.item = "additional_preferences"
-            additional_preferences = extract_meaning.extract_preferences(self.customer_input, self.item, TEXT2SPEECH, True)
+            additional_preferences = extract_meaning.extract_preferences(
+                self.customer_input, self.item, TEXT2SPEECH, True)
             if "additional_preferences" in additional_preferences:
                 self.preferences["additional_preferences"] = additional_preferences["additional_preferences"]
                 if self.preferences["additional_preferences"] == ["any"]:
                     self.dialog_state.add_pref = False
-                    self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
+                    self.dialog_state.update_state(
+                        self.dialog_act.dialog_act, self.missing_preferences)
                     response = self.create_response()
                 else:
                     self.dialog_state.add_pref = True
                     # based on additional_preferences get antecedents
                     antecedents = self.get_antecedents()
                     # filter restaurant info based on additional preferences
-                    self.antecedents = self.restaurant_info.filter_on_additional_info(antecedents, restaurant_options)
-                    self.dialog_state.update_state(self.dialog_act.dialog_act, self.missing_preferences)
+                    self.antecedents = self.restaurant_info.filter_on_additional_info(
+                        antecedents, restaurant_options)
+                    self.dialog_state.update_state(
+                        self.dialog_act.dialog_act, self.missing_preferences)
                     response = self.create_response()
             else:
-               response = {"FRIENDLY" : "Sorry I did not understand. Please enter any of the following preferences: " +\
-                                        "romantic, busy, children or long stay.",
-                           "TERSE" : "I don\'t understand. Choose from : romantic, busy, children or long stay."}[FRIENDLINESS]
-               self.dialog_state.add_pref = False
+                response = {"FRIENDLY": "Sorry I did not understand. Please enter any of the following preferences: " +
+                            "romantic, busy, children or long stay.",
+                            "TERSE": "I don\'t understand. Choose from : romantic, busy, children or long stay."}[FRIENDLINESS]
+                self.dialog_state.add_pref = False
 
         else:
 
-            response = {"FRIENDLY" : "Alright, is there any other preference you have for a restaurant? "+ \
-                                    " For instance, do you like some place romantic, busy, suitable for children," + \
-                                    "or do you prefer a place where you can stay a bit longer?",
-                        "TERSE" : "OK, any other requirements?  Choose from romantic, busy, suitable for children," + \
-                                  " and places where you can stay long."}[FRIENDLINESS]
+            response = {"FRIENDLY": "Alright, is there any other preference you have for a restaurant? " +
+                        " For instance, do you like some place romantic, busy, suitable for children," +
+                        "or do you prefer a place where you can stay a bit longer?",
+                        "TERSE": "OK, any other requirements?  Choose from romantic, busy, suitable for children," +
+                        " and places where you can stay long."}[FRIENDLINESS]
         return response
 
     def get_antecedents(self):
-        # TODO based on the additional preferences use the dictionary to map the preferences such as 'romantic' to a list of ordered antecedents
+        # based on the additional preferences use the dictionary to map the preferences such as 'romantic' to a list of ordered antecedents
         options = {"romantic":  [("crowdedness", "calm"), ("length_of_stay", "long"), ("food_quality", "good")],
                    "busy": [("food_quality", "good"), ("pricerange", "cheap"), ("length_of_stay", "long")],
                    "children": [("length_of_stay", "short")],
@@ -314,40 +324,39 @@ class Dialog_system:
         # give the information that the user desires of the suggested restaurant
         information_req = self.extract_asked_information(self.customer_input)
         if self.provided_info == [] and information_req == []:
-            information_req.append("address") 
-            response = {"FRIENDLY" : "Great! ", "TERSE": "OK. "}[FRIENDLINESS]
+            information_req.append("address")
+            response = {"FRIENDLY": "Great! ", "TERSE": "OK. "}[FRIENDLINESS]
         else:
             response = ""
         if "address" in information_req:
             if str(self.restaurant_suggestion["addr"]) == "nan":
-                response += {"FRIENDLY" : f"Sorry, we do not have a address registered for {self.restaurant_suggestion['restaurantname']}. ",
-                            "TERSE" : f"Address of {self.restaurant_suggestion['restaurantname']} unknown. "}[FRIENDLINESS]
+                response += {"FRIENDLY": f"Sorry, we do not have a address registered for {self.restaurant_suggestion['restaurantname']}. ",
+                             "TERSE": f"Address of {self.restaurant_suggestion['restaurantname']} unknown. "}[FRIENDLINESS]
             else:
                 response += f"The address is {self.restaurant_suggestion['addr']}. "
         if "phone_number" in information_req:
             if str(self.restaurant_suggestion['phone']) == "nan":
-                response += {"FRIENDLY" : f"Sorry, we do not have a phone number registered for {self.restaurant_suggestion['restaurantname']}. ",
-                             "TERSE" : f"Phone number of {self.restaurant_suggestion['restaurantname']} unknown. "}[FRIENDLINESS]
+                response += {"FRIENDLY": f"Sorry, we do not have a phone number registered for {self.restaurant_suggestion['restaurantname']}. ",
+                             "TERSE": f"Phone number of {self.restaurant_suggestion['restaurantname']} unknown. "}[FRIENDLINESS]
             else:
                 response += f"The phone number is {self.restaurant_suggestion['phone']}. "
         if "postcode" in information_req:
             if str(self.restaurant_suggestion['postcode']) == "nan":
-                response += {"FRIENDLY" : f"Sorry, we do not have a postal code registered for {self.restaurant_suggestion['restaurantname']}. ",
-                             "TERSE" : f"Postal code for {self.restaurant_suggestion['restaurantname']} unknown. "}[FRIENDLINESS]
+                response += {"FRIENDLY": f"Sorry, we do not have a postal code registered for {self.restaurant_suggestion['restaurantname']}. ",
+                             "TERSE": f"Postal code for {self.restaurant_suggestion['restaurantname']} unknown. "}[FRIENDLINESS]
             else:
                 response += f"The postal code is {self.restaurant_suggestion['postcode']}. "
         if information_req == [] or self.provided_info == []:
-            response += {"FRIENDLY" : "Would you like to know their phone number or the postcode? Or maybe both? ",
-                         "TERSE" : "Do you want to know their phone number, the postcode, or both? "}[FRIENDLINESS]
+            response += {"FRIENDLY": "Would you like to know their phone number or the postcode? Or maybe both? ",
+                         "TERSE": "Do you want to know their phone number, the postcode, or both? "}[FRIENDLINESS]
         for information in information_req:
             self.provided_info.append(information)
         return response
 
     def goodbye(self):
         # goodbye message
-        response = {"FRIENDLY" : "Enjoy your dinner. ", "TERSE" : "Bye."}
+        response = {"FRIENDLY": "Enjoy your dinner. ", "TERSE": "Bye."}
         return response[FRIENDLINESS]
-
 
 
 class Dialog_act:
@@ -363,7 +372,8 @@ class Dialog_act:
     def update_act(self, customer_input, classifier="logistic_regression"):
         # use imported model to predict dialog_act
         model = self.models[classifier]  # import model
-        affirm_words = ["ok", "okay", "oke", "sure", "yeah", "yes", "please", "yes please", "k", "yea"]
+        affirm_words = ["ok", "okay", "oke", "sure", "yeah",
+                        "yes", "please", "yes please", "k", "yea"]
         if customer_input.lower() in affirm_words:
             self.dialog_act = "affirm"
         else:
@@ -381,9 +391,10 @@ class Dialog_act:
             classifier = pickle.load(trained_model)
             trained_models["{}".format(model)] = classifier
             trained_model.close()
-        else:  
+        else:
             # all available models
-            trained_model_names = ["logistic_regression", "deep_tree", "shallow_tree"]
+            trained_model_names = [
+                "logistic_regression", "deep_tree", "shallow_tree"]
 
             # load all classifier models
             for trained_model_name in trained_model_names:
@@ -409,6 +420,7 @@ class Dialog_act:
         new_models = Models()
         new_models.logistic_regression()
         self.load_models()
+
 
 class Dialog_state:
 
@@ -441,7 +453,7 @@ class Dialog_state:
                 self.prev_state = "express_preferences"
 
         elif self.state == "get_add_preferences":
-            if act == "deny" or act == "negate" or (self.prev_state == "get_add_preferences" and self.add_pref==False):
+            if act == "deny" or act == "negate" or (self.prev_state == "get_add_preferences" and self.add_pref == False) or self.add_pref == True :
                 self.state = "suggest_restaurant"
             else:
                 self.state = "get_add_preferences"
@@ -465,6 +477,7 @@ class Dialog_state:
         elif self.state == "request_restaurant_information":
             if act == "thankyou" or act == "bye" or act == "deny" or act == "negate":
                 self.state = "goodbye"
+
 
 class RestaurantInfo:
 
@@ -504,19 +517,23 @@ class RestaurantInfo:
                 self.data.food.isin(food)) & (self.data.pricerange.isin(pricerange))]
 
         elif (area != ["any"]) & (food != ["any"]):
-            filtered_restaurant_info = self.data[(self.data.area.isin(area)) & (self.data.food.isin(food))]
+            filtered_restaurant_info = self.data[(
+                self.data.area.isin(area)) & (self.data.food.isin(food))]
 
         elif (area != ["any"]) & (pricerange != ["any"]):
-            filtered_restaurant_info = self.data[(self.data.area.isin(area)) & (self.data.pricerange.isin(pricerange))]
+            filtered_restaurant_info = self.data[(self.data.area.isin(
+                area)) & (self.data.pricerange.isin(pricerange))]
 
         elif (food != ["any"]) & (pricerange != ["any"]):
-            filtered_restaurant_info = self.data[(self.data.food.isin(food)) & (self.data.pricerange.isin(pricerange))]
+            filtered_restaurant_info = self.data[(self.data.food.isin(
+                food)) & (self.data.pricerange.isin(pricerange))]
 
         elif (area != ["any"]):
             filtered_restaurant_info = self.data[self.data.area.isin(area)]
 
         elif (pricerange != ["any"]):
-            filtered_restaurant_info = self.data[self.data.pricerange.isin(pricerange)]
+            filtered_restaurant_info = self.data[self.data.pricerange.isin(
+                pricerange)]
 
         elif (food != ["any"]):
             filtered_restaurant_info = self.data[self.data.food.isin(food)]
@@ -525,29 +542,27 @@ class RestaurantInfo:
         return filtered_restaurant_info
 
     def filter_on_additional_info(self, antecedents, restaurant_options):
-            # create general reasoning function
+        # create general reasoning function
 
-            # temp df used to update dataframe
-            temp_df = restaurant_options
+        # temp df used to update dataframe
+        temp_df = restaurant_options
 
-            for key,antecedent in antecedents:
-                # look for every key if it occurs in dataframe
-                filtererd_result = temp_df
-                temp_df = filtererd_result[filtererd_result[key] == antecedent]
-                # checks if restaurant no longer fulfills requirements
-                if temp_df.empty:
-                    self.filtered_restaurant_options  = filtererd_result
-                    return antecedents
-                
-            self.filtered_restaurant_options = temp_df
-            return antecedents
+        for key, antecedent in antecedents:
+            # look for every key if it occurs in dataframe
+            filtererd_result = temp_df
+            temp_df = filtererd_result[filtererd_result[key] == antecedent]
+            # checks if restaurant no longer fulfills requirements
+            if temp_df.empty:
+                self.filtered_restaurant_options = filtererd_result
+                return antecedents
+
+        self.filtered_restaurant_options = temp_df
+        return antecedents
 
     def restaurant_count(self, filter_preferences):
         # return the number of restaurants found
         return len(self.filter_info(filter_preferences))
 
-
-    
 
 if __name__ == "__main__":
     main()

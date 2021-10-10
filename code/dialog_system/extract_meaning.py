@@ -16,7 +16,7 @@ pref_keywords = {
     'pricerange' : [{'moderate': ['moderate', 'moderately']}, {'expensive': ['expensive', 'expensively']},
                     {'cheap': ['cheap', 'cheaply']}]}
 additional_pref_keywords = {
-    'additional_preferences': ['romantic', "busy", "children", "long", {"short":["fast"]}]}
+    'additional_preferences': ['romantic', "busy", "children", {"long":["longer", "extensive"]}, {"short":["fast"]}]}
 
 #this dictionary stores common textual patterns for different attributes in the following way:
 #('TEXT PATTERN', 'KEYWORD_POSITION') where TEXT PATTERN is the textual pattern (str) to be recognized and
@@ -28,7 +28,7 @@ pref_patterns = {
     'area' : [(r'[^\s]*[\s]part of town', 'part of town'), (r'[^\s]*[\s]area', 'area'), (r'in the[^\s]*[\s]', 'in the')],
     'pricerange': [(r'[^\s]*[\s]priced', 'priced'), (r'[^\s]*[\s]restaurant', 'restaurant'), (r'[^\s]*[\s]price', 'restaurant')]}
 additional_pref_patterns = {
-    'additional_preferences' : [(r'[^\s]*[\s]restaurant', 'restaurant'), (r'without[^\s]*[\s]', 'without'), (r'with[^\s]*[\s]', 'with') ]  
+    'additional_preferences' : [(r'[^\s]*[\s]restaurant', 'restaurant'), (r'without[^\s]*[\s]', 'without'), (r'with[^\s]*[\s]', 'with'), (r'bit[^\s]*[\s]', 'bit') ]  
 }
 
 #list of words that map to 'dontcare'
@@ -50,11 +50,9 @@ def extract_preferences(utterance, item, text2speech, additional_prefs = False):
 # if so, add the the preference to the preferences dictionary
 def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
     # map utterance to dontcare 
-    print(item)
     if item != "" :
         for word in dontcare_keywords:
             if word in utterance:
-                print(word, "in ", utterance)
                 preferences_dict[item] = ["any"]
                 return(preferences_dict)
     sent = utterance.split()
@@ -82,7 +80,6 @@ def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
         if len(attribute_matches) > 0:
             preferences_dict[attribute] = attribute_matches
     return(preferences_dict)
-
 #recognizes patterns in the text that belong to certain attributes, and compares whether the found potential keywords 
 #are similar to any known keywords
 def match_patterns(utterance, preferences_dict, additional_prefs=False):
