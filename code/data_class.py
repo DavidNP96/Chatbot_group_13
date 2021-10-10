@@ -6,6 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
 
+
 class Data:
     def __init__(self, filepath):
         self.FILE_PATH = filepath
