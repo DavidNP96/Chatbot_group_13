@@ -1,8 +1,9 @@
+# The file that is used to extract the meaning out of a user utterance
 from Levenshtein import distance
 import re
 import pyttsx3
 
-#this list stores keywords related to each category. Some keywords are stored as different variations (value) of the same keyword (key)
+# this list stores keywords related to each category. Some keywords are stored as different variations (value) of the same keyword (key)
 pref_keywords = {
     "food" : ["bistro", "mediterranean", "seafood", "fusion", "asian", "scottish", "chinese", "mexican", "european", "crossover", 
             "vietnamese", "greek", "english", "british", "thai", "corsica", "gastropub", "christmas", "indian", "turkish", "polynesian", 
@@ -18,7 +19,7 @@ pref_keywords = {
 additional_pref_keywords = {
     "additional_preferences": ["romantic", "busy", "children", {"long":["longer", "extensive", "stay long", "long"]}, {"short":["fast"]}]}
 
-#this dictionary stores common textual patterns for different attributes using regular expressions
+# this dictionary stores common textual patterns for different attributes using regular expressions
 pref_patterns = { 
     "food" : [(r"[^\s]*[\s]food", "food"), (r"[^\s]*[\s]restaurant","restaurant"), (r"[^\s]*[\s]food restautant", "food restaurant"), \
                 (r"[^\s]*[\s]cuisine", "cuisine"), (r"[^\s]*[\s]kitchen", "kitchen")],
@@ -29,13 +30,13 @@ additional_pref_patterns = {
     "additional_preferences" : [(r"[^\s]*[\s]restaurant", "restaurant"), (r"without[^\s]*[\s]", "without"), (r"with[^\s]*[\s]", "with"), (r"bit[^\s]*[\s]", "bit") ]  
 }
 
-#list of words that map to "dontcare"
+# list of words that map to "dontcare"
 dontcare_keywords = ["any", "anything", "don't", "care", "dont", "doesn't", "matter", "doesnt", "dont care", "don't care", "doesn't matter",
                      "doesnt matter"]
 
 engine = pyttsx3.init()
 
-#to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
+# to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
 def extract_preferences(utterance, item, text2speech, additional_prefs = False):
     global TEXT2SPEECH
     TEXT2SPEECH = text2speech
@@ -44,29 +45,29 @@ def extract_preferences(utterance, item, text2speech, additional_prefs = False):
     preferences_dict = match_patterns(utterance, preferences_dict, additional_prefs)
     return preferences_dict
 
-#go through the words in the given utterance, and compare if these words are relevant preference keywords
-#if so, add the the preference to the preferences dictionary
+# go through the words in the given utterance, and compare if these words are relevant preference keywords
+# if so, add the the preference to the preferences dictionary
 def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
     # map utterance to dontcare 
     
     sent = utterance.split()
 
-    #compare against appropriate set of keywords
+    # compare against appropriate set of keywords
     if additional_prefs:
         keywords = additional_pref_keywords
     else:
         keywords = pref_keywords
     for attribute, preference in keywords.items():
         attribute_matches = []
-        #if a keyword has multiple spelling variations, check if any of the variations is present in the text
-        #if so add the keyword to the preferences dictionary
+        # if a keyword has multiple spelling variations, check if any of the variations is present in the text
+        # if so add the keyword to the preferences dictionary
         for pref in preference:
             if type(pref) == dict:
                 for preference_variation in list(pref.values())[0]:
                     if preference_variation in sent:
                         attribute_matches.append(list(pref.keys())[0])
                         sent.remove(preference_variation)
-            #check if keyword is expressed in the sentence, if so add preference to preferences dictionary
+            # check if keyword is expressed in the sentence, if so add preference to preferences dictionary
             else:
                 if pref in sent:
                     attribute_matches.append(pref)
@@ -78,16 +79,16 @@ def match_keywords(utterance, preferences_dict, item, additional_prefs=False):
             if word in utterance:
                 preferences_dict[item] = ["any"]
     return(preferences_dict)
-#recognizes patterns in the text that belong to certain attributes, and compares whether the found potential keywords 
-#are similar to any known keywords
+# recognizes patterns in the text that belong to certain attributes, and compares whether the found potential keywords 
+# are similar to any known keywords
 def match_patterns(utterance, preferences_dict, additional_prefs=False):
-    #take appropriate set of patterns
+    # take appropriate set of patterns
     if additional_prefs:
         patterns = additional_pref_patterns
     else:
         patterns = pref_patterns
     for attribute, patterns in patterns.items():
-        #check the patterns for all attributes that are not yet known
+        # check the patterns for all attributes that are not yet known
         if attribute in preferences_dict:
             continue
         for pattern, keyword in patterns:
@@ -100,10 +101,10 @@ def match_patterns(utterance, preferences_dict, additional_prefs=False):
     return preferences_dict
 
 def match_keyword(potential_keyword, preferences_dict, attribute, additional_prefs=False):
-    #check if potential keyword expresses there is no preference
+    # check if potential keyword expresses there is no preference
     if potential_keyword in dontcare_keywords and attribute not in preferences_dict:
         preferences_dict[attribute] = ["any"]
-    #compare whether potential keyword is similar to any known keywords belonging to given attribute
+    # compare whether potential keyword is similar to any known keywords belonging to given attribute
     else:
         closest_word = find_similar_word(potential_keyword, attribute, additional_prefs)
         if closest_word != None:
@@ -123,45 +124,46 @@ def match_keyword(potential_keyword, preferences_dict, attribute, additional_pre
             if check_correction == "yes" or check_correction == "y":
                 preferences_dict[attribute] = [closest_word]
 
-#this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
+# this function returns the most similar keyword for the relevant attribute for a given potential keyword if there is one
 def find_similar_word(potential_keyword, attribute, additional_prefs =False):
     distance_dict = {}
+    # determine the threshold for the levenshtein distance based on the length of the potential keyword
     if len(potential_keyword) > 8:
         threshold = 4
     elif len(potential_keyword) > 5:
         threshold = 3
     else:
         threshold = 2
-    #take appropriate set of keywords
+    # take appropriate set of keywords
     if additional_prefs:
         keywords = additional_pref_keywords
     else:
         keywords = pref_keywords
-    #go through keywords belonging to relevant attribute
+    # go through keywords belonging to relevant attribute
     for word in keywords[attribute]:
-        #if keyword has multiple spelling variations, go through all of them
+        # if keyword has multiple spelling variations, go through all of them
         if type(word) == dict:
             keyword = list(word.keys())[0]
             for word_variantion in list(word.values())[0]:
-                #calculate distance for each variation
+                # calculate distance for each variation
                 levenshtein_dist = distance(potential_keyword, word_variantion)
                 if levenshtein_dist < threshold:
-                    #if another spelling variation of the same keyword was already saved, check if this variation has a lower score
+                    # if another spelling variation of the same keyword was already saved, check if this variation has a lower score
                     if keyword in distance_dict:
                         if levenshtein_dist < distance_dict[keyword]:
                             distance_dict[keyword] = levenshtein_dist
-                    #otherwise, save the score of this variation
+                    # otherwise, save the score of this variation
                     else:
                         distance_dict[keyword] = levenshtein_dist
         else:
-            #compare distance between keyword and potential keyword
+            # compare distance between keyword and potential keyword
             levenshtein_dist = distance(potential_keyword, word)
-            #if distance is smaller than 3, save the score
+            # if distance is smaller than 3, save the score
             if levenshtein_dist < threshold:
                 distance_dict[word] = levenshtein_dist
-    #if multiple similar words are found, return the one with the lowest distance score
+    # if multiple similar words are found, return the one with the lowest distance score
     if len(distance_dict.keys()) > 0:
         return min(distance_dict, key=distance_dict.get)
-    #if no similar words are found, return None
+    # if no similar words are found, return None
     else:
         return None

@@ -25,7 +25,7 @@ FRIENDLINESS = "TERSE"
 
 
 def main():
-    # Interface for the dialog system
+    # interface for the dialog system
     match = False
 
     ds = Dialog_system()
@@ -42,7 +42,7 @@ def main():
         engine.say(welcome_message[FRIENDLINESS])
         engine.runAndWait()
     print(welcome_message[FRIENDLINESS])
-
+    
     while match == False:
         customer_input = input("").lower()
         if customer_input == "restart dialog":
@@ -89,7 +89,8 @@ class Dialog_system:
             self.dialog_act.dialog_act, self.missing_preferences)
         # create reponse based on updated dialog_state
         response = self.create_response()
-
+        
+        # the conversation only ends when the goodbye state has been reached 
         match = False
         if self.dialog_state.state == "goodbye":
             match = True
@@ -122,7 +123,8 @@ class Dialog_system:
             if value == []:
                 self.missing_preferences.append(key)
 
-        # still missing preferences
+        # if there are missing preferences, ask for them
+        # otherwise go to next state
         if len(self.missing_preferences) > 0:
             # use singular of restaurant when we have 1 restaurant
             if self.restaurant_info.restaurant_count(self.preferences) == 1:
@@ -259,7 +261,7 @@ class Dialog_system:
         return reason
 
     def get_additional_information(self):
-        #  get restaurant info based on preferences
+        # get restaurant info based on additional preferences
         restaurant_options = self.restaurant_info.filter_info(self.preferences)
         if self.dialog_state.prev_state == "get_add_preferences":
             self.item = "additional_preferences"
@@ -287,9 +289,7 @@ class Dialog_system:
                             "romantic, busy, children or long stay.",
                             "TERSE": "I don\'t understand. Choose from : romantic, busy, children or long stay."}[FRIENDLINESS]
                 self.dialog_state.add_pref = False
-
         else:
-
             response = {"FRIENDLY": "Alright, is there any other preference you have for a restaurant? " +
                         " For instance, do you like some place romantic, busy, suitable for children," +
                         "or do you prefer a place where you can stay a bit longer?",
@@ -308,6 +308,7 @@ class Dialog_system:
         antecedents = options[preference]
         self.all_antecedents = antecedents 
         return antecedents
+    
     def update_antecedents(self):
         # check for next restaurant option which is viable
         new_antecedents = []
@@ -436,7 +437,8 @@ class Dialog_act:
         bow = self.tfidf_transformer.transform(
             self.count_vect.transform([customer_input]))
         return bow
-
+    
+    # retrain the model
     def retrain_model(self):
         new_models = Models()
         new_models.logistic_regression()

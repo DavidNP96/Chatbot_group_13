@@ -1,3 +1,4 @@
+# The file that is used to show how well different models perform
 from models import Models
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
@@ -14,12 +15,12 @@ sns.set_style("darkgrid")
 test_data = ["hey", "how", "are", "you"]
 plot_file = "../plots/"
 
-#all models
+# all models
 model_names = ["inform_baseline", "key_word_matching", "logistic_regression", "shallow_random_forest", "deep_random_forest", "all"]
 
 models = Models()
 
-#given predicted labels and true labels, print accuracy, macro- F1, recall and precision
+# given predicted labels and true labels, print accuracy, macro- F1, recall and precision
 def get_metrics(y_pred, y_true, model_name):
     print('accuracy score : ', round(accuracy_score(y_true, y_pred), 4))
     print('macro-f1 score : ', round(f1_score(y_true, y_pred, average='macro'), 4))
@@ -42,24 +43,24 @@ def create_confusion_matrix(label_id_df, y_true, y_pred, file_name):
     plt.gcf().subplots_adjust(bottom=0.15)
     plt.savefig(plot_file + file_name)
 
-#get input of user: which models to load
+# get input of user: which models to load
 requested_model_name = input("choose one of the following models: 'inform_baseline', 'key_word_matching', 'logistic_regression', "\
         "'shallow_random_forest', 'deep_random_forest' or 'all': ")
 
-#check if input is an existing model
+# check if input is an existing model
 while requested_model_name not in model_names:
     requested_model_name = input(
         "wrong model name! choose one of the following models: 'inform_baseline', 'key_word_matching', \
             'logistic_regression', 'shallow_random_forest', 'deep_random_forest' or 'all': ")
 
-#create dictionary with model names as keys and their predictions as values
+# create dictionary with model names as keys and their predictions as values
 all_models = {"inform_baseline": models.inform_baseline(),
             "key_word_matching": models.keyword_matcher(),
             "logistic_regression": models.logistic_regression(),
             "shallow_random_forest": models.random_forest(max_depth=3),
             "deep_random_forest": models.random_forest(max_depth=20)}
 
-#get y_test labels
+# get y_test labels
 y_test = models.data.test_labels
 
 # if all models are requested: print performance scores for all models;

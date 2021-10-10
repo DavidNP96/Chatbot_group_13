@@ -37,7 +37,7 @@ class Models:
         ### classify sentence based on keywords found in sentence
         labels = ['inform', 'request', 'thankyou', 'reqalts', 'null', 'affirm', 'bye',
                 'confirm', 'hello', 'negate', 'deny', 'repeat', 'ack', 'restart', 'reqmore']
-        #dictionary with the labels as keys, and their matching keywords as values in a list
+        # dictionary with the labels as keys, and their matching keywords as values in a list
         keywords = {"inform": ["know", "food", "restaurant", "town", "part"],
                     "request": ["number", "phone", "address", "whats", "code", "post"],
                     "thankyou": ["thanks", "appreciate", "thank"], 
@@ -59,7 +59,7 @@ class Models:
             labels_counter = Counter()
 
             for word in sentence.split(' '):
-
+                # count number of keyword occurrences
                 for label, keyword in keywords.items():
                     if word in keyword:
                         labels_counter[label] += 1
@@ -86,11 +86,11 @@ class Models:
         return y_pred
 
     def logistic_regression(self):
-        #load train/test text and labels. Transform text to Bag-of-Words representation
+        # load train/test text and labels. Transform text to Bag-of-Words representation
         y_train = self.data.train_labels
         y_test = self.data.test_labels
 
-        #train logistic model on train data, make predictions on test data
+        # train logistic model on train data, make predictions on test data
         logistic_model = LogisticRegression(multi_class='multinomial').fit(self.X_train, y_train)
         y_pred = logistic_model.predict(self.X_test)
         # save model
@@ -99,13 +99,13 @@ class Models:
         f.close()
         return y_pred
 
-    #train random forest with a given max depth
+    # train random forest with a given max depth
     def random_forest(self, max_depth):
         y_train = self.data.train_labels
         y_test = self.data.test_labels
         
 
-        #train random forest
+        # train random forest
         random_forest_model = RandomForestClassifier(
             max_depth=max_depth).fit(self.X_train, y_train)
         #get predictions for the test set
