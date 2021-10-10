@@ -114,7 +114,6 @@ class Dialog_system:
     def update_preferences(self):
         # this function updates the preferences according to the user's input
         confirmation = self.extract_preferences()
-        print(self.preferences)
         self.missing_preferences = []
 
         # check for missing preferences
@@ -204,7 +203,8 @@ class Dialog_system:
                 self.dialog_act.dialog_act, self.missing_preferences)
         else:
             self.restaurant_suggestion = restaurant_options.iloc[self.count_options]
-            self.update_antecedents()
+            if self.dialog_state.add_pref == True:
+                self.update_antecedents()
             # check for additional preferences
             if "additional_preferences" in self.preferences and self.preferences["additional_preferences"] != ["any"]:
 
@@ -234,7 +234,6 @@ class Dialog_system:
         # return the reason for the choice of restaurant.
         n = 0
         reasons = []
-        print(self.antecedents)
         for key, value in self.antecedents:
             n += 1
             if key == "length_of_stay":
@@ -451,7 +450,6 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
-        print(act)
         # update the current state with the previous state and the dialog act of the user input
         if act == "bye":
             self.state = "goodbye"
@@ -583,7 +581,7 @@ class RestaurantInfo:
                 for dataframe in dfs:
                     dataframe.columns = list(restaurant_options.columns)
 
-                self.filtered_restaurant_options = pd.concat(dfs).reset_index(drop=True)
+                self.filtered_restaurant_options = pd.concat(dfs).reset_index(drop=True).drop_duplicates()
                 print("self.filtered_restaurant_options", self.filtered_restaurant_options)
                 # self.filtered_restaurant_options = filtererd_result
                 new_antecedents.pop()
@@ -596,8 +594,7 @@ class RestaurantInfo:
         for dataframe in dfs:
             dataframe.columns = list(restaurant_options.columns)
 
-        self.filtered_restaurant_options = pd.concat(dfs).reset_index(drop=True)
-        print("self.filtered_restaurant_options", self.filtered_restaurant_options)
+        self.filtered_restaurant_options = pd.concat(dfs).reset_index(drop=True).drop_duplicates()
         self.filtered_restaurant_options = temp_df
         return new_antecedents
 
