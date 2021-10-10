@@ -114,6 +114,7 @@ class Dialog_system:
     def update_preferences(self):
         # this function updates the preferences according to the user's input
         confirmation = self.extract_preferences()
+        print(self.preferences)
         self.missing_preferences = []
 
         # check for missing preferences
@@ -168,10 +169,18 @@ class Dialog_system:
 
     def refresh_preferences(self):
         # reset the user preference when the dialog restarts or when no restaurant has been found
+        self.dialog_state = Dialog_state()
+        self.dialog_act = Dialog_act()
+        self.restaurant_info = RestaurantInfo()
         self.preferences = {"area": [],
                             "food": [],
                             "pricerange": []}
         self.missing_preferences = ["area", "food", "pricerange"]
+        self.restaurant_suggestion = None
+        self.provided_info = []
+        self.item = ""
+        self.count_options = 0
+        self.antecedents = []
         self.filtered_restaurant_options = []
 
     def hello(self):
@@ -186,8 +195,7 @@ class Dialog_system:
         if self.dialog_state.add_pref == True:
             restaurant_options = self.restaurant_info.filtered_restaurant_options
         else:
-            restaurant_options = self.restaurant_info.filter_info(
-                self.preferences)
+            restaurant_options = self.restaurant_info.filter_info(self.preferences)
         # get next restaurant option if user declines the restaurant suggestion
         if self.dialog_state.prev_state == "suggest_restaurant":
             self.count_options += 1
