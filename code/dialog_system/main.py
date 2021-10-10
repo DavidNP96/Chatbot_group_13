@@ -21,7 +21,7 @@ DATAPATH = "../../data/"
 # SETTINGS:
 TEXT2SPEECH = False
 # friendliness settings: choose between "FRIENDLY" and "TERSE"
-FRIENDLINESS = "FRIENDLY"
+FRIENDLINESS = "TERSE"
 
 
 def main():
@@ -114,7 +114,7 @@ class Dialog_system:
     def update_preferences(self):
         # this function updates the preferences according to the user's input
         confirmation = self.extract_preferences()
-
+        print(self.preferences)
         self.missing_preferences = []
 
         # check for missing preferences
@@ -196,7 +196,7 @@ class Dialog_system:
             self.count_options = 0
         if len(restaurant_options) == 0 or self.count_options >= len(restaurant_options):
             response = {"FRIENDLY": "Unfortunately I cannot find any restaurant that matches your whishes! What else " +
-                        "you would like to eat?",
+                        "would you like to eat?",
                         "TERSE": "No matches. Restarting dialog. What else do you want to eat?"}
             self.count_options = 0
             self.refresh_preferences()
@@ -222,11 +222,11 @@ class Dialog_system:
                             f"It is a {descript} because {self.give_reasons()}. OK?"}
             else:
                 response = {"FRIENDLY": f"I think {self.restaurant_suggestion['restaurantname']} would be the perfect restaurant " +
-                            f"for you.It is a {self.preferences['pricerange'][0]} {self.preferences['food'][0]} restaurant" +
+                            f"for you.It is a {self.restaurant_suggestion['pricerange']} {self.restaurant_suggestion['food']} restaurant" +
                             f"in the {self.restaurant_suggestion['area']} of town,  Do you feel like to going there?",
                             "TERSE": f"I recommend {self.restaurant_suggestion['restaurantname']}. It is a "
-                            f"{self.preferences['pricerange'][0] if self.preferences['food'][0] != 'any' else '' } "
-                            f"{self.preferences['food'][0] if self.preferences['food'][0] != 'any' else ''} restaurant in the "
+                            f"{self.restaurant_suggestion['pricerange'] if self.preferences['food'][0] != 'any' else '' } "
+                            f"{self.restaurant_suggestion['food'] if self.preferences['food'][0] != 'any' else ''} restaurant in the "
                             f"{self.restaurant_suggestion['area']} of town. OK?"}
         return response[FRIENDLINESS]
 
@@ -234,6 +234,7 @@ class Dialog_system:
         # return the reason for the choice of restaurant.
         n = 0
         reasons = []
+        print(self.antecedents)
         for key, value in self.antecedents:
             n += 1
             if key == "length_of_stay":
@@ -386,8 +387,11 @@ class Dialog_act:
         model = self.models[classifier]  # import model
         affirm_words = ["ok", "okay", "oke", "sure", "yeah",
                         "yes", "please", "yes please", "k", "yea"]
+        thankyou_words = ["thanks"]
         if customer_input.lower() in affirm_words:
             self.dialog_act = "affirm"
+        elif customer_input.lower() in thankyou_words:
+            self.dialog_act = "thankyou"
         else:
             self.dialog_act = model.predict(self.create_bow(customer_input))[0]
 
@@ -447,6 +451,7 @@ class Dialog_state:
         self.info[request[0]] = request[1]
 
     def update_state(self, act, missing_preferences=[]):
+        print(act)
         # update the current state with the previous state and the dialog act of the user input
         if act == "bye":
             self.state = "goodbye"
