@@ -19,7 +19,7 @@ TRAINED_MODELS_FP = "../../trained_models/"
 DATAPATH = "../../data/"
 
 # SETTINGS:
-TEXT2SPEECH = False
+TEXT2SPEECH = True
 # friendliness settings: choose between "FRIENDLY" and "TERSE"
 FRIENDLINESS = "TERSE"
 
@@ -196,7 +196,7 @@ class Dialog_system:
             self.count_options = 0
         if len(restaurant_options) == 0 or self.count_options >= len(restaurant_options):
             response = {"FRIENDLY": "Unfortunately I cannot find any restaurant that matches your whishes! What else " +
-                        "you would like to eat?",
+                        "would you like to eat?",
                         "TERSE": "No matches. Restarting dialog. What else do you want to eat?"}
             self.count_options = 0
             self.refresh_preferences()
