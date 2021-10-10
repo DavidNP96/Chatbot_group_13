@@ -478,10 +478,11 @@ class Dialog_state:
             self.prev_state = "get_add_preferences"
 
         elif self.state == "suggest_restaurant":
+
             if len(missing_preferences) > 0:
                 self.state = "express_preferences"
                 self.prev_state = "suggest_restaurant"
-            if act == "affirm":
+            elif act == "affirm":
                 self.state = "request_restaurant_information"
                 self.prev_state = "suggest_restaurant"
             elif act == "deny" or act == "negate" or act == "reqalts" or act == "reqmore":
@@ -582,7 +583,6 @@ class RestaurantInfo:
                     dataframe.columns = list(restaurant_options.columns)
 
                 self.filtered_restaurant_options = pd.concat(dfs).reset_index(drop=True).drop_duplicates()
-                print("self.filtered_restaurant_options", self.filtered_restaurant_options)
                 # self.filtered_restaurant_options = filtererd_result
                 new_antecedents.pop()
                 # found a restauratn that fullfills minimal requirements
