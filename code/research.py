@@ -19,6 +19,9 @@ def research():
     friendliness = ["TERSE", "FRIENDLY"]
     paricipant_number = input('Enter your participant number:')
     start = time.time()
+    # reverse order of freindliness if partivcipant numebr is even
+    if int(paricipant_number) % 2 == 0:
+        friendliness.reverse()
 
     #  lof = level off friendliness
     for lof in friendliness:
