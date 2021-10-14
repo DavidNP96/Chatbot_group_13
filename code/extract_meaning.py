@@ -1,7 +1,7 @@
 # The file that is used to extract the meaning out of a user utterance
 from Levenshtein import distance
 import re
-import pyttsx3
+# import pyttsx3
 
 # this list stores keywords related to each category. Some keywords are stored as different variations (value) of the same keyword (key)
 pref_keywords = {
@@ -34,7 +34,7 @@ additional_pref_patterns = {
 dontcare_keywords = ["any", "anything", "don't", "care", "dont", "doesn't", "matter", "doesnt", "dont care", "don't care", "doesn't matter",
                      "doesnt matter"]
 
-engine = pyttsx3.init()
+# engine = pyttsx3.init()
 
 # to extract preferences from an utterance, we first try to recognize keywords, and next we recognize patterns
 def extract_preferences(utterance, item, text2speech, additional_prefs = False):
