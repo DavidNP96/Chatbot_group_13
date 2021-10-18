@@ -1,0 +1,20 @@
+You want to find an expensive priced Chinese restaurant located in the south of the city. Make sure you get the address of the restaurant.
+You want to find an expensive priced European restaurant located in the center of the city. Make sure you get the phone number of the restaurant.
+You want to find a Swiss restaurant in the center of the city. Make sure you get all contact details of the restaurant (adress, postal code and phone number).
+You want to find an Indian restaurant in the north of the city. 
+You want to find a Spanish restaurant where you can stay for a while.
+You want to find a expensive Japanese restaurant where you can stay long.
+You are in the center of the city, and you are starving. You cannot travel far, and you are craving Lebanese food. Try to find a restaurant.
+You are looking for cheap gastropub food. If you cannot find any, try different price ranges.
+Find an expensive Mediterranean restaurant. Make sure you get the phone number.
+Find a busy Thai restaurant. Make sure you get all their contact information.
+Find an expensive Indian restaurant where you can stay long.
+You are craving a cheap traditional meal. Find a suitable restaurant.
+You watched Squid Game and are now craving Korean food. Find a Korean restaurant in your city. Make sure you get the postal code.
+You remember a coworker being ecstatic about Tuscan food, but you can’t remember where the restaurant is located. You only remember the restaurant being busy and expensive.
+It is your brother his birthday! You are looking for a moderately priced Moroccan restaurant where you can stay for a while.
+Find a romantic restaurant.
+Find a restaurant that is suitable for children.
+Find a moderately priced European restaurant in the south of the city. If none are available, try the center of the city.
+Find an expensively priced Persian restaurant in the west of the city. If none are available, try the north of the city.
+You are craving seafood and want to enjoy it for a while. Find a restaurant that serves seafood and where you can stay long.
