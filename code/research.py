@@ -56,7 +56,8 @@ def research():
             # add data to dataframe
             data["dialog number"] = [round + 1]
             data["friendliness"] = [lof]
-            data["task"] =[task]
+            #substring = task[:-2]
+            data["task"] = task[:-2]
             data["time in seconds"] = [total_time]
             data["number of turns"] = [number_of_turns]
             
@@ -76,7 +77,7 @@ def research():
             print(f"\nThank you for completing this round! please fill in this short survery by holding 'CTRL' and click on the following link https://docs.google.com/forms/d/e/1FAIpQLSctlXF1v_ZF1g6yJigmx4aJM0Q1vfc3mOP1BSERisyS2Wu6aQ/viewform \n your participant number is: {paricipant_number}")
             print("After filling in the survey you are done! Thank you very much for helping us!")
     # save data and dialogs
-    df.to_csv("../data/participants.csv", mode="a", header=False)
+    df.to_csv("../data/participants.csv", mode="a", header=False, index=False)
     file = open("../data/dialogs.txt", "a")
     for dia in dialogs:
         file.writelines(dia)
