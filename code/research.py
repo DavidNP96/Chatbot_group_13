@@ -11,7 +11,6 @@ def research():
     possible_tasks = []
     # column_names = ["participant number", "dialog number","friendliness","task", "time in seconds", "number of turns"]
     df = pd.read_csv("../data/participants.csv")
-    print(df)
     for line in tasks:
         possible_tasks.append(line)
 
