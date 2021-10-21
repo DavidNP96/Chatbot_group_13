@@ -47,7 +47,7 @@ def main(FRIENDLINESS):
         customer_input = input("").lower()
         dialogs.append(f"\n(user): {customer_input}")
         if customer_input == "restart dialog":
-            ds = Dialog_system()
+            ds = Dialog_system(FRIENDLINESS)
             if TEXT2SPEECH:
                 engine.say(welcome_message[FRIENDLINESS])
                 engine.runAndWait()
