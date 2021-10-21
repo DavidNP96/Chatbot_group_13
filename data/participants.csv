@@ -1,1 +1,20 @@
-participant number,dialog number,friendliness,task,time in seconds,number of turns
+participant number,dialog number,friendliness,task,time in seconds,number of turns0,21,1,TERSE,"Find a restaurant that is suitable for children.
+",15.857982873916626,7
+1,21,2,TERSE,"You want to find an Indian restaurant in the north of the city. 
+",15.108087062835693,7
+2,21,3,TERSE,"You are craving a cheap traditional meal. Find a suitable restaurant.
+",17.72743797302246,6
+3,21,4,TERSE,"You are in the center of the city, and you are starving. You cannot travel far, and you are craving Lebanese food. Try to find a restaurant.
+",17.320630311965942,6
+4,21,5,TERSE,"Find an expensive Indian restaurant where you can stay long.
+",14.885328769683838,6
+5,21,1,FRIENDLY,"It is your brother his birthday! You are looking for a moderately priced Moroccan restaurant where you can stay for a while.
+",93.38914966583252,7
+6,21,2,FRIENDLY,"Find a romantic restaurant.
+",42.07330656051636,7
+7,21,3,FRIENDLY,"Find an expensively priced Persian restaurant in the west of the city. If none are available, try the north of the city.
+",154.2998559474945,14
+8,21,4,FRIENDLY,"You want to find a Spanish restaurant where you can stay for a while.
+",41.69923496246338,6
+9,21,5,FRIENDLY,"You want to find an expensive priced Chinese restaurant located in the south of the city. Make sure you get the address of the restaurant.
+",54.131165981292725,8
