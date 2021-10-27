@@ -38,3 +38,23 @@ participant number,dialog number,friendliness,task,time in seconds,number of tur
 23,3,FRIENDLY,You want to find a Spanish restaurant where you can stay for a while,38.75810480117798,,,,,,,,9.0
 23,4,FRIENDLY,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",60.74300837516785,,,,,,,,12.0
 23,5,FRIENDLY,"You want to find a Swiss restaurant in the center of the city. Make sure you get all contact details of the restaurant (adress, postal code and phone number)",29.398428201675415,,,,,,,,8.0
+34,1,FRIENDLY,"You remember a coworker being ecstatic about Tuscan food, but you canâ€™t remember where the restaurant is located. You only remember the restaurant being busy and expensive",196.57762551307678,,,,,,,,10.0
+34,2,FRIENDLY,"Find a moderately priced European restaurant in the south of the city. If none are available, try the center of the city",111.0872414112091,,,,,,,,8.0
+34,3,FRIENDLY,Find a restaurant that is suitable for children,98.50083875656128,,,,,,,,10.0
+34,4,FRIENDLY,It is your brother his birthday! You are looking for a moderately priced Moroccan restaurant where you can stay for a while,60.334394693374634,,,,,,,,8.0
+34,5,FRIENDLY,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",138.9037787914276,,,,,,,,17.0
+34,1,TERSE,"Find an cheaply priced Persian restaurant in the west of the city. If none are available, try the north of the city",60.971874475479126,,,,,,,,9.0
+34,2,TERSE,You want to find an expensive priced Chinese restaurant located in the south of the city. Make sure you get the address of the restaurant,96.3392481803894,,,,,,,,9.0
+34,3,TERSE,You watched Squid Game and are now craving Korean food. Find a Korean restaurant in your city. Make sure you get the postal code,92.80796217918396,,,,,,,,9.0
+34,4,TERSE,You want to find an Indian restaurant in the north of the city.,29.294894695281982,,,,,,,,8.0
+34,5,TERSE,Find an expensive Mediterranean restaurant. Make sure you get the phone number,51.53811860084534,,,,,,,,7.0
+35,1,TERSE,It is your brother his birthday! You are looking for a moderately priced Moroccan restaurant where you can stay for a while,244.87066173553467,,,,,,,,10.0
+35,2,TERSE,You watched Squid Game and are now craving Korean food. Find a Korean restaurant in your city. Make sure you get the postal code,90.19666266441345,,,,,,,,8.0
+35,3,TERSE,You want to find an expensive priced Chinese restaurant located in the south of the city. Make sure you get the address of the restaurant,94.35874319076538,,,,,,,,12.0
+35,4,TERSE,You want to find a expensive Japanese restaurant where you can stay long,55.75572657585144,,,,,,,,9.0
+35,5,TERSE,Find a restaurant that is suitable for children,61.73869848251343,,,,,,,,9.0
+35,1,FRIENDLY,Find an expensive Indian restaurant where you can stay long,148.91799473762512,,,,,,,,9.0
+35,2,FRIENDLY,You want to find an expensive priced European restaurant located in the center of the city. Make sure you get the phone number of the restaurant,55.5541512966156,,,,,,,,5.0
+35,3,FRIENDLY,You want to find an Indian restaurant in the north of the city.,35.52843403816223,,,,,,,,4.0
+35,4,FRIENDLY,"You want to find a Swiss restaurant in the center of the city. Make sure you get all contact details of the restaurant (adress, postal code and phone number)",133.60219073295593,,,,,,,,9.0
+35,5,FRIENDLY,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",108.29466009140015,,,,,,,,12.0
