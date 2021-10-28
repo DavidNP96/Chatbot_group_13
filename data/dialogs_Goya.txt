@@ -1,0 +1,1589 @@
+---
+ participant : 11 dialog: 0 in setting: TERSE
+(user): can you find me a swiss restaurant in the center of the city?
+(system): 1 restaurant matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): none
+(system): I don't understand. Choose from : romantic, busy, children or long stay.
+(user): no
+(system): I recommend efes restaurant. It is a moderate swiss restaurant in the centre of town. OK?
+(user): yes
+(system): OK. The address is king street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both please
+(system): The phone number is 01223 500005. The postal code is c.b 1. 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): both 
+(system): The phone number is 01223 500005. The postal code is c.b 1. 
+(user): okay
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 500005. The postal code is c.b 1. 
+(user): thank you
+(system): Bye.---
+ participant : 11 dialog: 1 in setting: TERSE
+(user): can you find me an expensive mediterranean restaurant?
+(system): 3 restaurants matches.  What area?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend shiraz restaurant. It is a expensive mediterranean restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is 84 regent street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): phone number please
+(system): The phone number is 01223 307581. 
+(user): great thanks
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): phone number!
+(system): The phone number is 01223 307581. 
+(user): yes
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): phone number
+(system): The phone number is 01223 307581. 
+(user): okay thanks
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): phone number
+(system): The phone number is 01223 307581. 
+(user): thanks
+(system): Bye.---
+ participant : 11 dialog: 2 in setting: TERSE
+(user): can you find me a seafood restaurant
+(system): 3 restaurants matches.  What area?
+(user): any
+(system): 3 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): i want to stay long
+(system): I recommend curry king. It is a expensive seafood restaurant in the centre of town.
+It is a restaurant where you can stay long because it allows for long stays and the food is good and it is usually nice and calm. OK?
+(user): ok
+(system): OK. The address is 5 jordans yard bridge street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): no thanks
+(system): Bye.---
+ participant : 11 dialog: 3 in setting: TERSE
+(user): i would like a cheap traditional meal
+(system): 1 restaurant matches.  What area?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend da vinci pizzeria. It is a cheap traditional restaurant in the north of town. OK?
+(user): ok
+(system): OK. The address is 20 milton road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): thanks
+(system): Bye.---
+ participant : 11 dialog: 4 in setting: TERSE
+(user): i would like to eat in an expensive chinese resataurant
+(system): 4 restaurants matches.  What area?
+(user): south of the city please
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend peking restaurant. It is a expensive chinese restaurant in the south of town. OK?
+(user): ok
+(system): OK. The address is 10 homerton street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): thanks
+(system): Bye.---
+ participant : 11 dialog: 0 in setting: FRIENDLY
+(user): i would like to find an expensive indian restaurant
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  In what area would you like to eat?
+(user): doesn't matter for  me
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i would like to stay a little longer
+(system): I think pipasha restaurant would be the perfect restaurant for you. It is a expensive indian restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good. Do you feel like going there?
+(user): yea
+(system): Great! The address is newmarket road fen ditton. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no thanks
+(system): Enjoy your dinner. ---
+ participant : 11 dialog: 1 in setting: FRIENDLY
+(user): i would like some korean food
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): doesnt matter
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any, i am starving 
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): nope
+(system): Sorry I did not understand. Please enter any of the following preferences: romantic, busy, children or long stay.
+(user): no 
+(system): I think stazione restaurant and coffee bar would be the perfect restaurant for you.It is a expensive korean restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is market hill city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): postcode please
+(system): Sorry, we do not have a postal code registered for stazione restaurant and coffee bar. 
+(user): well oaky
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no thanks
+(system): Enjoy your dinner. ---
+ participant : 11 dialog: 2 in setting: FRIENDLY
+(user): i would like some japanese food
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): no preference
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): doesnt matter
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i want to stay longer
+(system): I think wagamama would be the perfect restaurant for you. It is a expensive japanese restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good. Do you feel like going there?
+(user): yes
+(system): Great! The address is 36 saint andrews street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 11 dialog: 3 in setting: FRIENDLY
+(user): i would like some thai food
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): doesnt matter
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): doesnt matter
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i would like it to be busy
+(system): I think bangkok city would be the perfect restaurant for you. It is a expensive thai restaurant. It is a busy restaurant because the food is good and it allows for long stays. Do you feel like going there?
+(user): yes
+(system): Great! The address is 24 green street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no thanks
+(system): Enjoy your dinner. ---
+ participant : 11 dialog: 4 in setting: FRIENDLY
+(user): hi, i would like some gastropub food
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): doesnt matter
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap please
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): nope
+(system): Sorry I did not understand. Please enter any of the following preferences: romantic, busy, children or long stay.
+(user): no
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): maybe some expensive gastropub food
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  In what area would you like to eat?
+(user): wait go back
+(system): I'm sorry I did not quite get that.  So far I've found 3 restaurants that match your whishes.  In what area would you like to eat?
+(user): no preference
+(system): I'm sorry I did not quite get that.  So far I've found 3 restaurants that match your whishes.  In what area would you like to eat?
+(user): doesnt matter
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): I think cocum would be the perfect restaurant for you.It is a expensive gastropub restaurantin the east of town,  Do you feel like to going there?
+(user): no
+(system): I think backstreet bistro would be the perfect restaurant for you.It is a expensive gastropub restaurantin the south of town,  Do you feel like to going there?
+(user): yes sure 
+(system): Great! The address is 2 sturton street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 12 dialog: 0 in setting: FRIENDLY
+(user): i am looking for a fancy japanese restaurant for a longer stay
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): which areas are available?
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): can i sit outside?
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): anywhere would be fine
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i am looking for a more expensive restaurant
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay longer
+(system): I think wagamama would be the perfect restaurant for you. It is a expensive japanese restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good. Do you feel like going there?
+(user): yes
+(system): Great! The address is 36 saint andrews street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 462354. The postal code is c.b 2. 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 12 dialog: 1 in setting: FRIENDLY
+(user): i am looking for a tuscan restaurant
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): anywhere
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): the higher end range
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): the more expensive range
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): I think city stop restaurant would be the perfect restaurant for you.It is a expensive tuscan restaurantin the north of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is cambridge city football club milton road chesterton. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): the postcode
+(system): Sorry, we do not have a postal code registered for city stop restaurant. 
+(user): what is their number
+(system): The phone number is 01223 363270. 
+(user): ok
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 12 dialog: 2 in setting: FRIENDLY
+(user): i am looking for a european restaurant
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): the center
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): I think eraina would be the perfect restaurant for you.It is a expensive european restaurantin the centre of town,  Do you feel like to going there?
+(user): can i make a reservation by phone?
+(system): I think eraina would be the perfect restaurant for you.It is a expensive european restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is free school lane city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): the phone number
+(system): The phone number is 01223 368786. 
+(user): ok
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 12 dialog: 3 in setting: FRIENDLY
+(user): thai restaurant
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): the center
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): I think bangkok city would be the perfect restaurant for you. It is a expensive thai restaurant. It is a busy restaurant because the food is good and it allows for long stays. Do you feel like going there?
+(user): yes
+(system): Great! The address is 24 green street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 12 dialog: 4 in setting: FRIENDLY
+(user): chinese
+(system): Great choice.  So far I've found 9 restaurants that match your whishes.  In what area would you like to eat?
+(user): south
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): I think peking restaurant would be the perfect restaurant for you.It is a expensive chinese restaurantin the south of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 10 homerton street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 12 dialog: 0 in setting: TERSE
+(user): i am looking for a moderately priced moroccan restaurant
+(system): 1 restaurant matches.  What area?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): long stay
+(system): I recommend the cow pizza kitchen and bar. It is a moderate moroccan restaurant in the centre of town.
+It is a restaurant where you can stay long because it allows for long stays and it is usually nice and calm. OK?
+(user): ok
+(system): OK. The address is corn exchange street. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 12 dialog: 1 in setting: TERSE
+(user): seafood\
+(system): 3 restaurants matches.  What area?
+(user): any
+(system): 3 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): long stay
+(system): I recommend curry king. It is a expensive seafood restaurant in the centre of town.
+It is a restaurant where you can stay long because it allows for long stays and the food is good and it is usually nice and calm. OK?
+(user): ok
+(system): OK. The address is 5 jordans yard bridge street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 12 dialog: 2 in setting: TERSE
+(user): neduterranean
+(system): 3 restaurants matches.  What area?
+(user): any
+(system): 3 restaurants matches.  What pricerange?
+(user): expensive
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend shiraz restaurant. It is a expensive mediterranean restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is 84 regent street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): phone number
+(system): The phone number is 01223 307581. 
+(user): ok
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 12 dialog: 3 in setting: TERSE
+(user): romantic
+(system): 110 restaurants matches.  What area?
+(user): any
+(system): 110 restaurants matches.  What cuisine ?
+(user): any
+(system): 110 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): romantic
+(system): I recommend royal standard. It is a expensive spanish restaurant in the east of town.
+It is a romantic restaurant because it is usually nice and calm and it allows for long stays and the food is good. OK?
+(user): ok
+(system): OK. The address is 290 mill road city centre. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 12 dialog: 4 in setting: TERSE
+(user): swiss
+(system): 1 restaurant matches.  What area?
+(user): center
+(system): 1 restaurant matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend efes restaurant. It is a moderate swiss restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is king street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 500005. The postal code is c.b 1. 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 13 dialog: 0 in setting: TERSE
+(user): i'm looking for a moderately priced moroccan restaurant, with the option to stay there for a while
+(system): 1 restaurant matches.  What area?
+(user): amsterdam
+(system): 1 restaurant matches.  What area?
+(user): amsterdam, the netherlands
+(system): 1 restaurant matches.  What area?
+(user): restart dialog
+(system): 110 restaurants matches.  What area?
+(user): 5 miles far away from me
+(system): 110 restaurants matches.  What area?
+(user): amsterdam
+(system): 110 restaurants matches.  What area?
+(user): london
+(system): 110 restaurants matches.  What area?
+(user): restart dialog
+(system): 110 restaurants matches.  What area?
+(user): morocco
+(system): 1 restaurant matches.  What area?
+(user): amsterdam
+(system): 1 restaurant matches.  What area?
+(user): oost
+(system): 1 restaurant matches.  What area?
+(user): zuid
+(system): 1 restaurant matches.  What area?
+(user): west
+(system): 0 restaurants matches.  What pricerange?
+(user): 25-50
+(system): 0 restaurants matches.  What pricerange?
+(user): 150 euros to 200
+(system): 0 restaurants matches.  What pricerange?
+(user): 50 to 100 euros
+(system): 0 restaurants matches.  What pricerange?
+(user): restart dialog
+(system): 110 restaurants matches.  What area?
+(user): oost
+(system): 110 restaurants matches.  What area?
+(user): west
+(system): 9 restaurants matches.  What cuisine ?
+(user): moroccan
+(system): 0 restaurants matches.  What pricerange?
+(user): restart dialog
+(system): 110 restaurants matches.  What area?
+(user): noord
+(system): 110 restaurants matches.  What area?
+(user): centrum
+(system): 53 restaurants matches.  What cuisine ?
+(user): moroccan
+(system): 1 restaurant matches.  What pricerange?
+(user): 25 to 75
+(system): 1 restaurant matches.  What pricerange?
+(user): 25
+(system): 1 restaurant matches.  What pricerange?
+(user): 50
+(system): 1 restaurant matches.  What pricerange?
+(user): 100
+(system): 1 restaurant matches.  What pricerange?
+(user): restart dialog
+(system): 110 restaurants matches.  What area?
+(user): centre
+(system): 53 restaurants matches.  What cuisine ?
+(user): african
+(system): 1 restaurant matches.  What pricerange?
+(user): 50-75
+(system): 1 restaurant matches.  What pricerange?
+(user): 100
+(system): 1 restaurant matches.  What pricerange?
+(user): 150
+(system): 1 restaurant matches.  What pricerange?
+(user): 125
+(system): 1 restaurant matches.  What pricerange?
+(user): 10
+(system): 1 restaurant matches.  What pricerange?
+(user): 1
+(system): 1 restaurant matches.  What pricerange?
+(user): 45
+(system): 1 restaurant matches.  What pricerange?
+(user): restart dialog
+(system): 110 restaurants matches.  What area?
+(user): cebtre
+(system): 53 restaurants matches.  What cuisine ?
+(user): moroccan
+(system): 1 restaurant matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): places where you can stay long
+(system): I recommend the cow pizza kitchen and bar. It is a moderate moroccan restaurant in the centre of town.
+It is a restaurant where you can stay long because it allows for long stays and it is usually nice and calm. OK?
+(user): ok
+(system): OK. The address is corn exchange street. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 308871. The postal code is c.b 2. 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 308871. The postal code is c.b 2. 
+(user): thank you
+(system): Bye.---
+ participant : 13 dialog: 1 in setting: TERSE
+(user): i am looking for a busy thai restaurant in the area of amsterdam centre
+(system): 3 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): busy
+(system): I recommend bangkok city. It is a expensive thai restaurant in the centre of town.
+It is a busy restaurant because the food is good and it allows for long stays. OK?
+(user): ok
+(system): OK. The address is 24 green street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 354382. The postal code is c.b 2. 
+(user): thank you
+(system): Bye.---
+ participant : 13 dialog: 2 in setting: TERSE
+(user): i am looking for a cheap restaurant downtown amsterdam
+(system): 22 restaurants matches.  What area?
+(user): cebtre
+(system): 12 restaurants matches.  What cuisine ?
+(user): traditional
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): cheap
+(system): I don't understand. Choose from : romantic, busy, children or long stay.
+(user): busy
+(system): No matches. Restarting dialog. What else do you want to eat?
+(user): cheap traditional meal
+(system): 1 restaurant matches.  What area?
+(user): centre
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): suitable for childrfen
+(system): I don't understand. Choose from : romantic, busy, children or long stay.
+(user): children
+(system): No matches. Restarting dialog. What else do you want to eat?
+(user): cheap meal
+(system): 22 restaurants matches.  What area?
+(user): west
+(system): 2 restaurants matches.  What cuisine ?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): places where you can stay long
+(system): I recommend thanh binh. It is a cheap vietnamese restaurant in the west of town.
+It is a restaurant where you can stay long because it allows for long stays and it is usually nice and calm. OK?
+(user): ok
+(system): OK. The address is 17 magdalene street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 362456. The postal code is c.b 3. 
+(user): thank you
+(system): Bye.---
+ participant : 13 dialog: 3 in setting: TERSE
+(user): i am looking for a expensive mediterranean restaurant
+(system): 3 restaurants matches.  What area?
+(user): centre
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): romantic
+(system): I recommend la mimosa. It is a expensive mediterranean restaurant in the centre of town.
+It is a romantic restaurant because it is usually nice and calm and it allows for long stays. OK?
+(user): ok
+(system): OK. The address is thompsons lane fen ditton. Do you want to know their phone number, the postcode, or both? 
+(user): phone number
+(system): The phone number is 01223 362525. 
+(user): thank you
+(system): Bye.---
+ participant : 13 dialog: 4 in setting: TERSE
+(user): i am looking for a cheap persian restaurant
+(system): 1 restaurant matches.  What area?
+(user): west
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): any
+(system): No matches. Restarting dialog. What else do you want to eat?
+(user): persian
+(system): 1 restaurant matches.  What area?
+(user): north
+(system): 1 restaurant matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): busy
+(system): I recommend hakka. It is a cheap persian restaurant in the north of town.
+It is a busy restaurant because the food is good. OK?
+(user): ok
+(system): OK. The address is milton road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 568988. The postal code is c.b 4. 
+(user): thank you
+(system): Bye.---
+ participant : 13 dialog: 0 in setting: FRIENDLY
+(user): i'm looking for a expensive indian restaurant
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  In what area would you like to eat?
+(user): centre
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): romantic
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): indian
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): any
+(system): I think maharajah tandoori restaurant would be the perfect restaurant for you.It is a expensive indian restaurantin the east of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 41518 castle street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 358399. The postal code is c.b 3. 
+(user): can i ask about an expensive indian restaurant where i can stay long?
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): restart dialog
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): i'm looking for an expensive indian restaurant where you can stay long
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): stay a bit longer
+(system): I think pipasha restaurant would be the perfect restaurant for you. It is a expensive indian restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good. Do you feel like going there?
+(user): yes
+(system): Great! The address is newmarket road fen ditton. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 577786. The postal code is c.b 5. 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 13 dialog: 1 in setting: FRIENDLY
+(user): i am looking for a romantic restaurant
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): centre
+(system): Great choice.  So far I've found 53 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): french
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): romantic
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): any
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): centre
+(system): Great choice.  So far I've found 53 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): any
+(system): Great choice.  So far I've found 53 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): romantic
+(system): I think nandos city centre would be the perfect restaurant for you. It is a cheap portuguese restaurant. It is a romantic restaurant because it is usually nice and calm and it allows for long stays and the food is good. Do you feel like going there?
+(user): yes
+(system): Great! The address is 33-34 saint andrews street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 327908. The postal code is c.b 2. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 13 dialog: 2 in setting: FRIENDLY
+(user): i'm looking for a gastropub restaurant
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): any
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): gastropub
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): moderate
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): any
+(system): I think riverside brasserie would be the perfect restaurant for you.It is a moderate gastropub restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is doubletree by hilton cambridge granta place mill lane. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 259988. Sorry, we do not have a postal code registered for riverside brasserie. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 13 dialog: 3 in setting: FRIENDLY
+(user): expensive european restaurant
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  In what area would you like to eat?
+(user): centre
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): any
+(system): I think eraina would be the perfect restaurant for you.It is a expensive european restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is free school lane city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): phone number
+(system): The phone number is 01223 368786. 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 13 dialog: 4 in setting: FRIENDLY
+(user): spanish restaurant where i can stay for a while
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): stay a bit longer
+(system): I think royal standard would be the perfect restaurant for you. It is a expensive spanish restaurant. It is a restaurant where you can stay long because spanish restaurants serve extensive dinners that take a long time to finish and the food is good and it is usually nice and calm. Do you feel like going there?
+(user): yes
+(system): Great! The address is 290 mill road city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 247877. The postal code is c.b 1. 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 14 dialog: 0 in setting: FRIENDLY
+(user): hi, i am looking for a nice expensive indian restaurant where i can stay for a long time. i am willing to spend approximately 100 euros per person. 
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  In what area would you like to eat?
+(user): the city center
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i would like a place where i can stay a bit longer
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): a romantic place
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): the city center
+(system): Great choice.  So far I've found 53 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): indian
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 100 euros
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): my pricerange is around 100
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i am looking for an expensive indian restaurant
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay long
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): indian
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): my pricerange is an expensive indian restaurant
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay longer
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): indian
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): my pricerange is 50-100
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay a bit longer
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): italian
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): east
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): romantic
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): european
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): west
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): my pricerange is moderately priced
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): suitable for children
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): romantic
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): west
+(system): Great choice.  So far I've found 9 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): indian
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i dont mind
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay a bit longer
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): indian
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i dont mind
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay a bit longer
+(system): I think the gandhi would be the perfect restaurant for you. It is a cheap indian restaurant. It is a restaurant where you can stay long because it allows for long stays and it is usually nice and calm. Do you feel like going there?
+(user): yes
+(system): Great! The address is 72 regent street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): i would like their phone number
+(system): The phone number is 01223 353942. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 14 dialog: 1 in setting: FRIENDLY
+(user): hi, i am looking for a korean place to eat in amsterdam.
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): no preference
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i dont mind
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i dont mind
+(system): I think stazione restaurant and coffee bar would be the perfect restaurant for you.It is a expensive korean restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is market hill city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): postcode 
+(system): Sorry, we do not have a postal code registered for stazione restaurant and coffee bar. 
+(user): i would like the postal code for stazione restaurant
+(system): Sorry, we do not have a postal code registered for stazione restaurant and coffee bar. 
+(user): ok
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 14 dialog: 2 in setting: FRIENDLY
+(user): hi i am looking for a busy thai restaurant
+(system): Hi! so nice to meet you. What do you feel like eating today?
+(user): thai
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i dont mind
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): I think bangkok city would be the perfect restaurant for you. It is a expensive thai restaurant. It is a busy restaurant because the food is good and it allows for long stays. Do you feel like going there?
+(user): yes
+(system): Great! The address is 24 green street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 354382. The postal code is c.b 2. 
+(user): great
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 354382. The postal code is c.b 2. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 14 dialog: 3 in setting: FRIENDLY
+(user): i am looking for a swiss restaurant in the city center
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i dont mind
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i dont mind
+(system): I think efes restaurant would be the perfect restaurant for you.It is a moderate swiss restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is king street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both 
+(system): The phone number is 01223 500005. The postal code is c.b 1. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 14 dialog: 4 in setting: FRIENDLY
+(user): i am looking for cheap gastropub food
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i dont mind
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): cheap gastropub food
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  In what area would you like to eat?
+(user): gastropub
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  In what area would you like to eat?
+(user): cheap food
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  In what area would you like to eat?
+(user): restart dialog
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): gastropub
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): i dont mind
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i dont mind
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): gastropub
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): center
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): affordable
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): gastropub
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): center
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): restart dialog
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): center
+(system): Great choice.  So far I've found 53 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): gastropub
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 10 euros
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap price
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i dont mind
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): gastropub
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): center
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap price
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): restart dialog
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): gastropub 
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): cheap centre
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): any
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): restart dialog
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): restart dialog
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): gastropub
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): any
+(system): I think cocum would be the perfect restaurant for you.It is a expensive gastropub restaurantin the east of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 71 castle street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 366668. The postal code is c.b 3. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 14 dialog: 0 in setting: TERSE
+(user): i am looking for a mediterranean restuarant
+(system): 3 restaurants matches.  What area?
+(user): any
+(system): 3 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): any
+(system): I recommend shiraz restaurant. It is a expensive mediterranean restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is 84 regent street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): phone numberr
+(system): The phone number is 01223 307581. 
+(user): thank you
+(system): Bye.---
+ participant : 14 dialog: 1 in setting: TERSE
+(user): i am looking for a seafood restaurant
+(system): 3 restaurants matches.  What area?
+(user): any
+(system): 3 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): stay long
+(system): I recommend curry king. It is a expensive seafood restaurant in the centre of town.
+It is a restaurant where you can stay long because it allows for long stays and the food is good and it is usually nice and calm. OK?
+(user): ok
+(system): OK. The address is 5 jordans yard bridge street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 324351. Postal code for curry king unknown. 
+(user): thank you
+(system): Bye.---
+ participant : 14 dialog: 2 in setting: TERSE
+(user): i am looking for an expensive priced chinese restaurant in the south of the city
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): any
+(system): I recommend peking restaurant. It is a expensive chinese restaurant in the south of town. OK?
+(user): ok
+(system): OK. The address is 10 homerton street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 354755. The postal code is c.b 2. 
+(user): thank you
+(system): Bye.---
+ participant : 14 dialog: 3 in setting: TERSE
+(user): i am looking for a cheap traditional meal
+(system): 1 restaurant matches.  What area?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): any
+(system): I recommend da vinci pizzeria. It is a cheap traditional restaurant in the north of town. OK?
+(user): ok
+(system): OK. The address is 20 milton road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 351707. The postal code is c.b 4. 
+(user): thank you
+(system): Bye.---
+ participant : 14 dialog: 4 in setting: TERSE
+(user): i am looking for a moderately priced european restaurant in the south of the city
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): any
+(system): No matches. Restarting dialog. What else do you want to eat?
+(user): moderately priced european restaurant in the city center
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): any
+(system): I recommend galleria. It is a moderate european restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is 33 bridge street. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 362054. The postal code is c.b 2. 
+(user): thank you
+(system): Bye.---
+ participant : 15 dialog: 0 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): i don't care
+(system): 110 restaurants matches.  What cuisine ?
+(user): traditional
+(system): 1 restaurant matches.  What pricerange?
+(user): cheap
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): doesn't matter
+(system): I recommend da vinci pizzeria. It is a cheap traditional restaurant in the north of town. OK?
+(user): ok
+(system): OK. The address is 20 milton road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 15 dialog: 1 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): in the south of the city
+(system): 16 restaurants matches.  What cuisine ?
+(user): european cuisine
+(system): 2 restaurants matches.  What pricerange?
+(user): moderately priced
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): i don't care
+(system): No matches. Restarting dialog. What else do you want to eat?
+(user): european
+(system): 8 restaurants matches.  What area?
+(user): the center of the city
+(system): 5 restaurants matches.  What pricerange?
+(user): moderately priced
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no other requirements
+(system): I recommend galleria. It is a moderate european restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is 33 bridge street. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 15 dialog: 2 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): in the north of the city
+(system): 16 restaurants matches.  What cuisine ?
+(user): indian
+(system): 6 restaurants matches.  What pricerange?
+(user): i don't care
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no other requirements
+(system): I recommend meghna. It is a moderate indian restaurant in the north of town. OK?
+(user): ok
+(system): OK. The address is 205 victoria road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 15 dialog: 3 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): center of the city
+(system): 53 restaurants matches.  What cuisine ?
+(user): lebanese
+(system): 1 restaurant matches.  What pricerange?
+(user): i don't care
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no other requirements
+(system): I recommend ali baba. It is a moderate lebanese restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is 59 hills road city centre. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 15 dialog: 4 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): center of the city
+(system): 53 restaurants matches.  What cuisine ?
+(user): european
+(system): 5 restaurants matches.  What pricerange?
+(user): expensive 
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no other requirements
+(system): I recommend eraina. It is a expensive european restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is free school lane city centre. Do you want to know their phone number, the postcode, or both? 
+(user): their phone number
+(system): The phone number is 01223 368786. 
+(user): ok
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 15 dialog: 0 in setting: FRIENDLY
+(user): 
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): i don't care
+(system): Great choice.  So far I've found 110 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): moroccan
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): moderately priced
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): where i can stay a bit longer
+(system): I think the cow pizza kitchen and bar would be the perfect restaurant for you. It is a moderate moroccan restaurant. It is a restaurant where you can stay long because it allows for long stays and it is usually nice and calm. Do you feel like going there?
+(user): yes
+(system): Great! The address is corn exchange street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 15 dialog: 1 in setting: FRIENDLY
+(user): 
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): i don't care
+(system): Great choice.  So far I've found 110 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): thai
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i don't care
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): I think bangkok city would be the perfect restaurant for you. It is a expensive thai restaurant. It is a busy restaurant because the food is good and it allows for long stays. Do you feel like going there?
+(user): yes
+(system): Great! The address is 24 green street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 354382. The postal code is c.b 2. 
+(user): ok
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 15 dialog: 2 in setting: FRIENDLY
+(user): gastropub food anywhere
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): anywhere
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): gastropub food
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): anywhere
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): moderate or expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): I think cocum would be the perfect restaurant for you.It is a expensive gastropub restaurantin the east of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 71 castle street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 15 dialog: 3 in setting: FRIENDLY
+(user): seafood 
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  In what area would you like to eat?
+(user): i don't care
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i don't care
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): where i can stay a bit longer
+(system): I think curry king would be the perfect restaurant for you. It is a expensive seafood restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good and it is usually nice and calm. Do you feel like going there?
+(user): yes
+(system): Great! The address is 5 jordans yard bridge street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 15 dialog: 4 in setting: FRIENDLY
+(user): korean food in my city
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): in my city
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): in the city
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): in the citycenter
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): city
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): amsterdam
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): 
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i don't care
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): no
+(system): I think stazione restaurant and coffee bar would be the perfect restaurant for you.It is a expensive korean restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is market hill city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): postcode
+(system): Sorry, we do not have a postal code registered for stazione restaurant and coffee bar. 
+(user): ok
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 16 dialog: 0 in setting: FRIENDLY
+(user): 
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): city center
+(system): Great choice.  So far I've found 53 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): indonesian
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): im rich, can have anything
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): quick and romantic
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): chinese
+(system): Great choice.  So far I've found 9 restaurants that match your whishes.  In what area would you like to eat?
+(user): sub-urb
+(system): I'm sorry I did not quite get that.  So far I've found 9 restaurants that match your whishes.  In what area would you like to eat?
+(user): centre 
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 0-50
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 10
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 10-30
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 50 euros
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 0- 100 euros
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): zero to hundred euros
+(system): I'm sorry I did not quite get that.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): dont have
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): italian
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): centre
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 20
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): none
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): dont have
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): pizza
+(system): Hi! so nice to meet you. What do you feel like eating today?
+(user): pizza
+(system): Hi! so nice to meet you. What do you feel like eating today?
+(user): pasta
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): east
+(system): Great choice.  So far I've found 13 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): chinese
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): pricy
+(system): I'm sorry I did not quite get that.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): dont habe
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): anythinh
+(system): I think yu garden would be the perfect restaurant for you.It is a expensive chinese restaurantin the east of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 529 newmarket road fen ditton. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 248882. The postal code is c.b 5. 
+(user): cool
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): nu
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 16 dialog: 1 in setting: FRIENDLY
+(user): yes
+(system): Hi! so nice to meet you. What do you feel like eating today?
+(user): persian
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): west of the city
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheaply
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): romantic
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): persian
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): west
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): chinese
+(system): Great choice.  So far I've found 9 restaurants that match your whishes.  In what area would you like to eat?
+(user): west
+(system): Great choice.  So far I've found 0 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): romantic
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): chinese
+(system): Great choice.  So far I've found 9 restaurants that match your whishes.  In what area would you like to eat?
+(user): east
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): cheap
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): chinese
+(system): Great choice.  So far I've found 9 restaurants that match your whishes.  In what area would you like to eat?
+(user): east
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): anything
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): anything
+(system): I think saint johns chop house would be the perfect restaurant for you.It is a moderate british restaurantin the west of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 21 - 24 northampton street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 353110. The postal code is c.b 3. 
+(user): cool
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): phone
+(system): The phone number is 01223 353110. 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 16 dialog: 2 in setting: FRIENDLY
+(user): traditional\
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): anywhere
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): anything
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): anything
+(system): I think saint johns chop house would be the perfect restaurant for you.It is a moderate british restaurantin the west of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 21 - 24 northampton street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 353110. The postal code is c.b 3. 
+(user): thaks
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 353110. The postal code is c.b 3. 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 353110. The postal code is c.b 3. 
+(user): have them already
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 353110. The postal code is c.b 3. 
+(user): cool
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 16 dialog: 3 in setting: FRIENDLY
+(user): european
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): center of the city
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): priced
+(system): I'm sorry I did not quite get that.  So far I've found 5 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): romantic
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): european
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): expensive
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  In what area would you like to eat?
+(user): center
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): anything
+(system): I think eraina would be the perfect restaurant for you.It is a expensive european restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is free school lane city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 368786. The postal code is c.b 2. 
+(user): cool
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 368786. The postal code is c.b 2. 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 16 dialog: 4 in setting: FRIENDLY
+(user): seafood
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  In what area would you like to eat?
+(user): anywhere
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): anything
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): anything
+(system): I think saint johns chop house would be the perfect restaurant for you.It is a moderate british restaurantin the west of town,  Do you feel like to going there?
+(user): ye
+(system): Great! The address is 21 - 24 northampton street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 353110. The postal code is c.b 3. 
+(user): cool
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): thanks
+(system): Enjoy your dinner. ---
+ participant : 16 dialog: 0 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): east
+(system): 13 restaurants matches.  What cuisine ?
+(user): thai
+(system): 0 restaurants matches.  What pricerange?
+(user): all
+(system): 0 restaurants matches.  What pricerange?
+(user): 
+(system): 0 restaurants matches.  What pricerange?
+(user): anything
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend saint johns chop house. It is a moderate british restaurant in the west of town. OK?
+(user): yes
+(system): OK. The address is 21 - 24 northampton street. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 16 dialog: 1 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): center
+(system): 53 restaurants matches.  What cuisine ?
+(user): gastropub
+(system): 1 restaurant matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend riverside brasserie. It is a moderate gastropub restaurant in the centre of town. OK?
+(user): yes
+(system): OK. The address is doubletree by hilton cambridge granta place mill lane. Do you want to know their phone number, the postcode, or both? 
+(user): yes
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 259988. Postal code for riverside brasserie unknown. 
+(user): thanks
+(system): Bye.---
+ participant : 16 dialog: 2 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): japanese
+(system): 1 restaurant matches.  What area?
+(user): any
+(system): 1 restaurant matches.  What pricerange?
+(user): all
+(system): 1 restaurant matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): any
+(system): I recommend wagamama. It is a expensive japanese restaurant in the centre of town. OK?
+(user): yes
+(system): OK. The address is 36 saint andrews street. Do you want to know their phone number, the postcode, or both? 
+(user): bothj
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 462354. The postal code is c.b 2. 
+(user): thanks
+(system): Bye.---
+ participant : 16 dialog: 3 in setting: TERSE
+(user): in
+(system): 110 restaurants matches.  What area?
+(user): north
+(system): 16 restaurants matches.  What cuisine ?
+(user): indian
+(system): 6 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend meghna. It is a moderate indian restaurant in the north of town. OK?
+(user): yes
+(system): OK. The address is 205 victoria road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 16 dialog: 4 in setting: TERSE
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): 
+(system): 110 restaurants matches.  What area?
+(user): south
+(system): 16 restaurants matches.  What cuisine ?
+(user): european
+(system): 2 restaurants matches.  What pricerange?
+(user): expensice
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): romantic
+(system): I recommend chiquito restaurant bar. It is a expensive european restaurant in the south of town.
+It is a romantic restaurant because it is usually nice and calm. OK?
+(user): yes
+(system): OK. The address is 2g cambridge leisure park cherry hinton road cherry hinton. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 400170. The postal code is c.b 1. 
+(user): thanks
+(system): Bye.---
+ participant : 17 dialog: 0 in setting: TERSE
+(user): i am looking for a korean restaurant in my city
+(system): 2 restaurants matches.  What area?
+(user): amsterdam-zuid
+(system): 2 restaurants matches.  What area?
+(user): 1079wn
+(system): 2 restaurants matches.  What area?
+(user): amsterdam
+(system): 2 restaurants matches.  What area?
+(user): i don't care
+(system): 2 restaurants matches.  What pricerange?
+(user): i don't care
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): i don't care
+(system): I recommend stazione restaurant and coffee bar. It is a expensive korean restaurant in the centre of town. OK?
+(user): ok, what is the postal code?
+(system): I recommend stazione restaurant and coffee bar. It is a expensive korean restaurant in the centre of town. OK?
+(user): ok
+(system): OK. The address is market hill city centre. Do you want to know their phone number, the postcode, or both? 
+(user): i want the postcode
+(system): Postal code for stazione restaurant and coffee bar unknown. 
+(user): then i want a different restaurant
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 352607. Postal code for stazione restaurant and coffee bar unknown. 
+(user): ok 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): ok, thank you
+(system): Bye.---
+ participant : 17 dialog: 1 in setting: TERSE
+(user): i look for tuscan food restaurant
+(system): 1 restaurant matches.  What area?
+(user): i don't know
+(system): 1 restaurant matches.  What pricerange?
+(user): expensive
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): busy
+(system): I recommend city stop restaurant. It is a expensive tuscan restaurant in the north of town.
+It is a busy restaurant because the food is good. OK?
+(user): ok
+(system): OK. The address is cambridge city football club milton road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 363270. Postal code for city stop restaurant unknown. 
+(user): ok, thank you
+(system): Bye.---
+ participant : 17 dialog: 2 in setting: TERSE
+(user): i am looking for a romantic restaurant
+(system): 110 restaurants matches.  What area?
+(user): i don't care
+(system): 110 restaurants matches.  What cuisine ?
+(user): italian
+(system): 8 restaurants matches.  What pricerange?
+(user): expensive
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): romantic
+(system): I recommend zizzi cambridge. It is a expensive italian restaurant in the south of town.
+It is a romantic restaurant because it is usually nice and calm and it allows for long stays. OK?
+(user): ok
+(system): OK. The address is 47-53 regent street. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 365599. Postal code for zizzi cambridge unknown. 
+(user): thank you
+(system): Bye.---
+ participant : 17 dialog: 3 in setting: TERSE
+(user): i am looking for gastropub
+(system): 4 restaurants matches.  What area?
+(user): doesn't matter
+(system): 4 restaurants matches.  What pricerange?
+(user): cheap
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): No matches. Restarting dialog. What else do you want to eat?
+(user): gestropub food
+(system): 4 restaurants matches.  What area?
+(user): i don't care
+(system): 4 restaurants matches.  What pricerange?
+(user): expensive
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): i don't care
+(system): I recommend cocum. It is a expensive gastropub restaurant in the east of town. OK?
+(user): ok
+(system): OK. The address is 71 castle street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 366668. The postal code is c.b 3. 
+(user): thank you
+(system): Bye.---
+ participant : 17 dialog: 4 in setting: TERSE
+(user): i am looking for an indian restaurant
+(system): 15 restaurants matches.  What area?
+(user): i don't care
+(system): 15 restaurants matches.  What pricerange?
+(user): expensive
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): a place where i can stay long
+(system): I recommend pipasha restaurant. It is a expensive indian restaurant in the east of town.
+It is a restaurant where you can stay long because it allows for long stays and the food is good. OK?
+(user): ok
+(system): OK. The address is newmarket road fen ditton. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 577786. The postal code is c.b 5. 
+(user): thank you
+(system): Bye.---
+ participant : 17 dialog: 0 in setting: FRIENDLY
+(user): 
+(system): I'm sorry I did not quite get that.  So far I've found 110 restaurants that match your whishes.  In what area would you like to eat?
+(user): cheap food
+(system): Great choice.  So far I've found 22 restaurants that match your whishes.  In what area would you like to eat?
+(user): i don't care
+(system): Great choice.  So far I've found 22 restaurants that match your whishes.  What type of cuisine do you feel like eating today?
+(user): traditional food
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i don't care
+(system): I think da vinci pizzeria would be the perfect restaurant for you.It is a cheap traditional restaurantin the north of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 20 milton road chesterton. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 351707. The postal code is c.b 4. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 17 dialog: 1 in setting: FRIENDLY
+(user): european restaurant
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): south of the city
+(system): Great choice.  So far I've found 2 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): moderately priced
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i don't care
+(system): Unfortunately I cannot find any restaurant that matches your whishes! What else would you like to eat?
+(user): european restaurant
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): the center of the city
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): moderately priced
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): i don't care
+(system): I think galleria would be the perfect restaurant for you.It is a moderate european restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 33 bridge street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 362054. The postal code is c.b 2. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 17 dialog: 2 in setting: FRIENDLY
+(user): seafood
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  In what area would you like to eat?
+(user): i don't care
+(system): Great choice.  So far I've found 3 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i don't care
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay long
+(system): I think curry king would be the perfect restaurant for you. It is a expensive seafood restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good and it is usually nice and calm. Do you feel like going there?
+(user): yes
+(system): Great! The address is 5 jordans yard bridge street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 324351. Sorry, we do not have a postal code registered for curry king. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 17 dialog: 3 in setting: FRIENDLY
+(user): thai restaurant
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): i don't care
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): i don't care
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): I think bangkok city would be the perfect restaurant for you. It is a expensive thai restaurant. It is a busy restaurant because the food is good and it allows for long stays. Do you feel like going there?
+(user): yes
+(system): Great! The address is 24 green street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 354382. The postal code is c.b 2. 
+(user): thank you
+(system): Enjoy your dinner. ---
+ participant : 17 dialog: 4 in setting: FRIENDLY
+(user): morrocan
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  In what area would you like to eat?
+(user): i don't care
+(system): Great choice.  So far I've found 1 restaurant that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): moderately priced
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): a place where i can stay long
+(system): I think the cow pizza kitchen and bar would be the perfect restaurant for you. It is a moderate moroccan restaurant. It is a restaurant where you can stay long because it allows for long stays and it is usually nice and calm. Do you feel like going there?
+(user): yes
+(system): Great! The address is corn exchange street. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 308871. The postal code is c.b 2. 
+(user): thank you
+(system): Enjoy your dinner. 
