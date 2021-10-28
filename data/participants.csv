@@ -1,7 +1,7 @@
 participant number,dialog number,friendliness,task,time in seconds,number of turns0,21,1,TERSE,"Find a restaurant that is suitable for children.
 ",15.857982873916626,7,number of turns
 1,21,2,TERSE,"You want to find an Indian restaurant in the north of the city. 
-",15.108087062835693,7.0,,,,,,
+",15.108087062835692,7.0,,,,,,
 2,21,3,TERSE,"You are craving a cheap traditional meal. Find a suitable restaurant.
 ",17.72743797302246,6.0,,,,,,
 3,21,4,TERSE,"You are in the center of the city, and you are starving. You cannot travel far, and you are craving Lebanese food. Try to find a restaurant.
@@ -38,3 +38,53 @@ participant number,dialog number,friendliness,task,time in seconds,number of tur
 23,3,FRIENDLY,You want to find a Spanish restaurant where you can stay for a while,38.75810480117798,,,,,,,,9.0
 23,4,FRIENDLY,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",60.74300837516785,,,,,,,,12.0
 23,5,FRIENDLY,"You want to find a Swiss restaurant in the center of the city. Make sure you get all contact details of the restaurant (adress, postal code and phone number)",29.398428201675415,,,,,,,,8.0
+1,1,TERSE,You are craving a cheap traditional meal. Find a suitable restaurant,384.59550738334656,,,,,,,,18.0
+1,2,TERSE,It is your brother his birthday! You are looking for a moderately priced Moroccan restaurant where you can stay for a while,146.5306212902069,,,,,,,,9.0
+1,3,TERSE,"You remember a coworker being ecstatic about Tuscan food, but you canâ€™t remember where the restaurant is located. You only remember the restaurant being busy and expensive",126.96219801902771,,,,,,,,13.0
+1,4,TERSE,Find a busy Thai restaurant. Make sure you get all their contact information,41.31392741203308,,,,,,,,6.0
+1,5,TERSE,"Find an cheaply priced Persian restaurant in the west of the city. If none are available, try the north of the city",33.31954503059387,,,,,,,,6.0
+1,1,FRIENDLY,"You are in the center of the city, and you are starving. You cannot travel far, and you are craving Lebanese food. Try to find a restaurant",158.64046478271484,,,,,,,,10.0
+1,2,FRIENDLY,You want to find an Indian restaurant in the north of the city.,72.45037269592285,,,,,,,,6.0
+1,3,FRIENDLY,You want to find a expensive Japanese restaurant where you can stay long,160.4319667816162,,,,,,,,11.0
+1,4,FRIENDLY,"Find a moderately priced European restaurant in the south of the city. If none are available, try the center of the city",111.9398603439331,,,,,,,,9.0
+1,5,FRIENDLY,Find a romantic restaurant,55.82659387588501,,,,,,,,8.0
+2,1,FRIENDLY,Find an expensive Mediterranean restaurant. Make sure you get the phone number,208.7994682788849,,,,,,,,8.0
+2,2,FRIENDLY,Find a romantic restaurant,132.53722548484802,,,,,,,,12.0
+2,3,FRIENDLY,"Find an cheaply priced Persian restaurant in the west of the city. If none are available, try the north of the city",115.11493253707886,,,,,,,,11.0
+2,4,FRIENDLY,You are craving seafood and want to enjoy it for a while. Find a restaurant that serves seafood and where you can stay lon,95.63874650001526,,,,,,,,8.0
+2,5,FRIENDLY,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",130.38551998138428,,,,,,,,11.0
+2,1,TERSE,You want to find an expensive priced European restaurant located in the center of the city. Make sure you get the phone number of the restaurant,228.2816641330719,,,,,,,,6.0
+2,2,TERSE,"You want to find a Swiss restaurant in the center of the city. Make sure you get all contact details of the restaurant (adress, postal code and phone number)",109.30431628227234,,,,,,,,11.0
+2,3,TERSE,"You remember a coworker being ecstatic about Tuscan food, but you canâ€™t remember where the restaurant is located. You only remember the restaurant being busy and expensive",74.74129962921143,,,,,,,,6.0
+2,4,TERSE,You watched Squid Game and are now craving Korean food. Find a Korean restaurant in your city. Make sure you get the postal code,88.88447690010071,,,,,,,,9.0
+2,5,TERSE,You are craving a cheap traditional meal. Find a suitable restaurant,41.397289991378784,,,,,,,,5.0
+3,1,TERSE,"You are in the center of the city, and you are starving. You cannot travel far, and you are craving Lebanese food. Try to find a restaurant",287.1706237792969,,,,,,,,14.0
+3,2,TERSE,"Find an cheaply priced Persian restaurant in the west of the city. If none are available, try the north of the city",119.53873443603516,,,,,,,,12.0
+3,3,TERSE,You are craving a cheap traditional meal. Find a suitable restaurant,102.81650805473328,,,,,,,,17.0
+3,4,TERSE,You want to find a expensive Japanese restaurant where you can stay long,85.1912591457367,,,,,,,,7.0
+3,5,TERSE,"You remember a coworker being ecstatic about Tuscan food, but you canâ€™t remember where the restaurant is located. You only remember the restaurant being busy and expensive",73.55099654197693,,,,,,,,7.0
+3,1,FRIENDLY,Find a busy Thai restaurant. Make sure you get all their contact information,219.21695637702942,,,,,,,,10.0
+3,2,FRIENDLY,You want to find an expensive priced European restaurant located in the center of the city. Make sure you get the phone number of the restaurant,47.92286682128906,,,,,,,,6.0
+3,3,FRIENDLY,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",85.71745944023132,,,,,,,,10.0
+3,4,FRIENDLY,It is your brother his birthday! You are looking for a moderately priced Moroccan restaurant where you can stay for a while,68.42815136909485,,,,,,,,5.0
+3,5,FRIENDLY,You are craving seafood and want to enjoy it for a while. Find a restaurant that serves seafood and where you can stay lon,47.22080183029175,,,,,,,,7.0
+4,1,FRIENDLY,You watched Squid Game and are now craving Korean food. Find a Korean restaurant in your city. Make sure you get the postal code,446.24012541770935,,,,,,,,29.0
+4,2,FRIENDLY,You want to find an expensive priced European restaurant located in the center of the city. Make sure you get the phone number of the restaurant,104.90920758247375,,,,,,,,7.0
+4,3,FRIENDLY,"Find an cheaply priced Persian restaurant in the west of the city. If none are available, try the north of the city",108.2947027683258,,,,,,,,11.0
+4,4,FRIENDLY,You are craving a cheap traditional meal. Find a suitable restaurant,68.87998080253601,,,,,,,,9.0
+4,5,FRIENDLY,"Find a moderately priced European restaurant in the south of the city. If none are available, try the center of the city",59.531296730041504,,,,,,,,10.0
+4,1,TERSE,It is your brother his birthday! You are looking for a moderately priced Moroccan restaurant where you can stay for a while,95.96156668663025,,,,,,,,8.0
+4,2,TERSE,"You want to find a Swiss restaurant in the center of the city. Make sure you get all contact details of the restaurant (adress, postal code and phone number)",49.81507205963135,,,,,,,,6.0
+4,3,TERSE,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",55.24330759048462,,,,,,,,7.0
+4,4,TERSE,You want to find a expensive Japanese restaurant where you can stay long,26.86648464202881,,,,,,,,6.0
+4,5,TERSE,You want to find a Spanish restaurant where you can stay for a while,28.804807424545288,,,,,,,,7.0
+05,1,TERSE,"Find an cheaply priced Persian restaurant in the west of the city. If none are available, try the north of the city",93.41854476928711,,,,,,,,15.0
+05,2,TERSE,You are craving seafood and want to enjoy it for a while. Find a restaurant that serves seafood and where you can stay lon,61.265905141830444,,,,,,,,10.0
+05,3,TERSE,Find a restaurant that is suitable for children,51.7467246055603,,,,,,,,9.0
+05,4,TERSE,"You are looking for cheap gastropub food. If you cannot find any, try different price ranges",54.289918422698975,,,,,,,,11.0
+05,5,TERSE,You want to find an expensive priced European restaurant located in the center of the city. Make sure you get the phone number of the restaurant,44.312581300735474,,,,,,,,11.0
+05,1,FRIENDLY,"You want to find a Swiss restaurant in the center of the city. Make sure you get all contact details of the restaurant (adress, postal code and phone number)",52.39848232269287,,,,,,,,8.0
+05,2,FRIENDLY,You want to find an expensive priced Chinese restaurant located in the south of the city. Make sure you get the address of the restaurant,68.91834664344788,,,,,,,,8.0
+05,3,FRIENDLY,Find a romantic restaurant,54.49085569381714,,,,,,,,9.0
+05,4,FRIENDLY,You want to find a expensive Japanese restaurant where you can stay long,41.191280364990234,,,,,,,,8.0
+05,5,FRIENDLY,Find an expensive Mediterranean restaurant. Make sure you get the phone number,41.0060932636261,,,,,,,,7.0
