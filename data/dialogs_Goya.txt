@@ -1586,4 +1586,203 @@ It is a restaurant where you can stay long because it allows for long stays and 
 (user): both
 (system): The phone number is 01223 308871. The postal code is c.b 2. 
 (user): thank you
-(system): Enjoy your dinner. 
+(system): Enjoy your dinner. ---
+ participant : 18 dialog: 0 in setting: FRIENDLY
+(user): expensive chinese restaurant in the south of the city
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): busy
+(system): I think peking restaurant would be the perfect restaurant for you. It is a expensive chinese restaurant. It is a busy restaurant because the food is good and it allows for long stays. Do you feel like going there?
+(user): yes 
+(system): Great! The address is 10 homerton street city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 354755. The postal code is c.b 2. 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): thnx
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 18 dialog: 1 in setting: FRIENDLY
+(user): indian restaurant
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  In what area would you like to eat?
+(user): nortrh
+(system): Great choice.  So far I've found 6 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): average
+(system): I'm sorry I did not quite get that.  So far I've found 6 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 20
+(system): I'm sorry I did not quite get that.  So far I've found 6 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): 50
+(system): I'm sorry I did not quite get that.  So far I've found 6 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): no
+(system): I'm sorry I did not quite get that.  So far I've found 6 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): none
+(system): I'm sorry I did not quite get that.  So far I've found 6 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): long stay
+(system): I think tandoori palace would be the perfect restaurant for you. It is a moderate indian restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good. Do you feel like going there?
+(user): yes
+(system): Great! The address is 68 histon road chesterton. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 506055. The postal code is c.b 4. 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 18 dialog: 2 in setting: FRIENDLY
+(user): indian
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Great choice.  So far I've found 15 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): expencise
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): long stay
+(system): I think pipasha restaurant would be the perfect restaurant for you. It is a expensive indian restaurant. It is a restaurant where you can stay long because it allows for long stays and the food is good. Do you feel like going there?
+(user): yes
+(system): Great! The address is newmarket road fen ditton. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): yes
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): both
+(system): The phone number is 01223 577786. The postal code is c.b 5. 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 18 dialog: 3 in setting: FRIENDLY
+(user): spanish
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  In what area would you like to eat?
+(user): any
+(system): Great choice.  So far I've found 4 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): any
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): stay
+(system): Sorry I did not understand. Please enter any of the following preferences: romantic, busy, children or long stay.
+(user): long stay
+(system): I think royal standard would be the perfect restaurant for you.It is a expensive spanish restaurantin the east of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is 290 mill road city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): yes
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 18 dialog: 4 in setting: FRIENDLY
+(user): european
+(system): Great choice.  So far I've found 8 restaurants that match your whishes.  In what area would you like to eat?
+(user): center
+(system): Great choice.  So far I've found 5 restaurants that match your whishes.  Excuse me for asking, but what is your pricerange today?
+(user): axpensive
+(system): Alright, is there any other preference you have for a restaurant?  For instance, do you like some place romantic, busy, suitable for children,or do you prefer a place where you can stay a bit longer?
+(user): 
+(system): Sorry I did not understand. Please enter any of the following preferences: romantic, busy, children or long stay.
+(user): no
+(system): I think eraina would be the perfect restaurant for you.It is a expensive european restaurantin the centre of town,  Do you feel like to going there?
+(user): yes
+(system): Great! The address is free school lane city centre. Would you like to know their phone number or the postcode? Or maybe both? 
+(user): yes
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): phone
+(system): The phone number is 01223 368786. 
+(user): 
+(system): Would you like to know their phone number or the postcode? Or maybe both? 
+(user): no
+(system): Enjoy your dinner. ---
+ participant : 18 dialog: 0 in setting: TERSE
+(user): restart dialog
+(system): 110 restaurants matches.  What area?
+(user): swiss
+(system): 1 restaurant matches.  What area?
+(user): center
+(system): 1 restaurant matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend efes restaurant. It is a moderate swiss restaurant in the centre of town. OK?
+(user): yes
+(system): OK. The address is king street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): yes
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 500005. The postal code is c.b 1. 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 18 dialog: 1 in setting: TERSE
+(user): romantic
+(system): 110 restaurants matches.  What area?
+(user): any
+(system): 110 restaurants matches.  What cuisine ?
+(user): any
+(system): 110 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend saint johns chop house. It is a moderate british restaurant in the west of town. OK?
+(user): ok
+(system): OK. The address is 21 - 24 northampton street. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 353110. The postal code is c.b 3. 
+(user): perfect
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 18 dialog: 2 in setting: TERSE
+(user): cheap 
+(system): 22 restaurants matches.  What area?
+(user): any
+(system): 22 restaurants matches.  What cuisine ?
+(user): traditional
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend da vinci pizzeria. It is a cheap traditional restaurant in the north of town. OK?
+(user): perfect
+(system): I recommend da vinci pizzeria. It is a cheap traditional restaurant in the north of town. OK?
+(user): ok
+(system): OK. The address is 20 milton road chesterton. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 351707. The postal code is c.b 4. 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 18 dialog: 3 in setting: TERSE
+(user): thai
+(system): 4 restaurants matches.  What area?
+(user): any
+(system): 4 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): busy
+(system): I recommend bangkok city. It is a expensive thai restaurant in the centre of town.
+It is a busy restaurant because the food is good and it allows for long stays. OK?
+(user): ok
+(system): OK. The address is 24 green street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): yes
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): yes
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.---
+ participant : 18 dialog: 4 in setting: TERSE
+(user): gastro 
+(system): 110 restaurants matches.  What area?
+(user): any
+(system): 110 restaurants matches.  What cuisine ?
+(user): pub
+(system): 110 restaurants matches.  What cuisine ?
+(user): gastropub
+(system): 4 restaurants matches.  What pricerange?
+(user): any
+(system): OK, any other requirements?  Choose from romantic, busy, suitable for children, and places where you can stay long.
+(user): no
+(system): I recommend cocum. It is a expensive gastropub restaurant in the east of town. OK?
+(user): ok
+(system): OK. The address is 71 castle street city centre. Do you want to know their phone number, the postcode, or both? 
+(user): both
+(system): The phone number is 01223 366668. The postal code is c.b 3. 
+(user): 
+(system): Do you want to know their phone number, the postcode, or both? 
+(user): no
+(system): Bye.
